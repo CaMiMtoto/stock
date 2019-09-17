@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/expenses/{expense}', 'ExpenseController@destroy')->name('expenses.destroy');
 
         Route::get('/reports', 'ReportsController@index')->name('reports');
+        Route::get('/expenses-reports', 'ReportsController@expensesReports')->name('expensesReports');
 
     });
 });

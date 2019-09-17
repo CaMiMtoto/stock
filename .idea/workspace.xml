@@ -2,121 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2019_09_11_113524_remove_expense_types_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/.env.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/.styleci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Console/Kernel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Exceptions/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Kernel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/CheckForMaintenanceMode.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/EncryptCookies.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/TrimStrings.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/TrustProxies.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Providers/BroadcastServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/app/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/artisan" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/bootstrap/app.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/bootstrap/cache/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/composer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/composer.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/app.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/auth.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/broadcasting.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/cache.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/database.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/filesystems.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/hashing.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/logging.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/mail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/queue.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/services.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/session.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/config/view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/database/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/database/factories/UserFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/public/.htaccess" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/public/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/js/components/ExampleComponent.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/lang/en/auth.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/lang/en/pagination.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/lang/en/passwords.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/lang/en/validation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/sass/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/sass/app.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/auth/login.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/auth/register.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/auth/verify.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/home.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/resources/views/welcome.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/routes/api.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/routes/channels.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/routes/console.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/routes/web.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/server.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/app/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/app/public/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/framework/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/framework/cache/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/framework/cache/data/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/framework/sessions/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/framework/testing/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/framework/views/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/storage/logs/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/tests/Bootstrap.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/tests/CreatesApplication.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/tests/Feature/ExampleTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/tests/TestCase.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/tests/Unit/ExampleTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mag/webpack.mix.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/expenses.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/reports/reports.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ce6eb460-c66b-4b30-ba60-519e22819874.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ce6eb460-c66b-4b30-ba60-519e22819874.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/reports/expensesReports.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/_reportDates.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/stock.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/stock.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExpenseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExpenseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExpenseTypeController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_09_06_101150_create_expenses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_09_06_101150_create_expenses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/reports.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +167,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/mag" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/reports" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -284,11 +177,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\PHP\stock\resources\views\admin\reports" />
       <recent name="C:\Users\CaMi\Desktop\stock\public\lib\js" />
       <recent name="C:\Users\CaMi\Desktop\stock\public\lib\css" />
       <recent name="C:\Users\CaMi\Desktop\stock\resources\js" />
       <recent name="C:\Users\CaMi\Desktop\stock\app\Http" />
-      <recent name="C:\Users\CaMi\Desktop\stock\app\Http\Controllers" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -303,7 +196,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Unknown.Laravel1268637408">
+  <component name="RunManager" selected="npm.watch">
     <configuration name="Laravel" type="LaravelStorm_run_conf_serve" factoryName="Laravel">
       <option name="host" value="localhost" />
       <option name="port" value="8000" />
@@ -375,6 +268,7 @@
       <workItem from="1567761483884" duration="3727000" />
       <workItem from="1568199957881" duration="4517000" />
       <workItem from="1568208724664" duration="3684000" />
+      <workItem from="1568735179269" duration="2583000" />
     </task>
     <servers />
   </component>
