@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Reports')
+@section('title','Sales report')
 @section('content')
     <section class="content">
         <section class="invoice">
@@ -44,38 +44,30 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-        <?php
-        $array1 = array();
-        ?>
         <!-- Table row -->
             <div class="row">
                 <div class="col-xs-12 table-responsive">
-                    <h4>Expenses</h4>
+                    <h4>Sales</h4>
                     <table class="table table-hover table-condensed">
                         <thead>
                         <tr>
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Description</th>
+                            <th>Cost</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($expenses as $expense)
+                        @foreach($sales as $sale)
                             <tr>
-                                <td>{{ $expense->date }}</td>
-                                <td>{{ number_format($expense->amount) }}</td>
-                                <td>{{ $expense->description}}</td>
+                                <td>{{ $sale->order_date }}</td>
+                                <td>{{ $sale->customer_name}}</td>
+                                <td>{{ $sale->waiter}}</td>
+                                <td>{{ $sale->orderItems->sum('price') }}</td>
                             </tr>
                         @endforeach
 
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Total</th>
-                            <th>{{ number_format($expenses->sum('amount')) }}</th>
-                            <th></th>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
                 <!-- /.col -->

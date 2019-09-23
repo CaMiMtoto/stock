@@ -88,6 +88,20 @@
                                     <input type="text" v-model="waiter" id="waiter" placeholder="Waiter name"
                                            class="form-control">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="amount" class="control-label">Amount</label>
+                                    <input type="text" required id="amount" v-model="amount_paid" placeholder="Amount Paid"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="payment_mode" class="control-label">Payment Method</label>
+                                    <select name="payment_mode" required id="payment_mode" v-model="payment_mode" class="form-control">
+                                        <option value=""></option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Card">Card</option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <button type="submit"
                                             :disabled="saving"
@@ -121,6 +135,8 @@
                 customerName: "",
                 orderDate: "",
                 waiter: "",
+                payment_mode: "",
+                amount_paid: 0,
                 saving: false,
             };
         },
@@ -158,6 +174,8 @@
                 this.orderItems.customerName = this.customerName;
                 this.orderItems.orderDate = this.orderDate;
                 this.orderItems.waiter = this.waiter;
+                this.orderItems.amount_paid = this.amount_paid;
+                this.orderItems.payment_mode = this.payment_mode;
                 axios.post('/api/orders', this.orderItems)
                     .then(data => {
                         location.reload();

@@ -47,12 +47,11 @@ $(function () {
 
 
 
-/*
     $('.datepicker').datepicker({
         autoclose: true,
-        todayHighlight: true
+        todayHighlight: true,
+        format:'yyyy-mm-dd'
     });
-*/
 
     $('.clear_text').val("");
 

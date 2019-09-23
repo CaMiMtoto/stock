@@ -74,22 +74,22 @@
         </div>
         <!-- /.col -->
         <div class="col-sm-6">
-            <p class="lead">Amount Due <small>{{ $order->order_date }}</small></p>
+            <h4>Amount</h4>
 
             <div class="table-responsive">
                 <table class="table">
                     <tbody>
                     <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>Rwf {{ number_format($subtotal) }}</td>
+                        <th>Amount To Pay</th>
+                        <td>{{ number_format($order->totalOrderPrice()) }}</td>
                     </tr>
                     <tr>
-                        <th>Tax (18%)</th>
-                        <td>0</td>
+                        <th>Amount Paid</th>
+                        <td>{{ number_format($order->amount_paid) }}</td>
                     </tr>
                     <tr>
-                        <th>Total:</th>
-                        <td>Rwf {{ number_format($subtotal) }}</td>
+                        <th>Amount Due</th>
+                        <td>{{ number_format($order->amountDue()) }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -103,7 +103,7 @@
     <div class="row no-print">
         <div class="col-sm-12">
 
-            <a href="{{ route('orders.print',['id'=>$order->id]) }}" target="_blank"
+            <a href="{{ route('orders.print',['id'=>$order->id]) }}"
                class="btn btn-default pull-right no-print">
                 <i class="fa fa-print"></i>
                 Print

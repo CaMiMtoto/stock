@@ -1,5 +1,5 @@
 .form-control{
-    border: 2px solid #cccccc !important;
+    border: 1px solid #cccccc !important;
     border-radius: 0 !important;
 }
 .form-control:focus{
@@ -38,4 +38,7 @@ h1,h2,h3,h4,h5{
 .pagination>li:last-child>a, .pagination>li:last-child>span {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+}
+.with-border {
+    border-bottom: 1px solid #f4f4f4!important;
 }

@@ -16,9 +16,11 @@
     <link rel="stylesheet" href="{{ asset('lib/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('lib/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/css/skin-blue.min.css') }}">
     @yield('styles')
+    <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 </head>
@@ -37,6 +39,7 @@
 <script src="{{ asset('lib/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('lib/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('lib/js/bootbox.min.js') }}"></script>
+<script src="{{ asset('lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('scripts')

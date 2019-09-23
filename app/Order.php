@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
  * @property string waiter
  * @property string customer_name
  * @property mixed id
+ * @property mixed amout_paid
+ * @property mixed payment_mode
  */
 class Order extends Model
 {
@@ -27,6 +29,11 @@ class Order extends Model
             ->where('order_id', '=', $this->id)
             ->first()
             ->Total;
+    }
+
+    public function amountDue()
+    {
+        return $this->totalOrderPrice()- $this->amount_paid;
     }
 
 }

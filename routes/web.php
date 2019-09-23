@@ -70,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/orders/{order}/edit', 'OrdersController@edit')->name('orders.edit');
         Route::put('/orders/{order}', 'OrdersController@update')->name('orders.update');
         Route::get('/orders/{order}', 'OrdersController@print')->name('orders.print');
+        Route::get('/orders/{order}/edit', 'OrdersController@edit')->name('orders.edit');
 
         Route::get('/expenses', 'ExpenseController@index')->name('expenses.all');
         Route::post('/expenses', 'ExpenseController@store')->name('expenses.store');
@@ -78,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/reports', 'ReportsController@index')->name('reports');
         Route::get('/expenses-reports', 'ReportsController@expensesReports')->name('expensesReports');
+        Route::get('/sales-reports', 'ReportsController@salesReports')->name('salesReports');
 
     });
 });

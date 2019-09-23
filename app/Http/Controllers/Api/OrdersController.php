@@ -35,6 +35,8 @@ class OrdersController extends Controller
             $order->customer_name = $request->customerName;
             $order->order_date = $request->orderDate;
             $order->waiter = $request->waiter;
+            $order->payment_mode = $request->payment_mode;
+            $order->amount_paid = $request->amount_paid;
             $order->save();
 
             foreach ($request->orders as $item) {

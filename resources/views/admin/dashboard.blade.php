@@ -44,12 +44,12 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>{{ \App\Supplier::count() }}</h3>
+                        <h3>{{ App\Order::count() }}</h3>
 
-                        <p>Suppliers</p>
+                        <p>Orders</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-ios-people-outline"></i>
+                        <i class="ion ion-android-cart"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
