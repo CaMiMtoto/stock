@@ -12,7 +12,6 @@ class StocksController extends Controller
     public function index(Request $request)
     {
         $products = Product::orderBy('id', 'desc')->get();
-        $suppliers = Supplier::orderBy('id', 'desc')->get();
 
         if (empty($request->input('q'))) {
             $stocks = Stock::orderBy('id', 'desc')
@@ -20,13 +19,13 @@ class StocksController extends Controller
                 ->paginate(10);
         } else {
             $q = $request->input('q');
-            $stocks = Stock::with('supplier')
-                ->where('supplier.name', 'LIKE', "%{$q}%")
+            $stocks = Stock::with('product')
+                ->where('product.name', 'LIKE', "%{$q}%")
                 ->orderBy("created_at", "desc")
                 ->paginate(10);
             $stocks->appends(['q' => $q]);
         }
-        return view('admin.stocks', ['stocks' => $stocks, 'products' => $products, 'suppliers' => $suppliers]);
+        return view('admin.stocks', ['stocks' => $stocks, 'products' => $products]);
     }
 
     public function store(Request $request)
@@ -38,7 +37,6 @@ class StocksController extends Controller
                 // update stock product qty
                 $this->updateProductQtyWhenEditStockItem($request, $stock);
 
-                $stock->supplier_id = $request->supplier_id;
                 $stock->product_id = $request->product_id;
                 $stock->qty = $request->qty;
                 $stock->price = $request->price;
@@ -46,7 +44,6 @@ class StocksController extends Controller
             }
         } else {
             $stock = new Stock();
-            $stock->supplier_id = $request->supplier_id;
             $stock->product_id = $request->product_id;
             $stock->qty = $request->qty;
             $stock->price = $request->price;

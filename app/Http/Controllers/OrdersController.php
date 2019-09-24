@@ -13,7 +13,10 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::paginate(10);
-        return view('admin.orders.index', compact('orders'));
+        $menus = Menu::all();
+        return view('admin.orders.index', compact('orders'))->with([
+            'menus'=>$menus
+        ]);
     }
 
     public function create()
@@ -69,13 +72,44 @@ class OrdersController extends Controller
                 $orderItem->price = $request->rate[$i];
                 $orderItem->qty = $request->quantity[$i];
                 $orderItem->save();
-                $this->updateProductQty($orderItem->menu_id);
+//                $this->updateProductQty($orderItem->menu_id);
             }
             DB::commit();
-            return response()->json($order, 201);
+            return response()->json($order,200);
         } catch (\Exception $exception) {
             DB::rollBack();
-            return \response()->json($exception->getMessage(), 400);
+            return redirect()->back()->with(['error'=>'Please , try again or contact system administrator']);
+        }
+    }
+
+    public function update(Request $request,Order $order)
+    {
+        try {
+            DB::beginTransaction();
+            $order->customer_name = $request->customer_name;
+            $order->order_date = $request->order_date;
+            $order->waiter = $request->waiter;
+            $order->payment_mode = $request->payment_mode;
+            $order->amount_paid = $request->amount_paid;
+            $order->received = $request->delivered;
+            $order->status = $request->payment_status;
+            $order->save();
+//            OrderItem::where('order_id','=',$order->id)->delete();
+            $order->orderItems()->delete();
+            for ($i = 0; $i < count($request->menu); $i++) {
+                $orderItem = new OrderItem();
+                $orderItem->menu_id = $request->menu[$i];
+                $orderItem->order_id = $order->id;
+                $orderItem->price = $request->rate[$i];
+                $orderItem->qty = $request->quantity[$i];
+                $orderItem->save();
+//                $this->updateProductQty($orderItem->menu_id);
+            }
+            DB::commit();
+            return redirect()->route('orders.index');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with(['error'=>$exception->getMessage()]);
         }
     }
 

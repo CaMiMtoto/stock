@@ -71,11 +71,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="mn-users">
-                <a href="{{ route('suppliers.all') }}">
-                    <i class="fa fa-users"></i> <span>Users</span>
-                </a>
-            </li>
+
             <li class="mn-menus">
                 <a href="{{ route('menus.all') }}">
                     <i class="fa fa-list-ol"></i>

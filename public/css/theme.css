@@ -8,13 +8,10 @@ h2, .h2 { font-size: 25px; }
 
 .body-content { padding-top: 20px; }
 
-
-
-
 .btn-link { color: #09A7E4 !important; }
 
 .btn {
-    border-radius: 0 !important;
+    border-radius: 5px !important;
     text-transform: none;
     /*    padding: 8px 20px;*/
 }
@@ -41,7 +38,7 @@ h2, .h2 { font-size: 25px; }
 table a:not(.btn), .table a:not(.btn) { text-decoration: none; }
 
 .form-control, .datepicker {
-    /*    height: 41px;*/
+        /*height: 41px;*/
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: border-color ease-in-out .10s, box-shadow ease-in-out .15s;
@@ -50,8 +47,8 @@ table a:not(.btn), .table a:not(.btn) { text-decoration: none; }
     -o-transition: border-color ease-in-out .10s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .10s, box-shadow ease-in-out .15s;
     -ms-border-radius: 10px;
-    border-radius: 10px;
-    border-width: 2px!important;
+    border-radius: 5px;
+    border-width: 1px!important;
 }
 
 .btn-info.focus, .btn-info:focus {
@@ -84,7 +81,7 @@ table a:not(.btn), .table a:not(.btn) { text-decoration: none; }
 }
 .select2-container--default .select2-selection--single {
     border: 1px solid #d2d6de !important;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
 }
 .select2-container .select2-selection--single {
     height: inherit!important;
@@ -99,7 +96,9 @@ span.field-validation-error {
 
 .modal-content { border-radius: 0 !important; }
 
-
+.border-10px{
+    border-radius: 10px !important; ;
+}
 
 .skin-blue .main-header .navbar .sidebar-toggle:hover, .skin-blue .main-header .logo, .skin-blue .main-header .navbar, .btn-primary {
     background-image: linear-gradient(#0c6bc6, #054f97 60%, #1e578d);

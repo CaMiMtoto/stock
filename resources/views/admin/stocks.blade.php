@@ -24,7 +24,6 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Product</th>
-                            <th scope="col">Supplier</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Unit Cost</th>
                             <th scope="col">Total Cost</th>
@@ -42,7 +41,6 @@
                                         {{ $stock->product->name}}
                                     </a>
                                 </td>
-                                <td>{{ $stock->supplier->name}}</td>
                                 <td>{{ $stock->qty}}</td>
                                 <td>{{number_format($stock->price)}}</td>
                                 <?php
@@ -67,7 +65,6 @@
                         @endforeach
 
                         <tr>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -109,19 +106,6 @@
                     <div class="modal-body">
                         @include('layouts._loader')
                         <div class="edit-result">
-                            <div class="form-group">
-                                <label for="supplier_id" class="col-sm-3  control-label">Supplier</label>
-                                <div class="col-sm-9">
-                                    <select required class="form-control" id="supplier_id" name="supplier_id">
-                                        <option></option>
-                                        @foreach($suppliers as $supplier)
-                                            <option value="{{ $supplier->id}}">
-                                                {{$supplier->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="product_id" class="col-sm-3  control-label">Product</label>
                                 <div class="col-sm-9">
@@ -177,7 +161,6 @@
                 $.getJSON(url)
                     .done(function (data) {
                         hideLoader();
-                        $('#supplier_id').val(data.supplier_id);
                         $('#product_id').val(data.product_id);
                         $('#id').val(data.id);
                         $('#qty').val(data.qty);

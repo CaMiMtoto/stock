@@ -80,7 +80,7 @@
                             <div class="form-group">
                                 <label for="date" class="col-sm-3 control-label">Date</label>
                                 <div class="col-sm-9">
-                                    <input required type="date" class="form-control"
+                                    <input required type="text" class="form-control datepicker"
                                            name="date" id="date">
                                 </div>
                             </div>

@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/orders/{order}', 'OrdersController@show')->name('orders.show');
         Route::get('/orders/{order}/details', 'OrdersController@orderDetails')->name('orders.orderDetails');
         Route::get('/orders/{order}/edit', 'OrdersController@edit')->name('orders.edit');
-        Route::put('/orders/{order}', 'OrdersController@update')->name('orders.update');
+        Route::post('/orders/{order}/update', 'OrdersController@update')->name('orders.update');
         Route::get('/orders/{order}', 'OrdersController@print')->name('orders.print');
         Route::get('/orders/{order}/edit', 'OrdersController@edit')->name('orders.edit');
 
