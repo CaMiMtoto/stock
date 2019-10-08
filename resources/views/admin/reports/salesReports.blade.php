@@ -60,7 +60,7 @@
                         <tbody>
                         @foreach($sales as $sale)
                             <tr>
-                                <td>{{ $sale->order_date }}</td>
+                                <td>{{ $sale->created_at->format(' d M Y') }}</td>
                                 <td>{{ $sale->customer_name}}</td>
                                 <td>{{ $sale->waiter}}</td>
                                 <td>{{ $sale->orderItems->sum('price') }}</td>

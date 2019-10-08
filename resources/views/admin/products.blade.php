@@ -40,6 +40,7 @@
                             <th scope="col">Category</th>
                             <th scope="col">Unit Measure</th>
                             <th scope="col">In stock</th>
+                            <th scope="col">Beg. Qty</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -56,6 +57,7 @@
                                         <span class="label label-info">{{ $prod->qty }}</span>
                                     @endif
                                 </td>
+                                <td>{{ number_format($prod->original_qty)  }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button
@@ -129,12 +131,25 @@
                                            required>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="original_qty" class="col-sm-3 control-label">Beginning Qty</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" value="0" name="original_qty" id="original_qty"
+                                           required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer editFooter">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" id="createBtn" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                                Close
+                            </button>
+                            <button type="submit" id="createBtn" class="btn btn-primary">
+                                <i class="fa fa-check-circle-o"></i>
+                                Save changes
+                            </button>
                         </div>
                     </div>
                 </form>

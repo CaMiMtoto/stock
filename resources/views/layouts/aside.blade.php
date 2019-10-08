@@ -30,13 +30,6 @@
             </li>
 
 
-            <li class="mn-suppliers">
-                <a href="{{ route('suppliers.all') }}">
-                    <i class="ion ion-android-people"></i> <span>Suppliers</span>
-                </a>
-            </li>
-
-
             <li class="treeview tr-products">
                 <a href="#">
                     <i class="ion ion-ios-list"></i> <span>Products</span>
@@ -90,13 +83,32 @@
                     <span>Expenses</span>
                 </a>
             </li>
+
+            <li class="treeview tr-eod">
+                <a href="#">
+                    <i class="ion ion-calendar"></i> <span>
+                        End of Day
+                    </span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="mn-eod">
+                        <a href="{{ route('eod') }}">
+                            <i class="fa fa-circle-o"></i>
+                            Run EOD
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="mn-reports">
                 <a href="{{ route('reports') }}">
                     <i class="ion ion-printer"> </i>
                     <span>Reports</span>
                 </a>
             </li>
-
 
 
         </ul>

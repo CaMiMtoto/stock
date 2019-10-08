@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
+use App\Movement;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -24,11 +25,20 @@ class ReportsController extends Controller
         ]);
     }
 
+    public function productsHistory(Request $request)
+    {
+        $date = $request->date;
+        $movements = Movement::with('product')->where('system_date', $date)->get();
+        return view('admin.reports.product_history', compact('movements'))->with([
+            'date' => $date
+        ]);
+    }
+
     public function salesReports(Request $request)
     {
         $startDate = $request->start_date;
         $sendDate = $request->end_date;
-        $sales = Order::with('orderItems')->whereBetween('order_date', [$startDate, $sendDate])->get();
+        $sales = Order::with('orderItems')->whereBetween('created_at', [$startDate, $sendDate])->get();
         return view('admin.reports.salesReports', compact('sales'))->with([
             'start_date' => $startDate,
             'end_date' => $sendDate,

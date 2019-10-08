@@ -14,9 +14,9 @@ class AddColumnsToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('payment_mode');
+            $table->string('payment_mode')->nullable();
             $table->string('status')->default('Not Paid');
-            $table->boolean('received')->default(false);
+            $table->boolean('received')->default(false)->nullable();
             $table->decimal('amount_paid', 18, 2);
             // $table->
         });

@@ -3,10 +3,6 @@
 
 @section('content')
     <section class="content">
-        {{--        <div id="app">
-                    <add-order-component></add-order-component>
-                </div>--}}
-        {{--        <a href="{{ route('orders.create') }}" class="btn btn-primary btn-sm">Add New Order</a>--}}
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
             Add New Order
         </button>
@@ -37,15 +33,16 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="order_date" class="control-label">Date</label>
-                                        <input type="text" required class="form-control datepicker" name="order_date"
+                                        <input type="text" disabled required class="form-control datepicker"
+                                               name="order_date"
                                                id="order_date"
-                                               placeholder="Order Date" value="">
+                                               placeholder="Order Date" value="{{ now()->format('d/m/Y') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="customer_name" class="control-label">Customer</label>
-                                        <input type="text" required  class="form-control" name="customer_name"
+                                        <input type="text" class="form-control" name="customer_name"
                                                id="customer_name"
                                                placeholder="Customer name" value="">
                                     </div>
@@ -72,7 +69,7 @@
                                 <tr id="row1">
                                     <td>
                                         <div class="form-group">
-                                            <select required  onchange="getProductData(1)" name="menu[]" id="menu1"
+                                            <select required onchange="getProductData(1)" name="menu[]" id="menu1"
                                                     class="form-control">
                                                 <option value="">--menu--</option>
                                                 @foreach($menus as $menu)
@@ -83,7 +80,7 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input required  type="text" readonly class="form-control" id="rate1"
+                                            <input required type="text" readonly class="form-control" id="rate1"
                                                    name="rate[]"
                                                    value=""
                                                    placeholder="Price">
@@ -91,14 +88,14 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input required  type="text" onkeyup="getTotal(1)" class="form-control"
+                                            <input required type="text" onkeyup="getTotal(1)" class="form-control"
                                                    id="quantity1" name="quantity[]" value=""
                                                    placeholder="Qty">
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input required  type="text" readonly class="form-control" name="total[]"
+                                            <input required type="text" readonly class="form-control" name="total[]"
                                                    id="total1"
                                                    value=""
                                                    placeholder="Total">
@@ -106,9 +103,9 @@
                                     </td>
                                     <td>
 
-                                   {{--     <button class="btn btn-default removeProductRowBtn" type="button"
-                                                id="removeProductRowBtn" onclick="removeProductRow(1)">
-                                            <i class="fa fa-trash"></i></button>--}}
+                                        {{--     <button class="btn btn-default removeProductRowBtn" type="button"
+                                                     id="removeProductRowBtn" onclick="removeProductRow(1)">
+                                                 <i class="fa fa-trash"></i></button>--}}
                                     </td>
                                 </tr>
 
@@ -118,7 +115,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="amount_to_pay">Amount To Pay</label>
-                                        <input required  type="text" readonly name="amount_to_pay" class="form-control"
+                                        <input required type="text" readonly name="amount_to_pay" class="form-control"
                                                value=""
                                                id="amount_to_pay">
                                     </div>
@@ -126,23 +123,26 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="amount_paid">Amount Paid</label>
-                                        <input required  type="text" onkeyup="paidAmount()" name="amount_paid"
+                                        <input required min="0" type="number" onkeyup="paidAmount()" name="amount_paid"
                                                class="form-control"
-                                               value=""
+                                               value="0"
                                                id="amount_paid">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="due">Amount Due</label>
-                                        <input required  type="text" readonly name="due" class="form-control" value=""
+                                        <input required type="text" readonly name="due" class="form-control" value=""
                                                id="due">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="payment_mode">Payment Method</label>
-                                        <select required  name="payment_mode" id="payment_mode" class="form-control">
+                                        <select name="payment_mode" id="payment_mode" class="form-control">
                                             <option value=""></option>
                                             <option value="Cash">Cash</option>
                                             <option value="Card">Card</option>
@@ -151,21 +151,10 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="delivered">Delivery</label>
-                                        <select required name="delivered" class="form-control" id="delivered">
-                                            <option  value=""></option>
-                                            <option selected value="1">Delivered</option>
-                                            <option value="0">Not Delivered</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="payment_status">Payment status </label>
-                                        <select required  name="payment_status" class="form-control" id="payment_status">
-                                            <option value=""></option>
+                                        <select required name="payment_status" class="form-control" id="payment_status">
                                             <option value="Full">Full</option>
-                                            <option value="No payment">No payment</option>
+                                            <option value="Not Paid" selected>Not Paid</option>
                                             <option value="Advance">Advance</option>
                                         </select>
                                     </div>
@@ -227,12 +216,12 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td>{{ $order->order_date }}</td>
+                                <td>{{ $order->system_date->format('d-m-Y') }}</td>
                                 <td>{{ $order->customer_name }}</td>
                                 <td>{{ number_format($order->totalOrderPrice()) }}</td>
                                 <td>{{ number_format($order->amount_paid) }}</td>
                                 <td>{{ number_format($order->amountDue()) }}</td>
-                                <td>{{ $order->payment_mode }}</td>
+                                <td>{{ $order->payment_mode??"Not paid" }}</td>
                                 <td>
                                     @if($order->received==1)
                                         <span class="label label-success">Yes</span>

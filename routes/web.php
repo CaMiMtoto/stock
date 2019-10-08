@@ -80,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reports', 'ReportsController@index')->name('reports');
         Route::get('/expenses-reports', 'ReportsController@expensesReports')->name('expensesReports');
         Route::get('/sales-reports', 'ReportsController@salesReports')->name('salesReports');
+        Route::get('/products-reports', 'ReportsController@productsHistory')->name('productsHistory');
+
+        Route::get('/eod', 'SettingController@eod')->name('eod');
+        Route::post('/eod', 'SettingController@runEod')->name('runEod');
 
     });
 });

@@ -44,6 +44,7 @@ class ProductsController extends Controller
                 $prod->name = $request->name;
                 $prod->unit_measure = $request->unit_measure;
                 $prod->category_id = $request->category_id;
+                $prod->original_qty = $request->original_qty;
                 $prod->update();
             }
         } else {
@@ -51,6 +52,7 @@ class ProductsController extends Controller
             $prod->name = $request->name;
             $prod->unit_measure = $request->unit_measure;
             $prod->category_id = $request->category_id;
+            $prod->original_qty = $request->original_qty;
             $prod->save();
         }
         return response()->json($prod, 200);
