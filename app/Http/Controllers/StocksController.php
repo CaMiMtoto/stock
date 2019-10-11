@@ -6,6 +6,7 @@ use App\Product;
 use App\Stock;
 use App\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StocksController extends Controller
 {
@@ -14,12 +15,12 @@ class StocksController extends Controller
         $products = Product::orderBy('id', 'desc')->get();
 
         if (empty($request->input('q'))) {
-            $stocks = Stock::orderBy('id', 'desc')
+            $stocks = Stock::with('product')->orderBy('id', 'desc')
                 ->orderBy("created_at", "desc")
                 ->paginate(10);
         } else {
             $q = $request->input('q');
-            $stocks = Stock::with('product')
+           $stocks = Stock::with('product')
                 ->where('product.name', 'LIKE', "%{$q}%")
                 ->orderBy("created_at", "desc")
                 ->paginate(10);

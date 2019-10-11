@@ -175,6 +175,7 @@
                         $('#id').val(data.id);
                         $('#unit_measure').val(data.unit_measure);
                         $('#category_id').val(data.category_id);
+                        $('#original_qty').val(data.original_qty);
                     });
             });
 

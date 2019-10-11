@@ -14,9 +14,26 @@
             <div class="clearfix"></div>
             <div class="box box-primary flat">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
-                        Manage Stock
-                    </h4>
+                    <div class="col-md-6">
+                        <h4 class="box-title">
+                            Manage Stock
+                        </h4>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{{ route('stocks.all') }}" method="get">
+                            <div id="custom-search-input">
+                                <div class="input-group ">
+                                    <input type="text" name="q" id="query" class="form-control flat"
+                                           placeholder="Search .....">
+                                    <span class="input-group-btn">
+                                <button class="btn btn-primary flat" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="box-body">
                     <table class="table table-condensed table-hover">

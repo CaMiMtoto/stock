@@ -40,7 +40,7 @@
                         <tr>
                             <td>{{ $item->product->name }}</td>
                             <td>{{ $item->qty }}</td>
-                            <td>{{ $item->measure }}</td>
+                            <td>{{ $item->product->unit_measure }}</td>
                             <td>{{ number_format($item->cost) }}</td>
                             <td>
                                 <div class="btn-group">

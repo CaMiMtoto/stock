@@ -138,27 +138,37 @@
                             <div class="box-body">
                                 <form class="form-inline" id="addItemsForm">
                                     {{ csrf_field() }}
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Product name" class="form-control"
-                                               id="product" required>
-                                        <input type="hidden" name="product_id" id="product_id" required>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Product name" class="form-control"
+                                                       id="product" required>
+                                                <input type="hidden" name="product_id" id="product_id" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="qty" id="qty" placeholder="Qty" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="cost" id="cost"
+                                                       placeholder="Cost" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="submit" id="addItemButton" class="btn btn-primary pull-right">
+                                                <i class="fa fa-check-circle-o"></i>
+                                                Add Item
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="qty" id="qty" placeholder="Qty"
-                                               required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="measure" id="measure"
-                                               placeholder="Measure" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="cost" id="cost"
-                                               placeholder="Cost" required>
-                                    </div>
-                                    <button type="submit" id="addItemButton" class="btn btn-primary">
-                                        <i class="fa fa-check-circle-o"></i>
-                                        Add Item
-                                    </button>
+
+
+
+
                                 </form>
                             </div>
                         </div>

@@ -51,7 +51,6 @@ class MenusController extends Controller
         $request->validate([
             'product_id' => 'required|numeric',
             'qty' => 'required|numeric',
-            'measure' => 'required',
             'cost' => 'required|numeric',
         ]);
 
@@ -59,7 +58,6 @@ class MenusController extends Controller
         $menuItem->menu_id = $menu->id;
         $menuItem->product_id = $request->product_id;
         $menuItem->qty = $request->qty;
-        $menuItem->measure = $request->measure;
         $menuItem->cost = $request->cost;
         $menuItem->save();
 
