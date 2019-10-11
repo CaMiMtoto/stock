@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    {{ json_encode($stocks) }}
+
                     <table class="table table-condensed table-hover">
                         <thead>
                         <tr>
