@@ -18,7 +18,7 @@
 
                 <li>
                     <a>
-                       <strong class="text-yellow">System Date: {{ Session::get('system_date')->format('d/m/Y') }}</strong>
+                       <strong class="text-yellow">System Date: {{ App\Setting::getSystemDate()->format('d/m/Y') }}</strong>
                     </a>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->

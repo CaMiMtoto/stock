@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Expense;
 use App\Movement;
 use App\Order;
+use App\OrderItem;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -38,7 +39,7 @@ class ReportsController extends Controller
     {
         $startDate = $request->start_date;
         $sendDate = $request->end_date;
-        $sales = Order::with('orderItems')->whereBetween('created_at', [$startDate, $sendDate])->get();
+        $sales = OrderItem::with('menu')->whereBetween('created_at', [$startDate, $sendDate])->get();
         return view('admin.reports.salesReports', compact('sales'))->with([
             'start_date' => $startDate,
             'end_date' => $sendDate,

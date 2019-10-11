@@ -1,7 +1,12 @@
 @extends('layouts.master')
 @section('title','Sales report')
 @section('content')
+
+    <?php
+    $totalAmount=0;
+    ?>
     <section class="content">
+
         <section class="invoice">
             <!-- title row -->
             <div class="row">
@@ -47,27 +52,38 @@
         <!-- Table row -->
             <div class="row">
                 <div class="col-xs-12 table-responsive">
-                    <h4>Sales</h4>
+                    <h5>Sales reports</h5>
                     <table class="table table-hover table-condensed">
                         <thead>
                         <tr>
                             <th>Date</th>
+                            <th>Item</th>
+                            <th>Qty</th>
                             <th>Amount</th>
-                            <th>Description</th>
-                            <th>Cost</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($sales as $sale)
+                            <?php
+                            $totalAmount+=$sale->sum('price')* $sale->qty;
+                            ?>
                             <tr>
-                                <td>{{ $sale->created_at->format(' d M Y') }}</td>
-                                <td>{{ $sale->customer_name}}</td>
-                                <td>{{ $sale->waiter}}</td>
-                                <td>{{ $sale->orderItems->sum('price') }}</td>
+                                <td>{{ $sale->created_at }}</td>
+                                <td>{{ $sale->menu->name}}</td>
+                                <td>{{ $sale->qty}}</td>
+                                <td>{{ number_format($sale->sum('price')) }}</td>
+                                <td>{{ number_format($sale->sum('price')* $sale->qty) }}</td>
                             </tr>
                         @endforeach
 
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="4" class="text-right">Total amount</th>
+                            <th>{{ number_format($totalAmount) }}</th>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <!-- /.col -->
