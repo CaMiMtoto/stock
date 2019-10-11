@@ -20,10 +20,12 @@ class StocksController extends Controller
                 ->paginate(10);
         } else {
             $q = $request->input('q');
-           $stocks = Stock::with('product')
-                ->where('product.name', 'LIKE', "%{$q}%")
-                ->orderBy("created_at", "desc")
+            $stocks = Stock::join('products', 'products.id', '=', 'stocks.product_id')
+                ->where('products.name', 'LIKE', "%{$q}%")
+                ->orderBy("stocks.created_at", "desc")
+                ->select("stocks.*")
                 ->paginate(10);
+//           dd($stocks);
             $stocks->appends(['q' => $q]);
         }
         return view('admin.stocks', ['stocks' => $stocks, 'products' => $products]);
@@ -76,8 +78,8 @@ class StocksController extends Controller
      */
     public function updateProductQtyWhenStockingItem(Stock $stock): void
     {
-        if($stock->product->original_qty==0){
-            $stock->product->original_qty=$stock->qty;
+        if ($stock->product->original_qty == 0) {
+            $stock->product->original_qty = $stock->qty;
         }
         $stock->product->qty += $stock->qty;
         $stock->product->update();

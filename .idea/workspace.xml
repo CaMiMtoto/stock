@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2019_10_11_141331_removing_measure_from_menu_items_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MenusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MenusController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StocksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StocksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/menus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/menus.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/menus_items.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/menus_items.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/stocks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stocks.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -258,7 +252,22 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand />
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@8948f986" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@8948f986" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@55e73dfc" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@8948f986" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@7bdcba97" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
           <select />
         </treeState>
       </serviceView>
@@ -299,7 +308,7 @@
       <workItem from="1570550715390" duration="8238000" />
       <workItem from="1570716365449" duration="1584000" />
       <workItem from="1570795608777" duration="747000" />
-      <workItem from="1570802871633" duration="2226000" />
+      <workItem from="1570802871633" duration="4034000" />
     </task>
     <servers />
   </component>
