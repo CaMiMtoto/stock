@@ -35,7 +35,8 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary center-block btn-block btn-lg" id="createBtn">
+
+                        <button type="submit" {{ $date->addDays(2) > now()->addDays(3) ? 'disabled':'' }} class="btn btn-primary center-block btn-block btn-lg" id="createBtn">
                             <i class="fa fa-check-circle"></i>
                             Submit EOD
                         </button>

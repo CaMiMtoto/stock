@@ -83,24 +83,11 @@
                     <span>Expenses</span>
                 </a>
             </li>
-
-            <li class="treeview tr-eod">
-                <a href="#">
-                    <i class="ion ion-calendar"></i> <span>
-                        End of Day
-                    </span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <li class="mn-shifts">
+                <a href="{{ route('shifts') }}">
+                    <i class="fa fa-clock-o"></i>
+                    <span>Shift Manager</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li class="mn-eod">
-                        <a href="{{ route('eod') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Run EOD
-                        </a>
-                    </li>
-                </ul>
             </li>
 
             <li class="mn-reports">

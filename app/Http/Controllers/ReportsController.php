@@ -29,8 +29,8 @@ class ReportsController extends Controller
     public function productsHistory(Request $request)
     {
         $date = $request->date;
-        $movements = Movement::with('product')->where('system_date', $date)->get();
-        return view('admin.reports.product_history', compact('movements'))->with([
+        $orderItems = OrderItem::with('menu')->whereDate('created_at', $date)->get();
+        return view('admin.reports.product_history', compact('orderItems'))->with([
             'date' => $date
         ]);
     }

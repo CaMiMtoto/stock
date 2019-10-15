@@ -10,7 +10,7 @@
                     Manage categories
                 </h3>
                 <div class="box-tools pull-right">
-                    <button class="btn btn-primary  btn-sm float-right" id="addButton">
+                    <button class="btn btn-primary  btn-sm" id="addButton">
                         <i class="fa fa-plus"></i>
                         Add New
                     </button>
@@ -36,10 +36,12 @@
                                 <div class="btn-group flat">
                                     <button class="btn flat btn-secondary js-edit"
                                             data-url="{{ route('category.show',['id'=>$cat->id]) }}">
+                                        <i class="fa fa-edit"></i>
                                         Edit
                                     </button>
                                     <button class="btn flat btn-danger js-delete"
                                             data-url="{{ route('category.destroy',['id'=>$cat->id]) }}">
+                                        <i class="fa fa-trash"></i>
                                         Delete
                                     </button>
                                 </div>

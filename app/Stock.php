@@ -23,4 +23,11 @@ class Stock extends Model
     {
         return $this->belongsTo(Product::Class);
     }
+
+    public static function received($date,$productId)
+    {
+        return Stock::where('product_id', $productId)
+            ->whereDate('updated_at', $date)
+            ->sum('qty');
+    }
 }

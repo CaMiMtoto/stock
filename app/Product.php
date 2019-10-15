@@ -25,4 +25,10 @@ class Product extends Model
     {
         return Stock::where('product_id', '=', $this->id);
     }*/
+
+    public function available($date)
+    {
+        return Stock::received($date,$this->id);
+        return $this->received() + $this->opening;
+    }
 }

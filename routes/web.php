@@ -85,6 +85,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/eod', 'SettingController@eod')->name('eod');
         Route::post('/eod', 'SettingController@runEod')->name('runEod');
 
+
+
+        Route::get('/shifts', 'ShiftController@index')->name('shifts');
+        Route::post('/shifts', 'ShiftController@store')->name('shifts.save');
+
     });
 });
 
