@@ -65,7 +65,10 @@ $(function () {
             if (!form.valid()) return false;
 
             var button = $("#createBtn");
+            var save = $(".btn-save");
             button.button('loading');
+            save.button('loading');
+
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
@@ -73,6 +76,8 @@ $(function () {
             }).done(function(response) {
                 // button loading
                 button.button('reset');
+                save.button('reset');
+
                 var modal=$('.myModal');
                 modal.modal("hide");
                 modal.on('hidden.bs.modal',
@@ -84,6 +89,7 @@ $(function () {
             })
                 .fail(function (error) {
                     button.button('reset');
+                    save.button('reset');
                     $('#add-messages').html('<div class="alert alert-danger">' +
                         '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
                         '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' +

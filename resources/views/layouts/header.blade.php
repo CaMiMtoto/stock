@@ -16,11 +16,7 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
-                <li>
-                    <a>
-                       <strong class="text-yellow">System Date: {{ App\Setting::getSystemDate()->format('d/m/Y') }}</strong>
-                    </a>
-                </li>
+
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
