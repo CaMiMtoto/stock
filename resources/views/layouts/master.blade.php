@@ -3,12 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>Stock | @yield('title')  </title>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('lib/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/css/skin-blue.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('lib/select2/select2.min.css') }}">
     @yield('styles')
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -40,6 +38,7 @@
 <script src="{{ asset('lib/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('lib/js/bootbox.min.js') }}"></script>
 <script src="{{ asset('lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('lib/select2/select2.full.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('scripts')

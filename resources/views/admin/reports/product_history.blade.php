@@ -37,7 +37,7 @@
                                 <td>{{ number_format(App\Stock::received($date,$item->product_id)) }}</td>
                                 <td>{{ number_format($orderItem->available($item->product_id, $item->product->qty,$date))  }}</td>
                                 <td>{{ number_format($orderItem->used($item->product_id))  }}</td>
-                                <td>{{ number_format($item->product->qty) }}</td>
+                                <td>{{ number_format(($orderItem->available($item->product_id, $item->product->qty,$date))-($orderItem->used($item->product_id))) }}</td>
                             </tr>
                         @endforeach
                         @break(true)

@@ -1,7 +1,28 @@
 @extends('layouts.master')
 @section('title','Orders')
+@section('styles')
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: unset;
+        }
 
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #d2d6de !important;
+            border-radius: 0 !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 24px;
+        }
+
+    </style>
+@endsection
 @section('content')
+
+
+
     <section class="content">
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default">
             Add New Order
@@ -70,7 +91,7 @@
                                     <td>
                                         <div class="form-group">
                                             <select required onchange="getProductData(1)" name="menu[]" id="menu1"
-                                                    class="form-control">
+                                                    class="form-control select2" style="width: 100%">
                                                 <option value="">--menu--</option>
                                                 @foreach($menus as $menu)
                                                     <option value="{{ $menu->id }}">{{ $menu->name }}</option>
@@ -196,6 +217,22 @@
                             Orders
                         </h4>
                     </div>
+                    <div class="col-md-6">
+                        <form action="{{ route('orders.index') }}" method="get">
+                            <div id="custom-search-input">
+                                <div class="input-group ">
+                                    <input type="text" name="q" id="query" class="form-control flat"
+                                           value="{{ isset($_GET['q'])?$_GET['q']:'' }}"
+                                           placeholder="Search .....">
+                                    <span class="input-group-btn">
+                                <button class="btn btn-primary flat" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="box-body table-responsive">
@@ -216,7 +253,7 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td>{{ $order->system_date->format('d-m-Y') }}</td>
+                                <td>{{ $order->created_at->format('Y-m-d') }}</td>
                                 <td>{{ $order->customer_name }}</td>
                                 <td>{{ number_format($order->totalOrderPrice()) }}</td>
                                 <td>{{ number_format($order->amount_paid) }}</td>

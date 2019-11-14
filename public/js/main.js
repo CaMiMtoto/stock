@@ -20,7 +20,7 @@ function printDoc() {
 
 
 $(function () {
-    // $('.select2').select2();
+    $('.select2').select2();
     $('#addButton').click(function() {
         $('.myModal').modal('show');
         $('#submitForm')[0].reset();

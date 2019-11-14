@@ -10,10 +10,22 @@ use Illuminate\Support\Facades\DB;
 
 class OrdersController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::paginate(10);
         $menus = Menu::all();
+
+        if (empty($request->input('q'))) {
+            $orders = Order::paginate(10);
+        } else {
+            $q = $request->input('q');
+            $orders = Order::where('customer_name', 'LIKE', "%{$q}%")
+                ->orWhere('waiter', 'LIKE', "%{$q}%")
+                ->orWhere('created_at', 'LIKE', "%{$q}%")
+                ->orderBy("id", "desc")
+                ->paginate(10);
+            $orders->appends(['q' => $q]);
+        }
+
         return view('admin.orders.index', compact('orders'))->with([
             'menus' => $menus
         ]);
@@ -88,7 +100,7 @@ class OrdersController extends BaseController
         try {
             DB::beginTransaction();
             $order->customer_name = $request->customer_name;
-            $order->order_date = $request->order_date;
+//            $order->order_date = $request->order_date;
             $order->waiter = $request->waiter;
             $order->payment_mode = $request->payment_mode;
             $order->amount_paid = $request->amount_paid;

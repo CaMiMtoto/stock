@@ -1,6 +1,23 @@
 @extends('layouts.master')
 @section('title','Edit order')
 @section('styles')
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: unset;
+        }
+
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #d2d6de !important;
+            border-radius: 0 !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 24px;
+        }
+
+    </style>
 @endsection
 
 @section('content')
@@ -29,8 +46,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="order_date" class="control-label">Date</label>
-                                    <input type="text" class="form-control datepicker" name="order_date" id="order_date"
-                                           placeholder="Order Date" value="{{ $order->order_date }}">
+                                    <input disabled type="text" class="form-control datepicker" name="order_date" id="order_date"
+                                           placeholder="Order Date" value="{{ $order->created_at->format('d-m-Y') }}">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -66,7 +83,7 @@
                                     <td>
                                         <div class="form-group">
                                             <select onchange="getProductData(<?php echo $x; ?>)" name="menu[]"
-                                                    id="menu<?php echo $x; ?>" class="form-control">
+                                                    id="menu<?php echo $x; ?>" class="form-control select2" style="width: 100%">
                                                 <option value="">--menu--</option>
                                                 @foreach($menus as $menu)
                                                     <option

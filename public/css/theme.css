@@ -73,14 +73,14 @@ table a:not(.btn), .table a:not(.btn) { text-decoration: none; }
     box-shadow: 0 0 0 0.2rem rgba(72,180,97,.5);
 }
 
-.form-control:focus, .datepicker:focus, .select2-container--default .select2-selection--single:focus {
+.form-control:focus, .datepicker:focus {
     border-color: #7952b3;
     box-shadow: 0 0 0 3px #7952b3;
     box-shadow: 0 0 0 3px rgba(121, 82, 179, .25);
 }
 .select2-container--default .select2-selection--single {
     border: 1px solid #d2d6de !important;
-    border-radius: 5px !important;
+    border-radius: 0px !important;
 }
 .select2-container .select2-selection--single {
     height: inherit!important;
