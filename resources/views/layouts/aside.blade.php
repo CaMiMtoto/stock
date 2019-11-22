@@ -71,6 +71,12 @@
                     <span>Menus</span>
                 </a>
             </li>
+            <li class="mn-product-orders">
+                <a href="{{ route('productOrders.index') }}">
+                    <i class="fa fa-list-ul"></i>
+                    <span>Product Orders</span>
+                </a>
+            </li>
             <li class="mn-orders">
                 <a href="{{ route('orders.index') }}">
                     <i class="fa fa-shopping-cart"></i>

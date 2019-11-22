@@ -41,6 +41,7 @@
                             <th scope="col">Unit Measure</th>
                             <th scope="col">In stock</th>
                             <th scope="col">Beg. Qty</th>
+                            <th scope="col">Price</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -58,8 +59,9 @@
                                     @endif
                                 </td>
                                 <td>{{ number_format($prod->original_qty)  }}</td>
+                                <td>{{ number_format($prod->price)  }}</td>
                                 <td>
-                                    <div class="btn-group">
+                                    <div>
                                         <button
                                                 data-url="{{ route('products.show',['id'=>$prod->id]) }}"
                                                 class="btn btn-default js-edit">
@@ -137,6 +139,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="price" class="col-sm-3 control-label">Price</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="price" id="price"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="original_qty" class="col-sm-3 control-label">Beginning Qty</label>
                                 <div class="col-sm-9">
                                     <input type="number" class="form-control" value="0" name="original_qty" id="original_qty"
@@ -162,7 +171,7 @@
         </div>
     </div>
 
-    <div class="modal fade myModal" tabindex="-1" role="dialog" id="stockingModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="stockingModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -221,8 +230,9 @@
 @section('scripts')
     <script>
         $(function () {
+
             $('.tr-products').addClass('active');
-            $('.mn-products').addClass('active');
+            $('.mn-product').addClass('active');
             //edit product
             $('.js-edit').on('click', function () {
                 var url = $(this).attr('data-url');
@@ -236,6 +246,7 @@
                         $('#unit_measure').val(data.unit_measure);
                         $('#category_id').val(data.category_id);
                         $('#original_qty').val(data.original_qty);
+                        $('#price').val(data.price);
                     });
             });
 

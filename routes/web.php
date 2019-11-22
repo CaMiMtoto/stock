@@ -11,7 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -86,9 +85,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/eod', 'SettingController@runEod')->name('runEod');
 
 
-
         Route::get('/shifts', 'ShiftController@index')->name('shifts');
         Route::post('/shifts', 'ShiftController@store')->name('shifts.save');
+
+
+        Route::get('/product/orders', 'ProductOrderController@index')->name('productOrders.index');
+        Route::get('/product/orders/{order}', 'ProductOrderController@show')->name('productOrders.show');
+        Route::get('/product/orders/{order}/edit', 'ProductOrderController@edit')->name('productOrders.edit');
+        Route::get('/product/orders/details/{order}', 'ProductOrderController@details')->name('productOrders.details');
+        Route::post('/product/orders/{order}/update', 'ProductOrderController@update')->name('productOrders.update');
+        Route::post('/product/orders', 'ProductOrderController@all')->name('productOrders.all');
+        Route::post('/product/orders/save', 'ProductOrderController@store')->name('productOrders.store');
+        Route::post('/product/orders/mark', 'ProductOrderController@mark')->name('productOrders.mark');
 
     });
 });

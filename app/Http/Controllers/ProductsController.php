@@ -35,26 +35,26 @@ class ProductsController extends Controller
         return response()->json($products, 200);
     }
 
+    public function getAllProducts()
+    {
+        $products = Product::all();
+        return response()->json($products, 200);
+    }
+
 
     public function store(Request $request)
     {
         if ($request->id && $request->id > 0) {
             $prod = Product::find($request->id);
-            if ($prod) {
-                $prod->name = $request->name;
-                $prod->unit_measure = $request->unit_measure;
-                $prod->category_id = $request->category_id;
-                $prod->original_qty = $request->original_qty;
-                $prod->update();
-            }
         } else {
             $prod = new Product();
-            $prod->name = $request->name;
-            $prod->unit_measure = $request->unit_measure;
-            $prod->category_id = $request->category_id;
-            $prod->original_qty = $request->original_qty;
-            $prod->save();
         }
+        $prod->name = $request->name;
+        $prod->unit_measure = $request->unit_measure;
+        $prod->category_id = $request->category_id;
+        $prod->original_qty = $request->original_qty;
+        $prod->price = $request->price;
+        $prod->save();
         return response()->json($prod, 200);
     }
 

@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/menus/{menu}', 'MenusController@show')->name('menus.show');
         Route::delete('/menus/{menu}', 'MenusController@destroy')->name('menus.destroy');
 
+
+
     });
 });
 

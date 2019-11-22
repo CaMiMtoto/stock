@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\DB;
  * @property string waiter
  * @property string customer_name
  * @property mixed id
- * @property double amout_paid
  * @property boolean payment_mode
  * @property string status
  * @property mixed received
  * @property mixed amount_paid
- * @property \DateTime sytem_date
+ * @property mixed order_status
+ * @property mixed payment_status
+ * @property mixed amount_to_pay
+ * @property mixed tax
  */
 class Order extends Model
 {

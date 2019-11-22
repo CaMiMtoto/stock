@@ -3,6 +3,7 @@ $(window).on('load',
     function() {
         $('.loader').fadeOut(500);
         $('#submitForm').validate();
+        $('.validate-form').validate();
 
         $(function () {
             $('#logout_link').on('click',function (e) {
@@ -78,7 +79,7 @@ $(function () {
                 button.button('reset');
                 save.button('reset');
 
-                var modal=$('.myModal');
+                var modal=$('.modal');
                 modal.modal("hide");
                 modal.on('hidden.bs.modal',
                     function (e) {

@@ -25,8 +25,7 @@ h1,h2,h3,h4,h5{
 }
 .pagination {
     border-radius: 0;
-    display: flex;
-    justify-content: center;
+    font-size: inherit;
 }
 .pagination>li:first-child>a, .pagination>li:first-child>span {
     margin-left: 0;

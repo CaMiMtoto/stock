@@ -9,9 +9,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property double price
  * @property integer menu_id
  * @property mixed order_id
+ * @property integer product_id
  */
 class OrderItem extends Model
 {
+
+
     public function order()
     {
         return $this->belongsTo(Order::class);
