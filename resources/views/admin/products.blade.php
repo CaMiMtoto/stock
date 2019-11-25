@@ -232,7 +232,7 @@
         $(function () {
 
             $('.tr-products').addClass('active');
-            $('.mn-product').addClass('active');
+            $('.mn-products').addClass('active');
             //edit product
             $('.js-edit').on('click', function () {
                 var url = $(this).attr('data-url');

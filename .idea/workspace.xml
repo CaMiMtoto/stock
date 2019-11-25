@@ -3,6 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoriesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_20_154914_create_product_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_20_154914_create_product_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/menus.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/menus.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/orderDetails.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orderDetails.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/product_orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/product_orders.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/requested.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/requested.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +70,13 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
         <item name="product_orders: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="products: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -311,6 +330,7 @@
       <workItem from="1574352435031" duration="130000" />
       <workItem from="1574406004121" duration="14725000" />
       <workItem from="1574435240624" duration="74000" />
+      <workItem from="1574685736022" duration="3969000" />
     </task>
     <servers />
   </component>

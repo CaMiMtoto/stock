@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
@@ -11,7 +12,7 @@ class CategoriesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,10 +29,6 @@ class CategoriesController extends Controller
                 $cat->update();
             }
         } else {
-            // Category::create([
-            //     'name' => $request->name,
-            // ]);
-
             $cat = new Category();
             $cat->name = $request->name;
             $cat->save();

@@ -14,7 +14,11 @@ class ProductOrderController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')
+        ->join('categories','categories.id','=','products.category_id')
+        ->where('categories.name','!=','Food')
+        ->select('products.*')
+        ->get();
         return view('admin.orders.product_orders', compact('products'));
     }
 

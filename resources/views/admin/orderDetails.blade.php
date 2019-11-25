@@ -153,7 +153,7 @@
                 <option value=""></option>
                 <option value="Not Paid" {{ $order->payment_status=="Not Paid"? 'selected':'' }}>Not Paid</option>
                 <option value="Advance" {{ $order->payment_status=="Advance"? 'selected':'' }}>Advance</option>
-                <option value="Paid" {{ $order->payment_status=="Paid"? 'selected':'' }}>Paid</option>
+                <option value="Full" {{ $order->payment_status=="Full"? 'selected':'' }}>Full Paid</option>
             </select>
         </div>
     </div>

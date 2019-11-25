@@ -192,6 +192,9 @@
 @section('scripts')
     <script src="{{ asset('lib/js/typeahead.bundle.js') }}"></script>
     <script>
+        $('.tr-food').addClass('active');
+        $('.mn-menus').addClass('active');
+
         var addItemsUrl = "";
         var menuItemsUrl="";
 

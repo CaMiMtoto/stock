@@ -165,7 +165,7 @@
     <script>
         $(function () {
             $('.tr-products').addClass('active');
-            $('.mn-products').addClass('active');
+            $('.mn-requests').addClass('active');
 
             $('#category_id').on('change', function () {
                 loadProducts($(this).val());

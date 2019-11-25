@@ -56,7 +56,7 @@
                             Requisitions
                         </a>
                     </li>
-                    <li>
+                    <li  class="mn-requests">
                         <a href="{{ route('requests') }}">
                             <i class="fa fa-circle-o"></i>
                             Requests
@@ -65,24 +65,48 @@
                 </ul>
             </li>
 
-            <li class="mn-menus">
-                <a href="{{ route('menus.all') }}">
-                    <i class="fa fa-list-ol"></i>
-                    <span>Menus</span>
+
+            <li class="treeview tr-food">
+                <a href="#">
+                    <i class="ion ion-fork"></i>
+                    <span>Food</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="mn-menus">
+                        <a href="{{ route('menus.all') }}">
+                            <i class="fa fa-circle-o"></i>
+                            Menus
+                        </a>
+                    </li>
+                    <li class="mn-orders">
+                        <a href="{{ route('orders.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            Orders
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="mn-product-orders">
-                <a href="{{ route('productOrders.index') }}">
-                    <i class="fa fa-list-ul"></i>
-                    <span>Product Orders</span>
+            <li class="treeview tr-drinks">
+                <a href="#">
+                    <i class="ion ion-ios-pricetag-outline"></i>
+                    <span>Drinks</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="mn-productOrders">
+                        <a href="{{ route('productOrders.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            Orders
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="mn-orders">
-                <a href="{{ route('orders.index') }}">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span>Orders</span>
-                </a>
-            </li>
+
             <li class="mn-expenses">
                 <a href="{{ route('expenses.all') }}">
                     <i class="ion ion-pricetags"></i>

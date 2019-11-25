@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -30,14 +30,29 @@ class ProductsController extends Controller
     public function getProducts(Request $request)
     {
         $q = $request->input('query');
-        $products = Product::where('name', 'LIKE', "%{$q}%")
-            ->orderBy("id", "desc")->get();
+//        $products = Product::where('name', 'LIKE', "%{$q}%")
+//            ->orderBy("id", "desc")->get();
+
+        $products = Product::with('category')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->where([
+                ['categories.name', '=', 'Food'],
+                ['products.name', 'LIKE', "%{$q}%"]
+            ])
+            ->select('products.*')
+            ->orderBy("products.id", "desc")
+            ->get();
+
         return response()->json($products, 200);
     }
 
     public function getAllProducts()
     {
-        $products = Product::all();
+        $products = Product::with('category')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->where('categories.name', '!=', 'Food')
+            ->select('products.*')
+            ->get();
         return response()->json($products, 200);
     }
 
@@ -48,6 +63,7 @@ class ProductsController extends Controller
             $prod = Product::find($request->id);
         } else {
             $prod = new Product();
+            $prod->qty = $request->original_qty;
         }
         $prod->name = $request->name;
         $prod->unit_measure = $request->unit_measure;

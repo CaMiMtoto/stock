@@ -334,12 +334,13 @@
     <script>
 
         $(function () {
+            $('.tr-food').addClass('active');
+            $('.mn-orders').addClass('active');
 
             if ($('#dbError').val()) {
                 $('#modal-default').modal('show');
             }
 
-            $('.mn-orders').addClass('active');
 
             $('.js-details').on('click', function () {
                 var url = $(this).attr('data-url');

@@ -15,8 +15,8 @@ class CreateProductOrdersTable extends Migration
     {
         Schema::create('product_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('client_name');
-            $table->string('waiter');
+            $table->string('customer_name');
+            $table->string('waiter')->nullable();
             $table->string('order_status')->default('pending')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('payment_mode');

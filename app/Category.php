@@ -1,14 +1,24 @@
 <?php
 
 namespace App;
-use App\Product;
+
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed name
+ */
 class Category extends Model
 {
-    protected $fillable=['name'];
+    protected $fillable = ['name'];
 
-    public function products(){
-    	return $this->hasMany(Product::class);
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst(strtolower($value));
     }
 }

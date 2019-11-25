@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <label for="customer_name" class="control-label">Customer</label>
                                     <input type="text" class="form-control" name="customer_name"
-                                           id="customer_name"
+                                           id="customer_name" required
                                            placeholder="Customer name" value="">
                                 </div>
                             </div>
@@ -194,9 +194,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="payment_mode">Payment Method</label>
-                                    <select name="payment_mode" id="payment_mode" class="form-control">
+                                    <select required name="payment_mode" id="payment_mode" class="form-control">
                                         <option value=""></option>
-                                        <option value="Cash">Cash</option>
+                                        <option value="Cash" selected>Cash</option>
                                         <option value="Card">Card</option>
                                     </select>
                                 </div>
@@ -347,8 +347,9 @@
 
 
         $(document).ready(function () {
+            $('.tr-drinks').addClass('active');
+            $('.mn-productOrders').addClass('active');
 
-            $('.nav-orders').addClass('active');
             myFunc();
 
             manageTable.on("click", ".js-details", function (e) {
