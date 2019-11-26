@@ -30,9 +30,7 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="login-logo">
-            <a href="">
-                SMS
-            </a>
+            <img src="{{ asset('img/logo.png') }}" alt="">
         </div>
         @if(Session::has('message'))
             <div class="alert alert-danger flat">
@@ -45,10 +43,10 @@
         <p class="login-box-msg">Sign in to start your session</p>
 
 
-        <form method="POST" action="{{ route('signIn') }}" novalidate>
+        <form autocomplete="off" method="POST" action="{{ route('signIn') }}" novalidate >
             @csrf
-            <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="{{ __('E-Mail Address') }}"
+            <div class="form-group has-feedback form-group-lg">
+                <input type="email" class="form-control flat" placeholder="{{ __('E-Mail Address') }}"
                        name="email"
                        value="{{ old('email') }}"
                        required autocomplete="email" autofocus>
@@ -60,9 +58,9 @@
                 @enderror
             </div>
 
-            <div class="form-group has-feedback">
+            <div class="form-group has-feedback form-group-lg">
                 <input id="password" type="password"
-                       class="form-control @error('password') is-invalid @enderror"
+                       class="form-control flat @error('password') is-invalid @enderror"
                        name="password" placeholder="{{ __('Password') }}"
                        required autocomplete="current-password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -76,16 +74,15 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg btn-flat">Sign In</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-
-        <h4 class="text-center">Or</h4>
-        <a class="btn btn-link btn-block" href="">
-            {{ __('Forgot Your Password?') }}
-        </a>
+        <br>
+        <br>
+        <br>
+        <br>
 
     </div>
     <!-- /.login-box-body -->

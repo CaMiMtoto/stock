@@ -98,7 +98,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/product/orders/save', 'ProductOrderController@store')->name('productOrders.store');
         Route::post('/product/orders/mark', 'ProductOrderController@mark')->name('productOrders.mark');
 
+
+        //users routes
+        Route::get('/users', 'UsersController@index')->name('users.index');
+        Route::post('/users/all', 'UsersController@all')->name('users.all');
+        Route::delete('/users/destroy/{user}', 'UsersController@destroy')->name('users.destroy');
+        Route::post('/users/store', 'UsersController@store')->name('users.store');
+        Route::post('/users/update', 'UsersController@update')->name('users.update');
+        Route::get('/users/show/{user}', 'UsersController@show')->name('users.show');
+
     });
+    Route::get('/users/change/password', 'UsersController@changePassword')->name('changePassword');
+    Route::post('/users/{user}/change/password', 'UsersController@changePasswordPost')->name('password.update');
 });
 
 

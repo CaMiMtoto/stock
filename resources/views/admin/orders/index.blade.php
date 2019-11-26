@@ -214,7 +214,8 @@
                 <div class="box-header with-border">
                     <div class="col-md-6">
                         <h4 class="box-title">
-                            Orders
+                            <i class="ion ion-fork"></i>
+                          Food  Orders
                         </h4>
                     </div>
                     <div class="col-md-6">
@@ -334,8 +335,8 @@
     <script>
 
         $(function () {
-            $('.tr-food').addClass('active');
-            $('.mn-orders').addClass('active');
+            $('.tr-orders').addClass('active');
+                $('.mn-food').addClass('active');
 
             if ($('#dbError').val()) {
                 $('#modal-default').modal('show');

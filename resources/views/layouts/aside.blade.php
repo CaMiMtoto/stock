@@ -23,11 +23,7 @@
                 </a>
             </li>
 
-            <li class="mn-categories">
-                <a href="{{ url('/admin/categories') }}">
-                    <i class="fa fa-list-ul"></i> <span>Categories</span>
-                </a>
-            </li>
+
 
 
             <li class="treeview tr-products">
@@ -44,19 +40,21 @@
                             Manage products
                         </a>
                     </li>
+                    @if(Auth::user()->role->name!='cashier')
                     <li class="mn-stocks">
                         <a href="{{ route('stocks.all') }}">
                             <i class="fa fa-circle-o"></i>
                             Stocking
                         </a>
                     </li>
+                    @endif
                     <li class="mn-requisitions">
                         <a href="{{ route('requisitions.all') }}">
                             <i class="fa fa-circle-o"></i>
                             Requisitions
                         </a>
                     </li>
-                    <li  class="mn-requests">
+                    <li class="mn-requests">
                         <a href="{{ route('requests') }}">
                             <i class="fa fa-circle-o"></i>
                             Requests
@@ -65,61 +63,82 @@
                 </ul>
             </li>
 
-
-            <li class="treeview tr-food">
+            @if(Auth::user()->role->name!='keeper')
+                <li class="mn-menus">
+                    <a href="{{ route('menus.all') }}">
+                        <i class="fa fa-circle-o"></i>
+                        Menus
+                    </a>
+                </li>
+                <li class="treeview tr-orders">
+                    <a href="#">
+                        <i class="ion ion-ios-pricetag-outline"></i>
+                        <span>Orders</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="mn-drinks">
+                            <a href="{{ route('productOrders.index') }}">
+                                <i class="fa fa-circle-o"></i>
+                                Drinks
+                            </a>
+                        </li>
+                        <li class="mn-food">
+                            <a href="{{ route('orders.index') }}">
+                                <i class="fa fa-circle-o"></i>
+                                Food
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+            <li class="treeview tr-settings">
                 <a href="#">
-                    <i class="ion ion-fork"></i>
-                    <span>Food</span>
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="mn-menus">
-                        <a href="{{ route('menus.all') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Menus
+                    <li class="mn-changePassword">
+                        <a href="{{ route('changePassword') }}">
+                            <i class="fa fa-circle"></i>
+                            Change Password
                         </a>
                     </li>
-                    <li class="mn-orders">
-                        <a href="{{ route('orders.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Orders
+
+                    <li class="mn-categories">
+                        <a href="{{ url('/admin/categories') }}">
+                            <i class="fa fa-circle"></i> <span>Categories</span>
                         </a>
                     </li>
-                </ul>
-            </li>
-            <li class="treeview tr-drinks">
-                <a href="#">
-                    <i class="ion ion-ios-pricetag-outline"></i>
-                    <span>Drinks</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="mn-productOrders">
-                        <a href="{{ route('productOrders.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Orders
-                        </a>
-                    </li>
+
                 </ul>
             </li>
 
-            <li class="mn-expenses">
-                <a href="{{ route('expenses.all') }}">
-                    <i class="ion ion-pricetags"></i>
-                    <span>Expenses</span>
-                </a>
-            </li>
+{{--            <li class="mn-expenses">--}}
+{{--                <a href="{{ route('expenses.all') }}">--}}
+{{--                    <i class="ion ion-pricetags"></i>--}}
+{{--                    <span>Expenses</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="mn-shifts">
                 <a href="{{ route('shifts') }}">
                     <i class="fa fa-clock-o"></i>
                     <span>Shift Manager</span>
                 </a>
             </li>
-
+            @if(Auth::user()->role->name=='admin')
+                <li class="mn-users">
+                    <a href="{{ route('users.index') }}">
+                        <i class="ion ion-android-people"> </i>
+                        <span>Users</span>
+                    </a>
+                </li>
+            @endif
             <li class="mn-reports">
                 <a href="{{ route('reports') }}">
                     <i class="ion ion-printer"> </i>

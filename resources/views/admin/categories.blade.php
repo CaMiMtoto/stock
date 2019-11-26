@@ -104,6 +104,7 @@
 @section('scripts')
     <script>
         $(function () {
+            $('.tr-settings').addClass('active');
             $('.mn-categories').addClass('active');
 
             $('#addButton').on('click', function () {

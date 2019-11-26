@@ -19,8 +19,8 @@
                 <div class="box box-primary  flat">
                     <div class="box-header with-border">
                         <h4 class="box-title">
-                            <i class="fa fa-square"></i>
-                            Manage Orders
+                            <i class="ion ion-wineglass"></i>
+                            Drinks Orders
                         </h4>
 
                         <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
@@ -292,8 +292,8 @@
     <script src="{{ asset('lib/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/product_order.js') }}"></script>
     <script>
-
-        $('.mn-product-orders').addClass('active');
+        $('.tr-orders').addClass('active');
+        $('.mn-drinks').addClass('active');
         var defaultUrl = "{{ route('productOrders.all')  }}";
         var table;
         var manageTable = $("#manageTable");
