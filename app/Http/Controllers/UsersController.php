@@ -63,24 +63,25 @@ class UsersController extends Controller
         $dir = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $users = User::offset($start)
+            $users = User::with('role')->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
         } else {
             $search = $request->input('search.value');
 
-            $users = User::Where('email', 'LIKE', "%{$search}%")
-                ->orWhere('name', 'LIKE', "%{$search}%")
-                ->orWhere('role', 'LIKE', "%{$search}%")
+            $users = User::with('role')
+                ->join('roles','roles.id','users.role_id')
+                ->Where('users.email', 'LIKE', "%{$search}%")
+                ->orWhere('users.name', 'LIKE', "%{$search}%")
+                ->orWhere('roles.name', 'LIKE', "%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
+                ->select('users.*')
                 ->get();
 
-            $totalFiltered = User::where('id', 'LIKE', "%{$search}%")
-                ->orWhere('name', 'LIKE', "%{$search}%")
-                ->count();
+            $totalFiltered = $users->count();
         }
 
         $data = array();
