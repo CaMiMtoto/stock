@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_23_085137_create_roles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2013_08_23_085137_create_roles_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/insert_roles.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +178,7 @@
     <property name="database.console.LAST_STATE" value="false" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -318,7 +317,7 @@
       <workItem from="1574435240624" duration="74000" />
       <workItem from="1574685736022" duration="4663000" />
       <workItem from="1574784063442" duration="9195000" />
-      <workItem from="1574845517614" duration="194000" />
+      <workItem from="1574845517614" duration="571000" />
     </task>
     <servers />
   </component>
