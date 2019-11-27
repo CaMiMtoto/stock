@@ -13,7 +13,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Phone', 'Laptop', 'PC', 'Fruits', 'Shoes', 'T-shirt', 'Shirt', 'Drinks'];
+        $categories = ['Drinks', 'Food'];
         foreach ($categories as $category) {
             \App\Category::Create([
                 'name' => $category
