@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Order;
 use App\OrderItem;
+use App\Product;
+use App\StockHistory;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +16,7 @@ class OrdersController extends BaseController
     public function index(Request $request)
     {
         $menus = Menu::all();
+        $waiters = User::with('role')->where('role_id', '=', 5)->get();
 
         if (empty($request->input('q'))) {
             $orders = Order::paginate(10);
@@ -26,9 +30,11 @@ class OrdersController extends BaseController
             $orders->appends(['q' => $q]);
         }
 
-        return view('admin.orders.index', compact('orders'))->with([
-            'menus' => $menus
-        ]);
+        return view('admin.orders.index', compact('orders'))
+            ->with([
+                'menus' => $menus,
+                'waiters' => $waiters
+            ]);
     }
 
     public function create()
@@ -40,8 +46,10 @@ class OrdersController extends BaseController
     public function edit(Order $order)
     {
         $menus = Menu::all();
+        $waiters = User::with('role')->where('role_id', '=', 5)->get();
         return view('admin.orders.edit', compact('order'))->with([
-            'menus' => $menus
+            'menus' => $menus,
+            'waiters' => $waiters
         ]);
     }
 
@@ -54,12 +62,12 @@ class OrdersController extends BaseController
     {
         return view('admin.orders.print', compact('order'));
     }
-
     private function updateProductQty($menu_id, $qty)
     {
         $menu = Menu::find($menu_id);
         foreach ($menu->menuItems as $item) {
-            $item->product->qty -= ($item->qty * $qty);
+            $newQty=$item->qty * $qty;
+            $item->product->qty -=$newQty;
             $item->product->update();
         }
     }
@@ -70,7 +78,7 @@ class OrdersController extends BaseController
             DB::beginTransaction();
             $order = new Order();
             $order->customer_name = $request->customer_name;
-            $order->waiter = $request->waiter;
+            $order->waiter_id = $request->waiter;
             $order->payment_mode = $request->payment_mode;
             $order->amount_paid = $request->amount_paid;
             $order->received = $request->delivered;
@@ -101,7 +109,7 @@ class OrdersController extends BaseController
             DB::beginTransaction();
             $order->customer_name = $request->customer_name;
 //            $order->order_date = $request->order_date;
-            $order->waiter = $request->waiter;
+            $order->waiter_id = $request->waiter;
             $order->payment_mode = $request->payment_mode;
             $order->amount_paid = $request->amount_paid;
             $order->received = $request->delivered;

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\OrderItem;
 use App\Product;
 use App\ProductOrder;
 use App\ProductOrderItem;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,12 +13,14 @@ class ProductOrderController extends Controller
 {
     public function index()
     {
+        $waiters = User::with('role')->where('role_id', '=', 5)->get();
         $products = Product::with('category')
-        ->join('categories','categories.id','=','products.category_id')
-        ->where('categories.name','!=','Food')
-        ->select('products.*')
-        ->get();
-        return view('admin.orders.product_orders', compact('products'));
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->where('categories.name', '!=', 'Food')
+            ->select('products.*')
+            ->get();
+        return view('admin.orders.product_orders', compact('products'))
+            ->with(['waiters' => $waiters]);
     }
 
     public function all(Request $request)
@@ -109,9 +110,11 @@ class ProductOrderController extends Controller
 
     public function edit(ProductOrder $order)
     {
+        $waiters = User::with('role')->where('role_id', '=', 5)->get();
         $products = Product::all();
         $order = $order->load('productOrderItems');
-        return view('admin.editOrder', compact('order'))->with(['products' => $products]);
+        return view('admin.editOrder', compact('order'))
+            ->with(['products' => $products, 'waiters' => $waiters]);
     }
 
     public function show(ProductOrder $order)
@@ -144,7 +147,7 @@ class ProductOrderController extends Controller
             DB::beginTransaction();
             $order = new ProductOrder();
             $order->customer_name = $request->customer_name;
-            $order->waiter = $request->waiter;
+            $order->waiter_id = $request->waiter;
             $order->payment_status = $request->payment_status;
             $order->amount_paid = $request->amount_paid;
             $order->amount_to_pay = $request->amount_to_pay;
@@ -176,7 +179,7 @@ class ProductOrderController extends Controller
         try {
             DB::beginTransaction();
             $order->customer_name = $request->customer_name;
-            $order->waiter = $request->waiter;
+            $order->waiter_id = $request->waiter;
             $order->payment_status = $request->payment_status;
             $order->amount_paid = $request->amount_paid;
             $order->amount_to_pay = $request->amount_to_pay;

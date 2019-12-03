@@ -61,6 +61,8 @@ function addRow() {
                 $("#productTable tbody").append(tr);
             }
 
+            $(document).find('.select2').select2();
+
         } // /success
     });	// get the product data
 

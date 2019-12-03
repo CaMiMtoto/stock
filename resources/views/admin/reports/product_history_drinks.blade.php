@@ -3,15 +3,15 @@
 @section('title','Product History')
 
 @section('content')
+
     <?php
     use App\Connection;
     $con = Connection::getConnection();
     $date = $_GET['date'];
-    $sql = 'select p.name,s.opening,s.received,s.sold,s.closing  from stock_transactions s inner join products p on s.product_id = p.id where DATE(s.created_at) = "' . $date . '" and p.category_id=2
+    $sql = 'select p.name,s.opening,s.received,s.sold,s.closing  from stock_transactions s inner join products p on s.product_id = p.id where DATE(s.created_at) = "' . $date . '" and p.category_id=1
 group by p.id';
     $result = mysqli_query($con, $sql);
     ?>
-
     <section class="content">
         <div class="box box-primary flat">
             <div class="box-header with-border">
@@ -29,7 +29,7 @@ group by p.id';
                     <thead>
                     <tr>
                         <th colspan="6">
-                            <h4>Food</h4>
+                            <h4>Drinks</h4>
                         </th>
                     </tr>
                     <tr>

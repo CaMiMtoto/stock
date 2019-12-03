@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int|null user_open
+ * @property \Illuminate\Support\Carbon start_time
+ */
 class Shift extends Model
 {
     protected $casts = ['start_time' => 'datetime', 'end_time' => 'datetime'];

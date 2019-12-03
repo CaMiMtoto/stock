@@ -78,9 +78,9 @@ class StocksController extends Controller
      */
     public function updateProductQtyWhenStockingItem(Stock $stock): void
     {
-        if ($stock->product->original_qty == 0) {
+     /*   if ($stock->product->original_qty == 0) {
             $stock->product->original_qty = $stock->qty;
-        }
+        }*/
         $stock->product->qty += $stock->qty;
         $stock->product->update();
     }

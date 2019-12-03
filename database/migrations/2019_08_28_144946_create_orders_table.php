@@ -15,10 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('waiter_id');
             $table->string('customer_name');
-            $table->string('waiter');
             $table->date('system_date')->nullable(false);
             $table->timestamps();
+
+            $table->foreign('waiter_id')
+                ->references('id')
+                ->on('users');
+
         });
     }
 

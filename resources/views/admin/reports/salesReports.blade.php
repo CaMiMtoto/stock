@@ -3,7 +3,12 @@
 @section('content')
 
     <?php
-    $totalAmount=0;
+    use App\Connection;$totalAmount = 0;
+    $con = Connection::getConnection();
+    $startDate = $_GET['start_date'];
+    $endDate = $_GET['end_date'];
+    $sql = 'select i.created_at, m.name as name, sum(i.qty) as quantity, i.price as price, (sum(i.qty) * i.price) as Total from order_items as i inner join menus as m on i.menu_id = m.id where DATE(i.created_at) between "' . $startDate . '" and "' . $endDate . '"group by i.menu_id';
+    $result = mysqli_query($con, $sql);
     ?>
     <section class="content">
 
@@ -49,7 +54,7 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-        <!-- Table row -->
+            <!-- Table row -->
             <div class="row">
                 <div class="col-xs-12 table-responsive">
                     <h5>Sales reports</h5>
@@ -64,18 +69,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($sales as $sale)
-                            <?php
-                            $totalAmount+=$sale->sum('price')* $sale->qty;
-                            ?>
-                            <tr>
-                                <td>{{ $sale->created_at }}</td>
-                                <td>{{ $sale->menu->name}}</td>
-                                <td>{{ $sale->qty}}</td>
-                                <td>{{ number_format($sale->sum('price')) }}</td>
-                                <td>{{ number_format($sale->sum('price')* $sale->qty) }}</td>
-                            </tr>
-                        @endforeach
+                        <?php
+                        if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                        $totalAmount += $row['Total'];
+                        ?>
+                        <tr>
+                            <td>{{ $row['created_at'] }}</td>
+                            <td>{{ $row['name'] }}</td>
+                            <td>{{ $row['quantity'] }}</td>
+                            <td>{{ number_format($row['price'] )}}</td>
+                            <td>{{ number_format($row['Total']) }}</td>
+                        </tr>
+                        <?php
+                        }
+                        }
+                        ?>
+
 
                         </tbody>
                         <tfoot>
@@ -93,6 +103,9 @@
 
         </section>
     </section>
+    <?php
+    mysqli_close($con);
+    ?>
 @endsection
 @section('scripts')
     <script>

@@ -72,8 +72,15 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="waiter" class="control-label">Waiter</label>
-                                    <input type="text" class="form-control" name="waiter" id="waiter"
-                                           placeholder="Waiter" value="{{ $order->waiter }}">
+                                    <select name="waiter" id="waiter" class="form-control">
+                                        <option value=""></option>
+                                        @foreach($waiters as $waiter)
+                                            <option
+                                                value="{{ $waiter->id }}" {{ $order->waiter_id==$waiter->id?'selected':'' }}>
+                                                {{ $waiter->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -92,19 +99,25 @@
                                 <tr id="row{{$orderItem->id}}">
                                     <td>
                                         <div class="form-group">
-                                            <select required onchange="getProductData({{$orderItem->id}})" name="product[]" id="product{{$orderItem->id}}"
+                                            <select required onchange="getProductData({{$orderItem->id}})"
+                                                    name="product[]" id="product{{$orderItem->id}}"
                                                     class="form-control select2" style="width: 100%">
                                                 <option value="">--product--</option>
                                                 @foreach($products as $product)
-                                                    <option value="{{ $product->id }}" {{$orderItem->product_id==$product->id?'selected':''}}>{{ $product->name }}</option>
+                                                    <option
+                                                        value="{{ $product->id }}" {{$orderItem->product_id==$product->id?'selected':''}}>
+                                                        {{ $product->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
-                                            <label id="product1-error" class="error" for="product{{$orderItem->id}}"></label>
+                                            <label id="product1-error" class="error"
+                                                   for="product{{$orderItem->id}}"></label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input required type="text" readonly class="form-control" id="rate{{$orderItem->id}}"
+                                            <input required type="text" readonly class="form-control"
+                                                   id="rate{{$orderItem->id}}"
                                                    name="rate[]"
                                                    value="{{$orderItem->price}}"
                                                    placeholder="Price">
@@ -112,8 +125,10 @@
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <input required type="text" onkeyup="getTotal({{$orderItem->id}})" class="form-control"
-                                                   id="quantity{{$orderItem->id}}" name="quantity[]" value="{{$orderItem->qty}}"
+                                            <input required type="text" onkeyup="getTotal({{$orderItem->id}})"
+                                                   class="form-control"
+                                                   id="quantity{{$orderItem->id}}" name="quantity[]"
+                                                   value="{{$orderItem->qty}}"
                                                    placeholder="Qty">
                                         </div>
                                     </td>
@@ -152,7 +167,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="tax">Tax (18%)</label>
-                                    <input required type="text" readonly name="tax" class="form-control" value="{{ $order->tax }}"
+                                    <input required type="text" readonly name="tax" class="form-control"
+                                           value="{{ $order->tax }}"
                                            id="tax">
                                 </div>
                             </div>
@@ -161,7 +177,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="due">Amount Due</label>
-                                    <input required type="text" readonly name="due" class="form-control" value="{{ $order->amountDue() }}"
+                                    <input required type="text" readonly name="due" class="form-control"
+                                           value="{{ $order->amountDue() }}"
                                            id="due">
                                 </div>
                             </div>
@@ -170,8 +187,10 @@
                                     <label for="payment_mode">Payment Method</label>
                                     <select name="payment_mode" id="payment_mode" class="form-control">
                                         <option value=""></option>
-                                        <option value="Cash" {{ $order->payment_mode=='Cash'?'selected':'' }}>Cash</option>
-                                        <option value="Card" {{ $order->payment_mode=='Card'?'selected':'' }}>Card</option>
+                                        <option value="Cash" {{ $order->payment_mode=='Cash'?'selected':'' }}>Cash
+                                        </option>
+                                        <option value="Card" {{ $order->payment_mode=='Card'?'selected':'' }}>Card
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -179,9 +198,14 @@
                                 <div class="form-group">
                                     <label for="payment_status">Payment status </label>
                                     <select required name="payment_status" class="form-control" id="payment_status">
-                                        <option value="Full" {{ $order->payment_status=='Full'?'selected':'' }}>Full</option>
-                                        <option value="Not Paid" {{ $order->payment_status=='Not Paid'?'selected':'' }}>Not Paid</option>
-                                        <option value="Advance" {{ $order->payment_status=='Advance'?'selected':'' }}>Advance</option>
+                                        <option value="Full" {{ $order->payment_status=='Full'?'selected':'' }}>Full
+                                        </option>
+                                        <option value="Not Paid" {{ $order->payment_status=='Not Paid'?'selected':'' }}>
+                                            Not Paid
+                                        </option>
+                                        <option value="Advance" {{ $order->payment_status=='Advance'?'selected':'' }}>
+                                            Advance
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -216,6 +240,7 @@
 @section('scripts')
     <script src="{{ asset('js/product_order.js') }}"></script>
     <script>
-        $('.mn-product-orders').addClass('active');
+        $('.tr-orders').addClass('active');
+        $('.mn-drinks').addClass('active');
     </script>
 @endsection

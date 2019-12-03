@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed payment_status
  * @property mixed waiter
  * @property mixed customer_name
+ * @property int waiter_id
  */
 class ProductOrder extends Model
 {
@@ -23,5 +24,9 @@ class ProductOrder extends Model
 
     function productOrderItems(){
         return $this->hasMany(ProductOrderItem::class,'order_id','id');
+    }
+
+    public function waiter(){
+       return $this->belongsTo(User::class,'waiter_id','id');
     }
 }

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
  * @property mixed payment_status
  * @property mixed amount_to_pay
  * @property mixed tax
+ * @property int waiter_id
  */
 class Order extends Model
 {
@@ -41,5 +42,7 @@ class Order extends Model
     {
         return $this->totalOrderPrice() - $this->amount_paid;
     }
-
+   public function waiter(){
+        return $this->belongsTo(User::class,'waiter_id','id');
+    }
 }

@@ -71,8 +71,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="waiter" class="control-label">Waiter</label>
-                                        <input type="text" class="form-control" name="waiter" id="waiter"
-                                               placeholder="Waiter" value="">
+                                        <select name="waiter" id="waiter" class="form-control">
+                                            <option value=""></option>
+                                            @foreach($waiters as $waiter)
+                                                <option value="{{ $waiter->id }}">{{ $waiter->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -97,6 +101,7 @@
                                                     <option value="{{ $menu->id }}">{{ $menu->name }}</option>
                                                 @endforeach
                                             </select>
+                                            <label id="menu1-error" class="error" for="menu1"></label>
                                         </div>
                                     </td>
                                     <td>
@@ -123,10 +128,10 @@
                                         </div>
                                     </td>
                                     <td>
-
-                                        {{--     <button class="btn btn-default removeProductRowBtn" type="button"
-                                                     id="removeProductRowBtn" onclick="removeProductRow(1)">
-                                                 <i class="fa fa-trash"></i></button>--}}
+                                        <button type="button" class="btn btn-warning pull-left" onclick="addRow()" id="addRowBtn"
+                                                data-loading-text="Loading...">
+                                            <i class="fa fa-plus-square"></i> Add Row
+                                        </button>
                                     </td>
                                 </tr>
 
@@ -183,14 +188,11 @@
                             </div>
                         </div>
                         <div class="modal-footer editFooter">
-                            <button type="button" class="btn btn-default pull-left" onclick="addRow()" id="addRowBtn"
-                                    data-loading-text="Loading...">
-                                <i class="fa fa-plus-square"></i> Add Row
-                            </button>
-                            <button type="reset" class="btn btn-warning pull-left">
-                                <i class="fa fa-eraser"></i>
-                                Reset
-                            </button>
+
+{{--                            <button type="reset" class="btn btn-warning pull-left">--}}
+{{--                                <i class="fa fa-eraser"></i>--}}
+{{--                                Reset--}}
+{{--                            </button>--}}
 
                             <button type="button" class="btn btn-default" data-dismiss="modal">
                                 <i class="fa fa-close"></i>
@@ -198,7 +200,7 @@
                             </button>
                             <button type="submit" id="createBtn" class="btn btn-primary">
                                 <i class="fa fa-check-circle"></i>
-                                Save changes
+                                Save order
                             </button>
                         </div>
                     </form>

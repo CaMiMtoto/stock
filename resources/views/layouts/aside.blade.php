@@ -66,7 +66,7 @@
             @if(Auth::user()->role->name!='keeper')
                 <li class="mn-menus">
                     <a href="{{ route('menus.all') }}">
-                        <i class="fa fa-circle-o"></i>
+                        <i class="fa fa-circle"></i>
                         Menus
                     </a>
                 </li>
@@ -79,16 +79,16 @@
                     </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="mn-drinks">
-                            <a href="{{ route('productOrders.index') }}">
-                                <i class="fa fa-circle-o"></i>
-                                Drinks
-                            </a>
-                        </li>
                         <li class="mn-food">
                             <a href="{{ route('orders.index') }}">
-                                <i class="fa fa-circle-o"></i>
-                                Food
+                                <i class="fa fa-circle"></i>
+                                Food & Beverage
+                            </a>
+                        </li>
+                        <li class="mn-drinks">
+                            <a href="{{ route('productOrders.index') }}">
+                                <i class="fa fa-circle"></i>
+                                Drinks
                             </a>
                         </li>
                     </ul>

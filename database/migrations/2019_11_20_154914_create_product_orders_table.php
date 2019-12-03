@@ -15,6 +15,7 @@ class CreateProductOrdersTable extends Migration
     {
         Schema::create('product_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('waiter_id');
             $table->string('customer_name');
             $table->string('waiter')->nullable();
             $table->string('order_status')->default('pending')->nullable();
@@ -24,6 +25,8 @@ class CreateProductOrdersTable extends Migration
             $table->decimal('amount_to_pay');
             $table->decimal('amount_paid');
             $table->timestamps();
+
+            $table->foreign('waiter_id')->references('id')->on('users');
         });
     }
 

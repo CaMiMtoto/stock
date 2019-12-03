@@ -66,6 +66,17 @@
                         <div class="box-body" style="display: block">
                             <div class="col-xs-12">
                                 <div class="form-group">
+                                    <label for="date">Category</label>
+                                    <select name="category" required id="category" class="form-control">
+                                        <option value=""></option>
+                                        @foreach(App\Category::all() as $category)
+                                            <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
                                     <label for="date">Date</label>
                                     <input type="text" required name="date" id="date" placeholder="Date"
                                            class="form-control datepicker">

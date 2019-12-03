@@ -29,7 +29,8 @@
                         </button>
                     </div>
                     <div class="box-body table-responsive ">
-                        <table class="table table-striped table-hover" id="manageTable" style="border: 1px solid #f1f1f1">
+                        <table class="table table-striped table-hover" id="manageTable"
+                               style="border: 1px solid #f1f1f1">
                             <thead>
                             <tr>
                                 <th>Oder Date</th>
@@ -99,8 +100,12 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="waiter" class="control-label">Waiter</label>
-                                    <input type="text" class="form-control" name="waiter" id="waiter"
-                                           placeholder="Waiter" value="">
+                                    <select name="waiter" id="waiter" class="form-control">
+                                        <option value=""></option>
+                                        @foreach($waiters as $waiter)
+                                            <option value="{{ $waiter->id }}">{{ $waiter->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -311,7 +316,7 @@
                 columns: [
                     {data: 'created_at', 'sortable': true},
                     {data: 'customer_name', 'sortable': true},
-                    {data: 'waiter', 'sortable': true,},
+                    {data: 'waiter.name', 'sortable': true,},
                     {data: 'amount_to_pay', 'sortable': true},
                     {data: 'amount_paid', 'sortable': true},
                     {data: 'amount_due', 'sortable': false},
@@ -333,7 +338,7 @@
                         'sortable': false,
                         render: function (data, type, row) {
                             return "<div class='btn-group btn-group-sm'>" +
-                                "<a href='/admin/product/orders/"+row.id+"/edit' class='btn btn-warning btn-xs'> " +
+                                "<a href='/admin/product/orders/" + row.id + "/edit' class='btn btn-warning btn-xs'> " +
                                 "<i class='glyphicon glyphicon-edit'></i></a>" +
                                 "<button class='btn btn-default btn-xs  js-details' " +
                                 "data-url='/admin/product/orders/details/" + row.id + "' data-id='" + row.id + "'> " +

@@ -60,8 +60,14 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="waiter" class="control-label">Waiter</label>
-                                    <input type="text" class="form-control" name="waiter" id="waiter"
-                                           placeholder="Waiter" value="{{ $order->waiter }}">
+                                    <select name="waiter" id="waiter" class="form-control">
+                                        <option value=""></option>
+                                        @foreach($waiters as $waiter)
+                                            <option value="{{ $waiter->id }}" {{ $waiter->id==$order->waiter_id?'selected':'' }}>
+                                                {{ $waiter->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -118,12 +124,7 @@
                                                    placeholder="Total">
                                         </div>
                                     </td>
-                                    <td>
 
-                                        <button class="btn btn-default removeProductRowBtn" type="button"
-                                                id="removeProductRowBtn" onclick="removeProductRow(<?php print $x;?>)">
-                                            <i class="fa fa-trash"></i></button>
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -220,6 +221,8 @@
 
 @section('scripts')
     <script>
+        $('.tr-orders').addClass('active');
+        $('.mn-food').addClass('active');
         function addRow() {
             $("#addRowBtn").button("loading");
 
@@ -252,7 +255,7 @@
                         '<td>' +
                         '<div class="form-group">' +
 
-                        '<select class="form-control" name="menu[]" id="menu' + count + '" onchange="getProductData(' + count + ')" >' +
+                        '<select class="form-control select2" name="menu[]" id="menu' + count + '" onchange="getProductData(' + count + ')" >' +
                         '<option value="">--menu--</option>';
                     // console.log(response);
                     $.each(response, function (index, value) {
@@ -283,7 +286,7 @@
                     } else {
                         $("#productTable tbody").append(tr);
                     }
-
+                    $(document).find('.select2').select2();
                 } // /success
             });	// get the product data
 

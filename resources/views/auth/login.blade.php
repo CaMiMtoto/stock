@@ -74,7 +74,10 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg btn-flat">
+                        <i class="glyphicon glyphicon-log-in"></i>
+                        Sign In
+                    </button>
                 </div>
                 <!-- /.col -->
             </div>

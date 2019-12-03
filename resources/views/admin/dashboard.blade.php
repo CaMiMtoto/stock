@@ -76,7 +76,9 @@
             <div class="col-md-6">
                 <div class="box box-primary flat">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Recent products</h4>
+                        <h4 class="box-title">
+                            <i class="ion ion-ios-pricetags"></i>
+                            Recent products</h4>
                     </div>
                     <div class="box-body">
                         <table class="table table-hover">
@@ -112,10 +114,10 @@
                 <div class="box box-warning flat">
                     <div class="box-header with-border">
                         <h4 class="box-title">
-                            <i class="fa fa-shopping-bag"></i>
-                            Recent orders</h4>
+                            <i class="ion ion-fork"></i>
+                            Recent food orders</h4>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body table-responsive">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -132,7 +134,7 @@
                                 <tr>
                                     <td>{{ $product->created_at->format('d/m/Y') }}</td>
                                     <td>{{ $product->customer_name }}</td>
-                                    <td>{{ $product->waiter }}</td>
+                                    <td>{{ $product->waiter->name }}</td>
                                     <td>{{ $product->payment_mode }}</td>
                                     <td>{{ $product->orderItems->sum('qty') }}</td>
                                     <td>{{ number_format($product->amount_paid) }}</td>
@@ -143,6 +145,46 @@
                     </div>
                     <div class="box-footer text-center">
                         <a href="{{ route('orders.index') }}" class="btn btn-link btn-sm">
+                            More Info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-warning flat">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">
+                            <i class="ion ion-wineglass"></i>
+                            Recent drinks orders</h4>
+                    </div>
+                    <div class="box-body table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Customer</th>
+                                <th>Waiter</th>
+                                <th>Payment Mode</th>
+                                <th>Items</th>
+                                <th>Amount Paid</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(App\ProductOrder::orderByDesc('id')->limit(5)->get() as $product)
+                                <tr>
+                                    <td>{{ $product->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $product->customer_name }}</td>
+                                    <td>{{ $product->waiter->name }}</td>
+                                    <td>{{ $product->payment_mode }}</td>
+                                    <td>{{ $product->productOrderItems->sum('qty') }}</td>
+                                    <td>{{ number_format($product->amount_paid) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="{{ route('productOrders.index') }}" class="btn btn-link btn-sm">
                             More Info <i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>

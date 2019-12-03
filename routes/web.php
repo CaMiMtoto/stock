@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/menus/items/{menu}', 'MenusController@addMenuItem')->name('menus.addItems');
         Route::delete('/menus/items/{menuItem}', 'MenusController@removeItem')->name('menus.removeItem');
 
+        Route::put('/menus/items/{item}/update', 'MenuItemsController@updateMenuItem')->name('updateMenuItem');
+
         Route::get('/orders', 'OrdersController@index')->name('orders.index');
         Route::get('/orders/create', 'OrdersController@create')->name('orders.create');
         Route::post('/orders', 'OrdersController@store')->name('orders.store');

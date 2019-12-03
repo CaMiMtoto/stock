@@ -42,19 +42,19 @@
                                 <td>{{ number_format($menu->price) }}</td>
                                 <td>
                                     <button
-                                            data-url="{{ route('menus.show',['id'=>$menu->id]) }}"
-                                            class="btn btn-default btn-sm js-edit">
+                                        data-url="{{ route('menus.show',['id'=>$menu->id]) }}"
+                                        class="btn btn-default btn-sm js-edit">
                                         Edit
                                     </button>
                                     <button
-                                            data-url="{{ route('menus.destroy',['id'=>$menu->id]) }}"
-                                            class="btn btn-warning btn-sm js-delete">
+                                        data-url="{{ route('menus.destroy',['id'=>$menu->id]) }}"
+                                        class="btn btn-warning btn-sm js-delete">
                                         Delete
                                     </button>
                                     <button
-                                            data-add-items-url="{{ route('menus.addItems',['id'=>$menu->id]) }}"
-                                            data-url="{{ route('menus.items',['id'=>$menu->id]) }}"
-                                            class="btn btn-primary btn-sm js-details">
+                                        data-add-items-url="{{ route('menus.addItems',['id'=>$menu->id]) }}"
+                                        data-url="{{ route('menus.items',['id'=>$menu->id]) }}"
+                                        class="btn btn-primary btn-sm js-details">
                                         Details
                                     </button>
                                 </td>
@@ -118,7 +118,8 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">
                         Menu
                     </h4>
@@ -148,7 +149,8 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="qty" id="qty" placeholder="Qty" required>
+                                                <input type="text" class="form-control" name="qty" id="qty"
+                                                       placeholder="Qty" required>
                                             </div>
 
                                         </div>
@@ -167,8 +169,6 @@
                                     </div>
 
 
-
-
                                 </form>
                             </div>
                         </div>
@@ -180,13 +180,17 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-default pull-right" onclick="location.reload();" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default pull-right" onclick="location.reload();"
+                            data-dismiss="modal">Close
+                    </button>
                     <div class="clearfix"></div>
                 </div>
 
             </div>
         </div>
     </div>
+
+    <input type="hidden" id="token" value="{{ csrf_token() }}">
 @endsection
 
 @section('scripts')
@@ -196,7 +200,7 @@
         $('.mn-menus').addClass('active');
 
         var addItemsUrl = "";
-        var menuItemsUrl="";
+        var menuItemsUrl = "";
 
         function loadMenuItems(menuItemsUrl) {
             showLoader();
@@ -213,6 +217,7 @@
         $(function () {
             $('.mn-menus').addClass('active');
 
+            var itemDiv = $('#itemsDiv');
             //edit
             $('.js-edit').on('click', function () {
                 var url = $(this).attr('data-url');
@@ -229,12 +234,12 @@
 
             $('.js-details').on('click', function () {
                 addItemsUrl = $(this).attr('data-add-items-url');
-                menuItemsUrl=$(this).attr('data-url');
+                menuItemsUrl = $(this).attr('data-url');
                 $('#detailsModal').modal('show');
                 loadMenuItems(menuItemsUrl);
             });
 
-            $('#itemsDiv').on('click', '.js-remove-item', function () {
+            itemDiv.on('click', '.js-remove-item', function () {
                 var url = $(this).attr('data-url');
                 var button = $(this);
                 button.button('loading');
@@ -246,6 +251,72 @@
                     loadMenuItems(menuItemsUrl);
                 });
             });
+
+            itemDiv.on('click', '.js-edit-item', function () {
+                var id = $(this).attr('data-id');
+                var btnUpdate = $('#js-update' + id);
+                var btnCancel = $('#js-cancel' + id);
+                var btnClose = $('#js-close' + id);
+                var btnEdit = $('#js-edit' + id);
+
+
+                btnEdit.addClass('div-hide');
+                btnUpdate.removeClass('div-hide');
+                btnCancel.removeClass('div-hide');
+                btnClose.addClass('div-hide');
+
+                var editQty = $('#qty' + id);
+                var editCost = $('#cost' + id);
+
+                editQty.attr('contenteditable', 'true');
+                editCost.attr('contenteditable', 'true');
+            });
+
+
+            itemDiv.on('click', '.js-cancel', function () {
+                var btnCancel = $(this);
+                var id = btnCancel.attr('data-id');
+                var btnUpdate = $('#js-update' + id);
+                var btnClose = $('#js-close' + id);
+                var btnEdit = $('#js-edit' + id);
+                btnEdit.removeClass('div-hide');
+                btnUpdate.addClass('div-hide');
+                btnCancel.addClass('div-hide');
+                btnClose.removeClass('div-hide');
+
+                var editQty = $('#qty' + id);
+                var editCost = $('#cost' + id);
+
+                editQty.attr('contenteditable', 'false');
+                editCost.attr('contenteditable', 'false');
+            });
+
+            itemDiv.on('click', '.js-update-item', function () {
+                var btn = $(this);
+                var id = btn.attr('data-id');
+                var url = btn.attr('data-url');
+                var qty = $('#qty' + id).text();
+                var cost = $('#cost' + id).text();
+                if(qty.trim()===''|| cost.trim()===''){
+                    return;
+                }
+                if(isNaN(qty) || isNaN(cost)){
+                    alert('Please enter a valid number,, without commas.');
+                    return;
+                }
+
+
+                btn.button('loading');
+                $.ajax({
+                    url: url,
+                    method: 'PUT',
+                    data: {qty: qty, cost: cost,_token:$('#token').val()}
+                }).done(function (data) {
+                    loadMenuItems(menuItemsUrl);
+                });
+
+            });
+
 
             const products = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -293,7 +364,7 @@
         });
 
 
-        var loadItems=function () {
+        var loadItems = function () {
 
         };
     </script>

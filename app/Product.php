@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed category_id
  * @property mixed unit_measure
  * @property mixed name
+ * @property mixed original_qty
+ * @property mixed price
+ * @property mixed id
+ * @property mixed qty
  */
 class Product extends Model
 {

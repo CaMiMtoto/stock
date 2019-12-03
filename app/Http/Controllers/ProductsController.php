@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Menu;
+use App\MenuItem;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -71,6 +73,12 @@ class ProductsController extends Controller
         $prod->original_qty = $request->original_qty;
         $prod->price = $request->price;
         $prod->save();
+
+
+        if ($prod->category->name=='Drinks'){
+            $this->createMenu($prod);
+
+        }
         return response()->json($prod, 200);
     }
 
@@ -95,4 +103,24 @@ class ProductsController extends Controller
         $product->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * @param Product $prod
+     */
+    private function createMenu(Product $prod): void
+    {
+        $menu = new Menu();
+        $menu->name = $prod->name;
+        $menu->price = $prod->price;
+        $menu->save();
+
+        $menuItem = new MenuItem();
+        $menuItem->menu_id = $menu->id;
+        $menuItem->qty = 1;
+        $menuItem->product_id = $prod->id;
+        $menuItem->cost = $prod->price;
+        $menuItem->save();
+    }
+
+
 }

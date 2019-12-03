@@ -39,3 +39,9 @@ h1,h2,h3,h4,h5{
 .with-border {
     border-bottom: 1px solid #f4f4f4!important;
 }
+
+td[contenteditable="true"]{
+    font-weight: bolder;
+    font-style: italic;
+    border: 1px solid cornflowerblue!important;
+}

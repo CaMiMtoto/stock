@@ -21,5 +21,7 @@ class RoleTableSeeder extends Seeder
             [3, 'keeper', 'Store Keeper', '2019-11-27 11:12:46', '2019-11-27 11:12:46']);
         DB::insert("INSERT INTO roles (id, name, display, created_at, updated_at) VALUES (?,?,?,?,?);",
             [4, 'manager', 'Manager', '2019-11-27 11:12:46', '2019-11-27 11:12:46']);
+        DB::insert("INSERT INTO roles (id, name, display, created_at, updated_at) VALUES (?,?,?,?,?);",
+            [5, 'waiter', 'Waiter', '2019-11-27 11:12:46', '2019-11-27 11:12:46']);
     }
 }
