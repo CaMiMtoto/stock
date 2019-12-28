@@ -2,9 +2,9 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="MySQL for 5.1 - stock@localhost" uuid="ce6eb460-c66b-4b30-ba60-519e22819874">
-      <driver-ref>mysql</driver-ref>
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/stock</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
@@ -13,6 +13,7 @@
         <property name="characterEncoding" value="utf8" />
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
+        <property name="serverTimezone" value="UTC" />
       </driver-properties>
     </data-source>
     <data-source source="LOCAL" name="@localhost" uuid="bfe7fce7-910c-4915-8e12-3b6227590326">
