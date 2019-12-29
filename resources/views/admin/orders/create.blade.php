@@ -36,7 +36,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="waiter" class="control-label">Waiter</label>
-                                    <input type="text" class="form-control" name="waiter" id="waiter"
+                                    <input type="text" class="form-control" required name="waiter" id="waiter"
                                            placeholder="Waiter" value="">
                                 </div>
                             </div>

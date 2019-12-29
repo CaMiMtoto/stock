@@ -63,7 +63,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="customer_name" class="control-label">Customer</label>
-                                        <input type="text" class="form-control" name="customer_name"
+                                        <input type="text" required class="form-control" name="customer_name"
                                                id="customer_name"
                                                placeholder="Customer name" value="">
                                     </div>
@@ -71,7 +71,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="waiter" class="control-label">Waiter</label>
-                                        <select name="waiter" id="waiter" class="form-control">
+                                        <select name="waiter" required id="waiter" class="form-control">
                                             <option value=""></option>
                                             @foreach($waiters as $waiter)
                                                 <option value="{{ $waiter->id }}">{{ $waiter->name }}</option>
