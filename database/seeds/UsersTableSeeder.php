@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->name = 'Jean Paul CaMi';
+        $user->name = 'Emma';
         $user->role_id = Role::where('name','admin')->first()->id;
         $user->email = 'admin@gmail.com';
         $user->password = bcrypt('password');
