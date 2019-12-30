@@ -1,17 +1,8 @@
 @extends('layouts.master')
 @section('title','Sales report')
 @section('content')
-
-    <?php
-    use App\Connection;$totalAmount = 0;
-    $con = Connection::getConnection();
-    $startDate = $_GET['start_date'];
-    $endDate = $_GET['end_date'];
-    $sql = 'select i.created_at, m.name as name, sum(i.qty) as quantity, i.price as price, (sum(i.qty) * i.price) as Total from order_items as i inner join menus as m on i.menu_id = m.id where DATE(i.created_at) between "' . $startDate . '" and "' . $endDate . '"group by i.menu_id';
-    $result = mysqli_query($con, $sql);
-    ?>
     <section class="content">
-
+<?php $totalAmount=0;?>
         <section class="invoice">
             <!-- title row -->
             <div class="row">
@@ -69,23 +60,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                        $totalAmount += $row['Total'];
-                        ?>
-                        <tr>
-                            <td>{{ $row['created_at'] }}</td>
-                            <td>{{ $row['name'] }}</td>
-                            <td>{{ $row['quantity'] }}</td>
-                            <td>{{ number_format($row['price'] )}}</td>
-                            <td>{{ number_format($row['Total']) }}</td>
-                        </tr>
-                        <?php
-                        }
-                        }
-                        ?>
-
+                        @foreach($sales as $item)
+                            <?php
+                            $totalAmount += $item->total;
+                            ?>
+                            <tr>
+                                <td>{{$item->created_at}}</td>
+                                <td>{{$item->menu->name}}</td>
+                                <td>{{$item->quantity}}</td>
+                                <td>{{ number_format($item->price) }}</td>
+                                <td>{{ number_format($item->total) }}</td>
+                            </tr>
+                        @endforeach
 
                         </tbody>
                         <tfoot>
@@ -103,9 +89,6 @@
 
         </section>
     </section>
-    <?php
-    mysqli_close($con);
-    ?>
 @endsection
 @section('scripts')
     <script>

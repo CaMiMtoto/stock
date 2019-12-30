@@ -69,7 +69,7 @@
 @section('content')
     <section class="content">
         <div class="col-md-8">
-            <div class="box box-primary flat">
+            <div class="box box-info flat">
                 <div class="box-header with-border">
                     <h4 class="box-title">
                         <i class="ion-ios-calendar"></i>
@@ -122,9 +122,9 @@
                 <div class="box-body"><!-- Rounded switch -->
 
                     @if(Session::has('error'))
-                    <div class="alert alert-info flat">
-                        <p>{{ Session::get('error') }}</p>
-                    </div>
+                        <div class="alert alert-info flat">
+                            <p>{{ Session::get('error') }}</p>
+                        </div>
                     @endif
 
                     <form action="{{ route('shifts.save') }}" method="post" id="form">
@@ -157,14 +157,25 @@
 
 @section('scripts')
     <script>
+
         $('.mn-shifts').addClass('active');
+
         $('#form').on('submit', function (e) {
             e.preventDefault();
             $('#createBtn').button('loading');
             e.target.submit();
         });
+
         $('#shift_id').on('change', function () {
-            $('#form').submit();
+            var checkBox=$(this);
+            var result = confirm('Are you sure you want to change this shift?');
+            if (result){
+                $('#form').submit();
+            }else{
+                var value=checkBox.prop('checked');
+                checkBox.prop('checked',!value);
+                console.log(value);
+            }
         });
     </script>
 @endsection

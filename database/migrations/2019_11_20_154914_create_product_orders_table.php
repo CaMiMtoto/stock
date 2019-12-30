@@ -17,7 +17,6 @@ class CreateProductOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('waiter_id');
             $table->string('customer_name');
-            $table->string('waiter')->nullable();
             $table->string('order_status')->default('pending')->nullable();
             $table->string('payment_status')->nullable();
             $table->string('payment_mode');

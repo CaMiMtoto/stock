@@ -6,6 +6,7 @@ use App\Expense;
 use App\OrderItem;
 use App\ProductOrderItem;
 use App\StockTransaction;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,23 +32,31 @@ class ReportsController extends Controller
     {
         $date = $request->date;
         if ($request->category == 'Food') {
-            $orderItems = StockTransaction::with('product')->whereDate('created_at', $date)
+            $category='Food';
+            $orderItems = StockTransaction::with('product')
+                ->join('products','products.id','=','stock_transactions.product_id')
+                ->whereDate('stock_transactions.created_at', $date)
+                ->where('products.category_id','=',2)
+                ->whereDate('stock_transactions.created_at','=',$date)
+                ->groupBy('products.id')
+                ->select('*')
                 ->get();
-            return view('admin.reports.product_history', compact('orderItems'))
-                ->with([
-                    'date' => $date
-                ]);
+//            return \response($orderItems,200);
+        }else{
+            $category='Drinks';
+            $orderItems = StockTransaction::with('product')
+                ->join('products','products.id','=','stock_transactions.product_id')
+                ->whereDate('stock_transactions.created_at', $date)
+                ->where('products.category_id','=',1)
+                ->whereDate('stock_transactions.created_at','=',$date)
+                ->groupBy('products.id')
+                ->select('*')
+                ->get();
         }
-        $orderItems = StockTransaction::with('product')
-            ->join('products','products.id','=','stock_transactions.product_id')
-            ->whereDate('stock_transactions.created_at', $date)
-            ->where('products.category_id','=',1)
-            ->select('*')
-            ->get();
-//        return response($orderItems,200);
-        return view('admin.reports.product_history_drinks', compact('orderItems'))
+        return view('admin.reports.product_history', compact('orderItems'))
             ->with([
-                'date' => $date
+                'date' => $date,
+                'category'=>$category
             ]);
 
     }
@@ -56,10 +65,18 @@ class ReportsController extends Controller
     {
         $startDate = $request->start_date;
         $endDate = $request->end_date;
-        $sales = OrderItem::with('menu')
-            ->whereBetween('created_at', [$startDate, $endDate])
+        $sql = 'select i.created_at, m.name as name, sum(i.qty) as quantity, i.price as price, (sum(i.qty) * i.price) as Total from order_items as i inner join menus as m on i.menu_id = m.id where DATE(i.created_at) between "' . $startDate . '" and "' . $endDate . '"group by i.menu_id';
+
+        $sales = OrderItem::with(['menu','order'])
+            ->join('menus','menus.id','=','order_items.menu_id')
+//            ->whereBetween('order_items.created_at',[$startDate,$endDate])
+            ->whereDate('order_items.created_at','>=',$startDate)
+            ->whereDate('order_items.created_at','<=',$endDate)
+            ->select('*','menus.id', DB::raw('sum(order_items.qty) as quantity'), DB::raw(' (sum(order_items.qty) * order_items.price) as total'))
+            ->groupBy('menus.id')
             ->get();
-        return view('admin.reports.salesReports')->with([
+//        return \response($sales,200);
+        return view('admin.reports.salesReports',compact('sales'))->with([
             'start_date' => $startDate,
             'end_date' => $endDate,
         ]);

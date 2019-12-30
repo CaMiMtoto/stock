@@ -34,7 +34,8 @@ class ShiftController extends BaseController
         } else {
             $shift = Shift::whereNull('end_time')->orderBy('id', 'desc')->first();
             $interval = 7;
-            if ($shift->start_time->addHours($interval) < now()) {
+//            now()->addMicroseconds($interval)
+            if ($shift->start_time->addMicroseconds($interval) < now()) {
                 DB::beginTransaction();
                 $shift->end_time = now();
                 $shift->user_close = Auth::id();
