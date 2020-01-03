@@ -247,6 +247,7 @@
                             <th>Amount To Pay</th>
                             <th>Amount Paid</th>
                             <th>Amount Due</th>
+                            <th>Tax</th>
                             <th>Py Method</th>
                             <th>Delivered</th>
                             <th>Status</th>
@@ -261,6 +262,7 @@
                                 <td>{{ number_format($order->totalOrderPrice()) }}</td>
                                 <td>{{ number_format($order->amount_paid) }}</td>
                                 <td>{{ number_format($order->amountDue()) }}</td>
+                                <td>{{ number_format($order->tax) }}</td>
                                 <td>{{ $order->payment_mode??"Not paid" }}</td>
                                 <td>
                                     @if($order->received==1)

@@ -124,7 +124,8 @@ $(document).on('click',
                         method: 'DELETE',
                         data:{_token:$('meta[name="csrf-token"]').attr('content')},
                         success: function() {
-                            button.parents('tr').remove();
+                            // button.parents('tr').remove();
+                            location.reload();
                         }
                     });
                 }

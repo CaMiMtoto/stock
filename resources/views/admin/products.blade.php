@@ -41,6 +41,7 @@
                             <th scope="col">Unit Measure</th>
                             <th scope="col">In stock</th>
                             <th scope="col">Beg. Qty</th>
+                            <th scope="col">Cost</th>
                             <th scope="col">Price</th>
                             <th scope="col"></th>
                         </tr>
@@ -59,25 +60,28 @@
                                     @endif
                                 </td>
                                 <td>{{ number_format($prod->original_qty)  }}</td>
+                                <td>{{ number_format($prod->cost)  }}</td>
                                 <td>{{ number_format($prod->price)  }}</td>
                                 <td>
-                                    <div>
-                                        <button
+                                    @if(Auth::user()->role=='manager' || Auth::user()->role=='admin' || Auth::user()->role=='keeper')
+                                        <div>
+                                            <button
                                                 data-url="{{ route('products.show',['id'=>$prod->id]) }}"
                                                 class="btn btn-default js-edit">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button
                                                 data-url="{{ route('products.destroy',['id'=>$prod->id]) }}"
                                                 class="btn btn-danger js-delete">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                        <button
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                            <button
                                                 data-id="{{ $prod->id }}"
                                                 class="btn btn-default js-stocking">
-                                            Stock In
-                                        </button>
-                                    </div>
+                                                Stock In
+                                            </button>
+                                        </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -139,6 +143,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="cost" class="col-sm-3 control-label">Cost</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="cost" id="cost"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="price" class="col-sm-3 control-label">Price</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="price" id="price"
@@ -148,7 +159,8 @@
                             <div class="form-group">
                                 <label for="original_qty" class="col-sm-3 control-label">Beginning Qty</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" value="0" name="original_qty" id="original_qty"
+                                    <input type="number" class="form-control" value="0" name="original_qty"
+                                           id="original_qty"
                                            required>
                                 </div>
                             </div>
@@ -213,7 +225,7 @@
                                 <i class="fa fa-close"></i>
                                 Close
                             </button>
-                            <button type="submit"  class="btn btn-primary btn-save">
+                            <button type="submit" class="btn btn-primary btn-save">
                                 <i class="fa fa-check-circle-o"></i>
                                 Save changes
                             </button>
@@ -247,11 +259,12 @@
                         $('#category_id').val(data.category_id);
                         $('#original_qty').val(data.original_qty);
                         $('#price').val(data.price);
+                        $('#cost').val(data.cost);
                     });
             });
 
-            $('.js-stocking').on('click',function () {
-                var id=$(this).attr('data-id');
+            $('.js-stocking').on('click', function () {
+                var id = $(this).attr('data-id');
                 $('#product_id').val(id);
                 $('#stockingModal').modal();
             });

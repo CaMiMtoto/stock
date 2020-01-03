@@ -159,7 +159,9 @@ class ProductOrderController extends Controller
             $order->save();
             for ($i = 0; $i < count($request->product); $i++) {
                 $orderItem = new ProductOrderItem();
-                $orderItem->product_id = $request->product[$i];
+                $productId = $request->product[$i];
+                $orderItem->product_id = $productId;
+                $orderItem->cost = Product::find($productId)->cost;
                 $orderItem->order_id = $order->id;
                 $orderItem->price = $request->rate[$i];
                 $orderItem->qty = $request->quantity[$i];
@@ -192,7 +194,9 @@ class ProductOrderController extends Controller
             $order->productOrderItems()->delete();
             for ($i = 0; $i < count($request->product); $i++) {
                 $orderItem = new ProductOrderItem();
-                $orderItem->product_id = $request->product[$i];
+                $productId = $request->product[$i];
+                $orderItem->product_id = $productId;
+                $orderItem->cost = Product::find($productId)->cost;
                 $orderItem->order_id = $order->id;
                 $orderItem->price = $request->rate[$i];
                 $orderItem->qty = $request->quantity[$i];

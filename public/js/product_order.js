@@ -8,8 +8,9 @@ function addRow() {
     var count;
 
     if (tableLength > 0) {
-        tableRow = $("#productTable tbody tr:last").attr('id');
-        arrayNumber = $("#productTable tbody tr:last").attr('class');
+        var lstTr=$("#productTable tbody tr:last");
+        tableRow = lstTr.attr('id');
+        arrayNumber = lstTr.attr('class');
         count = tableRow.substring(3);
         count = Number(count) + 1;
         arrayNumber = Number(arrayNumber) + 1;
@@ -112,10 +113,8 @@ function subAmount() {
 
     totalSubAmount = totalSubAmount.toFixed(2);
     var amountToPay=$("#amount_to_pay");
-    // vat
-    var vat = (Number(amountToPay.val())/100) * 18;
-    vat = vat.toFixed(2);
-    $("#tax").val(vat);
+
+    // calculateTax();
 
     // sub total
     amountToPay.val(totalSubAmount);
@@ -127,9 +126,15 @@ function subAmount() {
     } else {
         $("#due").val($("#amount_to_pay").val());
     } // else
-
+    calculateTax();
 } // /sub total amount
-
+//calculate tax
+ function calculateTax(){
+     var amountToPay=$("#amount_to_pay");
+    var vat = (Number(amountToPay.val())/100) * 18;
+    vat = vat.toFixed(2);
+    $("#tax").val(vat);
+}
 // select on product data
 function getProductData(row = null) {
     if (row) {

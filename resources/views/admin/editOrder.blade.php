@@ -30,7 +30,10 @@
                     <p>{{ Session::get('error') }}</p>
                 </div>
             @endif
-
+                <a href="{{ route('productOrders.index') }}" class="btn btn-link">
+                    <i class="fa fa-arrow-circle-left"></i>
+                    Back to orders
+                </a>
             <div class="box box-primary flat">
                 <div class="box-header with-border">
                     <div class="col-md-6">
@@ -212,13 +215,10 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="button" class="btn btn-default pull-left" onclick="addRow()" id="addRowBtn"
+
+                        <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn"
                                 data-loading-text="Loading...">
                             <i class="fa fa-plus"></i> Add Row
-                        </button>
-                        <button type="reset" class="btn btn-default pull-left">
-                            <i class="fa fa-eraser"></i>
-                            Reset
                         </button>
 
                         <button type="submit" class="btn btn-primary createBtn pull-right">

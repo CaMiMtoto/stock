@@ -26,6 +26,7 @@
                         <tr>
                             <th>Created At</th>
                             <th>Name</th>
+                            <th>Category</th>
                             <th>Items</th>
                             <th>Cost</th>
                             <th>Price</th>
@@ -37,26 +38,35 @@
                             <tr>
                                 <td>{{ date_format($menu->created_at,'d M Y')  }}</td>
                                 <td>{{ $menu->name }}</td>
+                                <td>
+                                    @if($menu->category)
+                                        {{ $menu->category->name }}
+                                    @else
+                                        <span class="label label-info">Unknown</span>
+                                    @endif
+                                </td>
                                 <td>{{ number_format($menu->menuItems->count()) }}</td>
                                 <td>{{ number_format($menu->menuItems->sum('cost')) }}</td>
                                 <td>{{ number_format($menu->price) }}</td>
                                 <td>
-                                    <button
-                                        data-url="{{ route('menus.show',['id'=>$menu->id]) }}"
-                                        class="btn btn-default btn-sm js-edit">
-                                        Edit
-                                    </button>
-                                    <button
-                                        data-url="{{ route('menus.destroy',['id'=>$menu->id]) }}"
-                                        class="btn btn-warning btn-sm js-delete">
-                                        Delete
-                                    </button>
-                                    <button
-                                        data-add-items-url="{{ route('menus.addItems',['id'=>$menu->id]) }}"
-                                        data-url="{{ route('menus.items',['id'=>$menu->id]) }}"
-                                        class="btn btn-primary btn-sm js-details">
-                                        Details
-                                    </button>
+                                    @if(App\Category::$FOOD==$menu->category_id)
+                                        <button
+                                            data-url="{{ route('menus.show',['id'=>$menu->id]) }}"
+                                            class="btn btn-default btn-sm js-edit">
+                                            Edit
+                                        </button>
+                                        <button
+                                            data-add-items-url="{{ route('menus.addItems',['id'=>$menu->id]) }}"
+                                            data-url="{{ route('menus.items',['id'=>$menu->id]) }}"
+                                            class="btn btn-primary btn-sm js-details">
+                                            Details
+                                        </button>
+                                        <button
+                                            data-url="{{ route('menus.destroy',['id'=>$menu->id]) }}"
+                                            class="btn btn-warning btn-sm js-delete">
+                                            Delete
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -297,10 +307,10 @@
                 var url = btn.attr('data-url');
                 var qty = $('#qty' + id).text();
                 var cost = $('#cost' + id).text();
-                if(qty.trim()===''|| cost.trim()===''){
+                if (qty.trim() === '' || cost.trim() === '') {
                     return;
                 }
-                if(isNaN(qty) || isNaN(cost)){
+                if (isNaN(qty) || isNaN(cost)) {
                     alert('Please enter a valid number,, without commas.');
                     return;
                 }
@@ -310,7 +320,7 @@
                 $.ajax({
                     url: url,
                     method: 'PUT',
-                    data: {qty: qty, cost: cost,_token:$('#token').val()}
+                    data: {qty: qty, cost: cost, _token: $('#token').val()}
                 }).done(function (data) {
                     loadMenuItems(menuItemsUrl);
                 });

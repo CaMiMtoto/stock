@@ -11,24 +11,24 @@
     <section class="content">
         <div class="row">
             @if(Auth::user()->role->name!='keeper')
-                <div class="col-md-4">
-                    <div class="box box-info flat">
-                        <div class="box-header with-border">
-                            <p class=" h3 box-title">Expense report</p>
+                {{--            <div class="col-md-4">
+                                <div class="box box-info flat">
+                                    <div class="box-header with-border">
+                                        <p class=" h3 box-title">Expense report</p>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <form action="{{ route('expensesReports') }}" class="form-horizontal" autocomplete="off">
-                            @include('layouts._reportDates')
-                        </form>
-                    </div>
-                </div>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <form action="{{ route('expensesReports') }}" class="form-horizontal" autocomplete="off">
+                                        @include('layouts._reportDates')
+                                    </form>
+                                </div>
+                            </div>--}}
                 <div class="col-md-4">
                     <div class="box box-info flat">
                         <div class="box-header with-border">
@@ -93,6 +93,26 @@
                     </form>
                 </div>
             </div>
+            @if(Auth::user()->role=='manager')
+                <div class="col-md-4">
+                    <div class="box box-info flat">
+                        <div class="box-header with-border">
+                            <p class=" h3 box-title">Financial report</p>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <form action="{{ route('financialReport') }}" class="form-horizontal" autocomplete="off">
+                            @include('layouts._reportDates')
+                        </form>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

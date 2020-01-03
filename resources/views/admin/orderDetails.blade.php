@@ -47,7 +47,7 @@
             <b>Waiter</b>
             </span>
             </td>
-            <td> : {{ $order->waiter}}</td>
+            <td> : {{ $order->waiter->name}}</td>
         </tr>
         <tr>
             <td>

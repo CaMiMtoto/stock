@@ -33,7 +33,7 @@
                                style="border: 1px solid #f1f1f1">
                             <thead>
                             <tr>
-                                <th>Oder Date</th>
+                                <th>Order Date</th>
                                 <th>Client</th>
                                 <th>Waiter</th>
                                 <th>M.to pay</th>

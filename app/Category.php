@@ -16,9 +16,11 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
-
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucfirst(strtolower($value));
     }
+
+    public static $FOOD = 2;
+    public static $DRINK = 1;
 }

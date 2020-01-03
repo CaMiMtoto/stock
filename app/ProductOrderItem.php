@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed order_id
  * @property integer product_id
  * @property mixed product
+ * @property double cost
  */
 class ProductOrderItem extends Model
 {

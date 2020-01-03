@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Order;
 use App\OrderItem;
-use App\Product;
-use App\StockHistory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,12 +60,13 @@ class OrdersController extends BaseController
     {
         return view('admin.orders.print', compact('order'));
     }
+
     private function updateProductQty($menu_id, $qty)
     {
         $menu = Menu::find($menu_id);
         foreach ($menu->menuItems as $item) {
-            $newQty=$item->qty * $qty;
-            $item->product->qty -=$newQty;
+            $newQty = $item->qty * $qty;
+            $item->product->qty -= $newQty;
             $item->product->update();
         }
     }
@@ -83,14 +82,17 @@ class OrdersController extends BaseController
             $order->amount_paid = $request->amount_paid;
             $order->received = $request->delivered;
             $order->status = $request->payment_status;
+            $order->tax = $request->input('amount_to_pay') * 18.0 / 100.0;
             $order->system_date = $this->getSystemDate();
             $order->save();
             for ($i = 0; $i < count($request->menu); $i++) {
                 $orderItem = new OrderItem();
-                $orderItem->menu_id = $request->menu[$i];
+                $menuId= $request->menu[$i];
+                $orderItem->menu_id =$menuId;
                 $orderItem->order_id = $order->id;
                 $orderItem->price = $request->rate[$i];
                 $orderItem->qty = $request->quantity[$i];
+                $orderItem->cost = Menu::find($menuId)->menuItems->sum('cost');
                 $orderItem->save();
                 $this->updateProductQty($orderItem->menu_id, $orderItem->qty);
             }
@@ -108,7 +110,7 @@ class OrdersController extends BaseController
         try {
             DB::beginTransaction();
             $order->customer_name = $request->customer_name;
-//            $order->order_date = $request->order_date;
+            $order->tax = $request->input('amount_to_pay') * 18.0 / 100.0;
             $order->waiter_id = $request->waiter;
             $order->payment_mode = $request->payment_mode;
             $order->amount_paid = $request->amount_paid;
@@ -119,10 +121,12 @@ class OrdersController extends BaseController
             $order->orderItems()->delete();
             for ($i = 0; $i < count($request->menu); $i++) {
                 $orderItem = new OrderItem();
-                $orderItem->menu_id = $request->menu[$i];
+                $menuId=$request->menu[$i];
+                $orderItem->menu_id = $menuId;
                 $orderItem->order_id = $order->id;
                 $orderItem->price = $request->rate[$i];
                 $orderItem->qty = $request->quantity[$i];
+                $orderItem->cost = Menu::find($menuId)->menuItems->sum('cost');
                 $orderItem->save();
 //                $this->updateProductQty($orderItem->menu_id);
             }

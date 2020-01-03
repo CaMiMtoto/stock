@@ -20,16 +20,14 @@ class MenusController extends Controller
     public function store(Request $request)
     {
         if ($request->id == 0) {
-            Menu::create([
-                'name' => $request->name,
-                'price' => $request->price
-            ]);
+            $menu=new Menu();
         } else {
-            $menu = Menu::find($request->id);
-            $menu->name = $request->name;
-            $menu->price = $request->price;
-            $menu->update();
+            $menu = Menu::find($request->id);;
         }
+        $menu->name = $request->name;
+        $menu->price = $request->price;
+        $menu->category_id = Category::$FOOD;
+        $menu->save();
         return response()->json(null, 200);
     }
 

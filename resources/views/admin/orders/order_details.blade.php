@@ -73,8 +73,8 @@
         <div class="col-sm-6">
         </div>
         <!-- /.col -->
-        <div class="col-sm-6">
-            <h4>Amount</h4>
+        <div class="col-sm-12">
+            <h4>Payment Info</h4>
 
             <div class="table-responsive">
                 <table class="table">
@@ -86,6 +86,10 @@
                     <tr>
                         <th>Amount Paid</th>
                         <td>{{ number_format($order->amount_paid) }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tax </th>
+                        <td>{{ number_format($order->tax) }}</td>
                     </tr>
                     <tr>
                         <th>Amount Due</th>

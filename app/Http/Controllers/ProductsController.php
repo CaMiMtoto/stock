@@ -72,10 +72,11 @@ class ProductsController extends Controller
         $prod->category_id = $request->category_id;
         $prod->original_qty = $request->original_qty;
         $prod->price = $request->price;
+        $prod->cost = $request->cost;
         $prod->save();
 
 
-        if ($prod->category->name=='Drinks'){
+        if ($prod->category->name == 'Drinks') {
             $this->createMenu($prod);
 
         }
@@ -109,16 +110,20 @@ class ProductsController extends Controller
      */
     private function createMenu(Product $prod): void
     {
+        $menuItem = MenuItem::where('product_id', $prod->id);
+        if ($menuItem != null) return;
+
         $menu = new Menu();
         $menu->name = $prod->name;
         $menu->price = $prod->price;
+        $menu->category_id = Category::$DRINK;
         $menu->save();
 
         $menuItem = new MenuItem();
         $menuItem->menu_id = $menu->id;
         $menuItem->qty = 1;
         $menuItem->product_id = $prod->id;
-        $menuItem->cost = $prod->price;
+        $menuItem->cost = $prod->cost;
         $menuItem->save();
     }
 

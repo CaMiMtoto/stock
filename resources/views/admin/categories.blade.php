@@ -33,18 +33,20 @@
                             <td>{{ $cat->name }}</td>
                             <td>{{$cat->products->count()}}</td>
                             <td>
-                                <div class="btn-group flat">
-                                    <button class="btn flat btn-secondary js-edit"
-                                            data-url="{{ route('category.show',['id'=>$cat->id]) }}">
-                                        <i class="fa fa-edit"></i>
-                                        Edit
-                                    </button>
-                                    <button class="btn flat btn-danger js-delete"
-                                            data-url="{{ route('category.destroy',['id'=>$cat->id]) }}">
-                                        <i class="fa fa-trash"></i>
-                                        Delete
-                                    </button>
-                                </div>
+                                @if(Auth::user()->role=='manager' || Auth::user()->role=='admin' || Auth::user()->role=='keeper')
+                                    <div class="btn-group flat">
+                                        <button class="btn flat btn-secondary js-edit"
+                                                data-url="{{ route('category.show',['id'=>$cat->id]) }}">
+                                            <i class="fa fa-edit"></i>
+                                            Edit
+                                        </button>
+                                        <button class="btn flat btn-danger js-delete"
+                                                data-url="{{ route('category.destroy',['id'=>$cat->id]) }}">
+                                            <i class="fa fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -98,6 +98,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reports', 'ReportsController@index')->name('reports');
         Route::get('/expenses-reports', 'ReportsController@expensesReports')->name('expensesReports');
         Route::get('/sales-reports', 'ReportsController@salesReports')->name('salesReports');
+        Route::get('/financial/reports', 'ReportsController@financialReports')->name('financialReport');
         Route::get('/products-reports', 'ReportsController@productsHistory')->name('productsHistory');
 
         Route::get('/eod', 'SettingController@eod')->name('eod');
@@ -106,9 +107,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/shifts', 'ShiftController@index')->name('shifts');
         Route::post('/shifts', 'ShiftController@store')->name('shifts.save');
-
-
-
 
 
         //users routes
