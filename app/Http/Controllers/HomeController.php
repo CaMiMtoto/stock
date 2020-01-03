@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends BaseController
@@ -16,16 +19,14 @@ class HomeController extends BaseController
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
-
         return view('home');
     }
     public function dashboard()
     {
-        Session::put('system_date',$this->getSystemDate());
         return view('admin.dashboard');
     }
 }

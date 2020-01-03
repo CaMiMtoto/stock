@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckOrders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -158,7 +154,7 @@
     <property name="DatabaseDriversLRU" value="mysql&#10;sqlserver" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/storage/logs/laravel-2020-01-03.log&#10;G:/Projects/PHP/stock/.env" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
@@ -321,7 +317,10 @@
       <workItem from="1577636703060" duration="840000" />
       <workItem from="1577655011491" duration="1932000" />
       <workItem from="1577686639984" duration="6484000" />
-      <workItem from="1578041443248" duration="1728000" />
+      <workItem from="1578041443248" duration="1967000" />
+      <workItem from="1578044457680" duration="896000" />
+      <workItem from="1578054671282" duration="762000" />
+      <workItem from="1578057443641" duration="173000" />
     </task>
     <servers />
   </component>
