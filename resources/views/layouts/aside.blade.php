@@ -23,46 +23,44 @@
                 </a>
             </li>
 
-
-
-
-            <li class="treeview tr-products">
-                <a href="#">
-                    <i class="ion ion-ios-list"></i> <span>Products</span>
-                    <span class="pull-right-container">
+            @if(\App\Shift::getCurrentShift())
+                <li class="treeview tr-products">
+                    <a href="#">
+                        <i class="ion ion-ios-list"></i> <span>Products</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="mn-products">
-                        <a href="{{ url('/admin/products') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Manage products
-                        </a>
-                    </li>
-                    @if(Auth::user()->role->name!='cashier')
-                    <li class="mn-stocks">
-                        <a href="{{ route('stocks.all') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Stocking
-                        </a>
-                    </li>
-                    @endif
-                    <li class="mn-requisitions">
-                        <a href="{{ route('requisitions.all') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Requisitions
-                        </a>
-                    </li>
-                    <li class="mn-requests">
-                        <a href="{{ route('requests') }}">
-                            <i class="fa fa-circle-o"></i>
-                            Requests
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="mn-products">
+                            <a href="{{ url('/admin/products') }}">
+                                <i class="fa fa-circle-o"></i>
+                                Manage products
+                            </a>
+                        </li>
+                        @if(Auth::user()->role->name!='cashier')
+                            <li class="mn-stocks">
+                                <a href="{{ route('stocks.all') }}">
+                                    <i class="fa fa-circle-o"></i>
+                                    Stocking
+                                </a>
+                            </li>
+                        @endif
+                        <li class="mn-requisitions">
+                            <a href="{{ route('requisitions.all') }}">
+                                <i class="fa fa-circle-o"></i>
+                                Requisitions
+                            </a>
+                        </li>
+                        <li class="mn-requests">
+                            <a href="{{ route('requests') }}">
+                                <i class="fa fa-circle-o"></i>
+                                Requests
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
             @if(Auth::user()->role->name!='keeper')
                 <li class="mn-menus">
                     <a href="{{ route('menus.all') }}">
@@ -70,29 +68,31 @@
                         Menus
                     </a>
                 </li>
-                <li class="treeview tr-orders">
-                    <a href="#">
-                        <i class="ion ion-ios-pricetag-outline"></i>
-                        <span>Orders</span>
-                        <span class="pull-right-container">
+                @if(\App\Shift::getCurrentShift())
+                    <li class="treeview tr-orders">
+                        <a href="#">
+                            <i class="ion ion-ios-pricetag-outline"></i>
+                            <span>Orders</span>
+                            <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="mn-food">
-                            <a href="{{ route('orders.index') }}">
-                                <i class="fa fa-circle"></i>
-                                Food & Beverage
-                            </a>
-                        </li>
-                        <li class="mn-drinks">
-                            <a href="{{ route('productOrders.index') }}">
-                                <i class="fa fa-circle"></i>
-                                Drinks
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="mn-food">
+                                <a href="{{ route('orders.index') }}">
+                                    <i class="fa fa-circle"></i>
+                                    Food & Beverage
+                                </a>
+                            </li>
+                            <li class="mn-drinks">
+                                <a href="{{ route('productOrders.index') }}">
+                                    <i class="fa fa-circle"></i>
+                                    Drinks
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             @endif
             <li class="treeview tr-settings">
                 <a href="#">
@@ -119,12 +119,12 @@
                 </ul>
             </li>
 
-{{--            <li class="mn-expenses">--}}
-{{--                <a href="{{ route('expenses.all') }}">--}}
-{{--                    <i class="ion ion-pricetags"></i>--}}
-{{--                    <span>Expenses</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li class="mn-expenses">--}}
+            {{--                <a href="{{ route('expenses.all') }}">--}}
+            {{--                    <i class="ion ion-pricetags"></i>--}}
+            {{--                    <span>Expenses</span>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
             <li class="mn-shifts">
                 <a href="{{ route('shifts') }}">
                     <i class="fa fa-clock-o"></i>
