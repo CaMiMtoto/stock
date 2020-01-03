@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
             Route::delete('/products/{product}', 'ProductsController@destroy')->name('products.destroy');
             Route::get('/products/category/{categoryId}', 'ProductsController@byCategory')->name('products.byCategory');
-            
+
             Route::get('/stock', 'StocksController@index')->name('stocks.all');
             Route::post('/stock', 'StocksController@store')->name('stocks.store');
             Route::get('/stock/{stock}', 'StocksController@show')->name('stocks.show');
@@ -77,6 +77,15 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/orders/{order}/update', 'OrdersController@update')->name('orders.update');
             Route::get('/orders/{order}', 'OrdersController@print')->name('orders.print');
             Route::get('/orders/{order}/edit', 'OrdersController@edit')->name('orders.edit');
+
+            Route::get('/product/orders', 'ProductOrderController@index')->name('productOrders.index');
+            Route::get('/product/orders/{order}', 'ProductOrderController@show')->name('productOrders.show');
+            Route::get('/product/orders/{order}/edit', 'ProductOrderController@edit')->name('productOrders.edit');
+            Route::get('/product/orders/details/{order}', 'ProductOrderController@details')->name('productOrders.details');
+            Route::post('/product/orders/{order}/update', 'ProductOrderController@update')->name('productOrders.update');
+            Route::post('/product/orders', 'ProductOrderController@all')->name('productOrders.all');
+            Route::post('/product/orders/save', 'ProductOrderController@store')->name('productOrders.store');
+            Route::post('/product/orders/mark', 'ProductOrderController@mark')->name('productOrders.mark');
         });
 
 
@@ -99,14 +108,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/shifts', 'ShiftController@store')->name('shifts.save');
 
 
-        Route::get('/product/orders', 'ProductOrderController@index')->name('productOrders.index');
-        Route::get('/product/orders/{order}', 'ProductOrderController@show')->name('productOrders.show');
-        Route::get('/product/orders/{order}/edit', 'ProductOrderController@edit')->name('productOrders.edit');
-        Route::get('/product/orders/details/{order}', 'ProductOrderController@details')->name('productOrders.details');
-        Route::post('/product/orders/{order}/update', 'ProductOrderController@update')->name('productOrders.update');
-        Route::post('/product/orders', 'ProductOrderController@all')->name('productOrders.all');
-        Route::post('/product/orders/save', 'ProductOrderController@store')->name('productOrders.store');
-        Route::post('/product/orders/mark', 'ProductOrderController@mark')->name('productOrders.mark');
+
 
 
         //users routes

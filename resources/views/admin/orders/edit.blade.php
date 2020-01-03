@@ -124,8 +124,8 @@
                                                    placeholder="Total">
                                         </div>
                                     </td>
-
                                 </tr>
+                                <?php $x++;?>
                             @endforeach
                             </tbody>
                         </table>
@@ -201,10 +201,6 @@
                                 <i class="fa fa-check-circle"></i>
                                 Save order
                             </button>
-                            <button type="reset" class="btn btn-warning">
-                                <i class="fa fa-eraser"></i>
-                                Reset
-                            </button>
                         </div>
                     </div>
 
@@ -213,9 +209,7 @@
             </div>
 
         </div>
-
     </section>
-
 
 @endsection
 
