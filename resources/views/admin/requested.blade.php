@@ -1,15 +1,29 @@
 @extends('layouts.master')
 @section('title','Requisitions')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('lib/EasyAutocomplete-1.3.5/easy-autocomplete.min.css') }}">
+    <style>
+        .easy-autocomplete {
+            position: relative;
+            width: 100% !important;
+            border-radius: 0 !important;
+        }
+    </style>
+@endsection
 @section('content')
     <section class="content">
         <div class="col-12">
             <div class="clearfix"></div>
             <div class="box box-primary flat">
                 <div class="box-header with-border">
-                    <div class="col-md-6">
-                        <h4 class="box-title">
-                            Requests { {{ $requisitions->count() }} }
-                        </h4>
+                    <h4 class="box-title">
+                        Requests { {{ $requisitions->count() }} }
+                    </h4>
+                    <div class="box-tools">
+                        <button data-toggle="modal" data-target="#addModal" class="btn btn-primary btn-sm">
+                            <i class="fa fa-plus"></i>
+                            Add New
+                        </button>
                     </div>
                 </div>
 
@@ -17,19 +31,19 @@
                     <table class="table table-condensed table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Product</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Reason</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
+                            <th>Date</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Prepared By</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($requisitions as $req)
                             <tr>
-                                <td>{{ $req->product->name}}</td>
-                                <td>{{ $req->qty}}</td>
-                                <td>{{ $req->reason}}</td>
+                                <td>{{ $req->date}}</td>
+                                <td>{{ $req->department}}</td>
+                                <td>{{ $req->status}}</td>
                                 <td>
                                     @if($req->status=='pending')
                                         <span class="label label-info">{{ ucfirst($req->status) }}</span>
@@ -44,15 +58,15 @@
                                 <td>
                                     <div class="btn-group">
                                         <button
-                                                data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
-                                                data-url="{{ route('requisitions.show',['id'=>$req->id]) }}"
-                                                class="btn btn-default js-details">
+                                            data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
+                                            data-url="{{ route('requisitions.show',['id'=>$req->id]) }}"
+                                            class="btn btn-default js-details">
                                             Details
                                         </button>
                                         <button
-                                                data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
-                                                data-url="{{ route('requisitions.show',['id'=>$req->id]) }}"
-                                                class="btn btn-default js-edit">
+                                            data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
+                                            data-url="{{ route('requisitions.show',['id'=>$req->id]) }}"
+                                            class="btn btn-default js-edit">
                                             <i class="fa fa-edit"></i>
                                             Edit
                                         </button>
@@ -73,7 +87,7 @@
 
 
     <div class="modal fade myModal" tabindex="-1" role="dialog" id="addModal">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
@@ -84,75 +98,79 @@
                     </h4>
                 </div>
 
-                <form novalidate action="" id="submitForm" method="post" class="form-horizontal">
+                <form novalidate action="" id="submitForm" method="post">
                     <input type="hidden" id="id" name="id" value="0">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         @include('layouts._loader')
                         <div class="edit-result">
-                            <div class="form-group">
-                                <label for="category_id" class="col-sm-3  control-label">Category</label>
-                                <div class="col-sm-9">
-                                    <select required disabled="" class="form-control" id="category_id"
-                                            name="category_id">
-                                        <option></option>
-                                        @foreach($categories as $cat)
-                                            <option value="{{ $cat->id}}">
-                                                {{$cat->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="products" class="control-label">Product</label>
+                                        <div>
+                                            <input type="text" id="products" class="form-control" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="qty" class="control-label">Qty</label>
+                                        <div>
+                                            <input type="number" id="qty" class="form-control" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="price" class="control-label">Unit price</label>
+                                        <div>
+                                            <input type="text" id="price" class="form-control" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="price" class="control-label">Button</label>
+                                        <div>
+                                            <button type="button" id="itemButton" class="btn btn-default btn-block">
+                                                <i class="fa fa-plus-circle"></i>
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="product_id" class="col-sm-3  control-label">Product</label>
-                                <div class="col-sm-9">
-                                    <select required disabled="" class="form-control" id="product_id" name="product_id">
-                                        <option></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="qty" class="col-sm-3 control-label">Qty</label>
-                                <div class="col-sm-9">
-                                    <input type="number" class="form-control" name="qty" id="qty"
-                                           required>
-                                </div>
-                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Items chosen</h4>
+                                    <table class="table table-condensed table-hover table-striped" id="myTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Qty</th>
+                                            <th>Unit cost</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-                            <div class="form-group">
-                                <label for="reason" class="col-sm-3 control-label">Reason</label>
-                                <div class="col-sm-9">
-                                    <textarea name="reason" id="reason" class="form-control" disabled=""
-                                              placeholder="Reason"></textarea>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="status" class="col-sm-3 control-label">Status</label>
-                                <div class="col-sm-9">
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="pending">Pending</option>
-                                        <option value="accepted">Accepted</option>
-                                        <option value="rejected">Rejected</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="comment" class="col-sm-3 control-label">Comment</label>
-                                <div class="col-sm-9">
-                                    <textarea name="comment" id="comment" class="form-control"
-                                              placeholder="Comment"></textarea>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <div class="modal-footer editFooter">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" id="createBtn" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                                Close
+                            </button>
+                            <button type="submit" id="createBtn" class="btn btn-primary">
+                                <i class="fa fa-check-circle"></i>
+                                Save changes
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -162,49 +180,53 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('lib/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
     <script>
         $(function () {
             $('.tr-products').addClass('active');
             $('.mn-requests').addClass('active');
 
-            $('#category_id').on('change', function () {
-                loadProducts($(this).val());
+
+            $('#itemButton').on('click', function () {
+                var btn = $(this);
+                var qty = $('#qty');
+                var price = $('#price');
+
+                var tr = $('#myTable>tbody:last-child');
+
+                tr.append('<tr><td>' + product.name + '</td><td>' + qty.val() + '</td><td>' + price.val() + '</td><td>' + parseInt(qty.val()) * parseInt(price.val()) + '</td></tr>');
+                qty.val('');
+                price.val('');
             });
-
-            var loadProducts = function (categoryId, product_id = 0) {
-
-                $.getJSON('/admin/products/category/' + categoryId)
-                    .done(function (data) {
-                        var product = $('#product_id');
-                        product.empty();
-                        product.append('<option></option>');
-                        data.forEach(function (item) {
-                            product.append('<option value="' + item.id + '">' + item.name + '</option>');
-                        });
-                        product.val(product_id);
-                    });
-            };
-
-            //edit product
-            $('.js-edit').on('click', function () {
-                $('#submitForm').attr('action', $(this).attr('data-update'));
-                var url = $(this).attr('data-url');
-                $('#addModal').modal('show');
-                showLoader();
-                $.getJSON(url)
-                    .done(function (data) {
-                        hideLoader();
-                        $('#id').val(data.id);
-                        $('#qty').val(data.qty);
-                        $('#reason').val(data.reason);
-                        $('#status').val(data.status);
-                        $('#category_id').val(data.product.category_id);
-                        loadProducts(data.product.category_id, data.product_id);
-                        $('#comment').val(data.comment);
-                    });
-            });
-
 
         });
+
+        var product;
+
+
+        var options = {
+
+            url: "{{ route('api.getAllProducts') }}",
+
+            getValue: function (data) {
+                return data.name;
+            },
+
+            list: {
+                onSelectItemEvent: function () {
+                    product = $("#products").getSelectedItemData();
+                },
+                onHideListEvent: function () {
+                    console.log('hidden');
+                },
+                match: {
+                    enabled: true
+                }
+            },
+
+            theme: "square"
+        };
+
+        $("#products").easyAutocomplete(options);
     </script>
 @endsection
