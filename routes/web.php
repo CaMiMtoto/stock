@@ -62,9 +62,9 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/stock/{stock}', 'StocksController@destroy')->name('stocks.destroy');
 
             Route::get('/requests', 'RequestController@index')->name('requests');
+            Route::post('/requests', 'RequestController@store')->name('requests.store');
 
             Route::get('/requisitions', 'RequisitionsController@index')->name('requisitions.all');
-            Route::post('/requisitions', 'RequisitionsController@store')->name('requisitions.store');
             Route::post('/requisitions/{requisition}', 'RequisitionsController@update')->name('requisitions.update');
             Route::get('/requisitions/{requisition}', 'RequisitionsController@show')->name('requisitions.show');
             Route::patch('/requisitions/{requisition}', 'RequisitionsController@confirm')->name('requisitions.confirm');

@@ -43,7 +43,6 @@
                             <tr>
                                 <td>{{ $req->date}}</td>
                                 <td>{{ $req->department}}</td>
-                                <td>{{ $req->status}}</td>
                                 <td>
                                     @if($req->status=='pending')
                                         <span class="label label-info">{{ ucfirst($req->status) }}</span>
@@ -55,6 +54,7 @@
                                         <span class="label label-default">{{ ucfirst($req->status) }}</span>
                                     @endif
                                 </td>
+                                <td>{{ $req->prepared_by}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button
@@ -98,7 +98,7 @@
                     </h4>
                 </div>
 
-                <form novalidate action="" id="submitForm" method="post">
+                <form novalidate action="{{ route('requests.store') }}" autocomplete="off" method="post">
                     <input type="hidden" id="id" name="id" value="0">
                     {{ csrf_field() }}
                     <div class="modal-body">
@@ -159,6 +159,29 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="date" class="control-label">Date</label>
+                                        <input type="text" name="date" id="date" class="form-control datepicker"
+                                               required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="department" class="control-label">Department</label>
+                                        <input type="text" id="department" name="department" class="form-control"
+                                               required/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="prepared_by" class="control-label">Prepared By</label>
+                                        <input type="text" name="prepared_by" id="prepared_by" class="form-control"
+                                               required/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer editFooter">
@@ -182,6 +205,9 @@
 @section('scripts')
     <script src="{{ asset('lib/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js') }}"></script>
     <script>
+        var query = '';
+        var product;
+
         $(function () {
             $('.tr-products').addClass('active');
             $('.mn-requests').addClass('active');
@@ -193,25 +219,35 @@
                 var price = $('#price');
 
                 var tr = $('#myTable>tbody:last-child');
-
-                tr.append('<tr><td>' + product.name + '</td><td>' + qty.val() + '</td><td>' + price.val() + '</td><td>' + parseInt(qty.val()) * parseInt(price.val()) + '</td></tr>');
+                tr.append('<tr><td><input type="hidden" name="product_id[]" value="' + product.id + '"/>' + product.name + '</td><td><input type="hidden" name="qty[]" value="' + qty.val() + '">' + qty.val() + '</td><td><input type="hidden" name="price[]" value="' + price.val() + '">' + price.val() + '</td><td>' + parseInt(qty.val()) * parseInt(price.val()) + '</td></tr>');
                 qty.val('');
                 price.val('');
             });
 
-        });
+            $('#products').on('input', function () {
+                query = $(this).val();
+            });
 
-        var product;
+        });
 
 
         var options = {
-
-            url: "{{ route('api.getAllProducts') }}",
+            url: function (phrase) {
+                if (phrase === "") {
+                    return "{{ route('api.search.products') }}";
+                } else {
+                    return "{{ route('api.search.products') }}?query=" + phrase;
+                }
+            },
 
             getValue: function (data) {
                 return data.name;
             },
-
+            ajaxSettings: {
+                dataType: "json",
+                method: "GET"
+            },
+            requestDelay: 400,
             list: {
                 onSelectItemEvent: function () {
                     product = $("#products").getSelectedItemData();

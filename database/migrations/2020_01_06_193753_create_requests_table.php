@@ -22,7 +22,7 @@ class CreateRequestsTable extends Migration
             $table->string('delivered_by')->nullable();
             $table->string('received_by')->nullable();
             $table->string('department');
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->timestamps();
 
             $table->foreign('approved_by')->references('id')->on('users');
