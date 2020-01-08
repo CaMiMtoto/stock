@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ProductsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/requestDetails.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/RequestItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/RequestItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_06_193753_create_requests_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_06_193753_create_requests_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/requested.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/requested.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,6 +47,20 @@
         <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="request_items: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="requests: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -323,7 +334,8 @@
       <workItem from="1578054671282" duration="762000" />
       <workItem from="1578057443641" duration="11732000" />
       <workItem from="1578331209140" duration="7862000" />
-      <workItem from="1578410715128" duration="4137000" />
+      <workItem from="1578410715128" duration="4380000" />
+      <workItem from="1578479298823" duration="1838000" />
     </task>
     <servers />
   </component>

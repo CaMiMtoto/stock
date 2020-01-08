@@ -6,6 +6,15 @@
         .easy-autocomplete {
             position: relative;
             width: 100% !important;
+        }
+        .easy-autocomplete input {
+            border-color: #ccc;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: none;
+            color: #555;
+            float: none;
+            padding: 6px 12px;
             border-radius: 0 !important;
         }
     </style>
@@ -59,13 +68,13 @@
                                     <div class="btn-group">
                                         <button
                                             data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
-                                            data-url="{{ route('requisitions.show',['id'=>$req->id]) }}"
+                                            data-url="{{ route('requests.details',['id'=>$req->id]) }}"
                                             class="btn btn-default js-details">
                                             Details
                                         </button>
                                         <button
                                             data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
-                                            data-url="{{ route('requisitions.show',['id'=>$req->id]) }}"
+                                            data-url="{{ route('requests.show',['id'=>$req->id]) }}"
                                             class="btn btn-default js-edit">
                                             <i class="fa fa-edit"></i>
                                             Edit
@@ -98,7 +107,8 @@
                     </h4>
                 </div>
 
-                <form novalidate action="{{ route('requests.store') }}" autocomplete="off" method="post">
+                <form novalidate action="{{ route('requests.store') }}" id="saveRequest" autocomplete="off"
+                      method="post">
                     <input type="hidden" id="id" name="id" value="0">
                     {{ csrf_field() }}
                     <div class="modal-body">
@@ -200,6 +210,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade myModal" tabindex="-1" role="dialog" id="detailsModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Request details
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+
+                <form novalidate action="" id="updateRequestForm" autocomplete="off"
+                      method="post">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        @include('layouts._loader')
+                        <div class="edit-result">
+                            <div id="detailsDiv"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer editFooter">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                                Close
+                            </button>
+                            <button type="submit" id="saveChangesBtn" class="btn btn-primary">
+                                <i class="fa fa-check-circle"></i>
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -211,6 +259,24 @@
         $(function () {
             $('.tr-products').addClass('active');
             $('.mn-requests').addClass('active');
+
+            $('.js-details').on('click', function () {
+                var url = $(this).attr('data-url');
+                $('#detailsModal').modal();
+                showLoader();
+                $.ajax({
+                        url: url,
+                        method: 'GET',
+                        success: function (data) {
+                            hideLoader();
+                            $('#detailsDiv').html(data);
+                        },
+                        error: function () {
+
+                        }
+                    }
+                );
+            });
 
 
             $('#itemButton').on('click', function () {
@@ -224,8 +290,13 @@
                 price.val('');
             });
 
-            $('#products').on('input', function () {
-                query = $(this).val();
+            $('#saveRequest').on('submit', function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var btn = $('#createBtn');
+                if (!form.valid()) return;
+                btn.button('loading');
+                e.target.submit();
             });
 
         });

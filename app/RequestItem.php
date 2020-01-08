@@ -15,4 +15,7 @@ class RequestItem extends Model
     public function request(){
         return $this->belongsTo(Request::class);
     }
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -21,9 +21,9 @@ class RequestController extends Controller
 
     public function store(\Illuminate\Http\Request $request)
     {
-//        dd($request);
+
         DB::beginTransaction();
-//        try {
+        try {
             $re = new Request();
             $re->date = $request->date;
             $re->department = $request->department;
@@ -38,18 +38,24 @@ class RequestController extends Controller
                 $item->unit_price = $request->price[$i];
                 $item->save();
             }
-
             DB::commit();
-     /*   } catch (Exception $exception) {
-
+        } catch (Exception $exception) {
             DB::rollBack();
-        }*/
+            return redirect()->back()->with(
+                ['message' => $exception->getMessage()]
+            );
+        }
         return redirect()->back();
     }
 
     public function show(Request $request)
     {
-        return $request;
+        return $request->load('requestItems');
+    }
+    public function details(Request $request)
+    {
+        $request= $request->load('requestItems');
+        return view('admin.requestDetails',compact('request'));
     }
 
     public function update(\Illuminate\Http\Request $req, Request $request)

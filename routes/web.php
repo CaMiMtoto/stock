@@ -63,10 +63,12 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/requests', 'RequestController@index')->name('requests');
             Route::post('/requests', 'RequestController@store')->name('requests.store');
+            Route::get('/requests/{request}', 'RequestController@show')->name('requests.show');
+            Route::get('/requests/{request}/details', 'RequestController@details')->name('requests.details');
 
             Route::get('/requisitions', 'RequisitionsController@index')->name('requisitions.all');
             Route::post('/requisitions/{requisition}', 'RequisitionsController@update')->name('requisitions.update');
-            Route::get('/requisitions/{requisition}', 'RequisitionsController@show')->name('requisitions.show');
+
             Route::patch('/requisitions/{requisition}', 'RequisitionsController@confirm')->name('requisitions.confirm');
 
             Route::get('/orders', 'OrdersController@index')->name('orders.index');
