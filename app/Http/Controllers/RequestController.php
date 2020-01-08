@@ -6,7 +6,9 @@ use App\Category;
 use App\Product;
 use App\Request;
 use App\RequestItem;
+use App\Stock;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
@@ -52,15 +54,50 @@ class RequestController extends Controller
     {
         return $request->load('requestItems');
     }
+
     public function details(Request $request)
     {
-        $request= $request->load('requestItems');
-        return view('admin.requestDetails',compact('request'));
+        $request = $request->load('requestItems');
+        return view('admin.requestDetails', compact('request'));
     }
 
-    public function update(\Illuminate\Http\Request $req, Request $request)
+    public function updateStatus(\Illuminate\Http\Request $req, Request $request)
     {
-        //
+        $request->status = $req->status;
+        $request->comment = $req->comment;
+        if ($req->status == 'approved') {
+            $request->approved_by = Auth::id();
+        } else {
+            $request->approved_by = null;
+        }
+        $request->update();
+        return response($request, 200);
+    }
+
+    public function updateStock(\Illuminate\Http\Request $req, Request $request)
+    {
+//        return response($req,404);
+        DB::beginTransaction();
+        $request->delivered_by = $req->delivered_by;
+        $request->status = 'delivered';
+        $request->update();
+
+        for ($i = 0; $i < count($req->product); $i++) {
+            $product = Product::find($req->product[$i]);
+            $product->qty += $req->qtyToBeStocked[$i];
+            $product->update();
+
+            $stock = new Stock();
+            $stock->product_id = $req->product[$i];
+            $stock->qty = $req->qtyToBeStocked[$i];
+            $stock->price = $req->unit_price[$i];
+            $stock->save();
+
+
+        }
+
+        DB::commit();
+        return response($request, 200);
     }
 
     public function destroy(Request $request)

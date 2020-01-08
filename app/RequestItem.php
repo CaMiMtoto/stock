@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property  double unit_price
@@ -12,10 +13,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RequestItem extends Model
 {
-    public function request(){
+    public function request()
+    {
         return $this->belongsTo(Request::class);
     }
-    public function product(){
+
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
+
+
 }

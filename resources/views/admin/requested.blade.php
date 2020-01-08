@@ -7,6 +7,7 @@
             position: relative;
             width: 100% !important;
         }
+
         .easy-autocomplete input {
             border-color: #ccc;
             border-style: solid;
@@ -22,6 +23,16 @@
 @section('content')
     <section class="content">
         <div class="col-12">
+            <form action="{{ route('requestedItemsReports') }}" autocomplete="off" class="form-inline">
+                <div class="form-group">
+                    <input type="text" placeholder="Start Date" name="startDate" class="datepicker form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control datepicker" name="endDate" placeholder="End date">
+                </div>
+                <button class="btn btn-default">Go</button>
+            </form>
+            <br>
             <div class="clearfix"></div>
             <div class="box box-primary flat">
                 <div class="box-header with-border">
@@ -29,6 +40,7 @@
                         Requests { {{ $requisitions->count() }} }
                     </h4>
                     <div class="box-tools">
+
                         <button data-toggle="modal" data-target="#addModal" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i>
                             Add New
@@ -43,7 +55,11 @@
                             <th>Date</th>
                             <th>Department</th>
                             <th>Status</th>
+                            <th>Amount</th>
                             <th>Prepared By</th>
+                            <th>Checked By</th>
+                            <th>Approved By</th>
+                            <th>Delivered By</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -55,15 +71,21 @@
                                 <td>
                                     @if($req->status=='pending')
                                         <span class="label label-info">{{ ucfirst($req->status) }}</span>
-                                    @elseif($req->status=='accepted')
+                                    @elseif($req->status=='approved')
                                         <span class="label label-success">{{ ucfirst($req->status) }}</span>
                                     @elseif($req->status=='rejected')
                                         <span class="label label-danger">{{ ucfirst($req->status) }}</span>
+                                    @elseif($req->status=='modify')
+                                        <span class="label label-warning">{{ ucfirst($req->status) }}</span>
                                     @else
                                         <span class="label label-default">{{ ucfirst($req->status) }}</span>
                                     @endif
                                 </td>
+                                <td>{{ number_format($req->totalAmount()) }}</td>
                                 <td>{{ $req->prepared_by}}</td>
+                                <td>{{ $req->checked_by}}</td>
+                                <td>{{ $req->approvedBy==null?'Not yet':$req->approvedBy->name}}</td>
+                                <td>{{ $req->delivered_by }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button
@@ -71,13 +93,13 @@
                                             data-url="{{ route('requests.details',['id'=>$req->id]) }}"
                                             class="btn btn-default js-details">
                                             Details
-                                        </button>
-                                        <button
-                                            data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
-                                            data-url="{{ route('requests.show',['id'=>$req->id]) }}"
-                                            class="btn btn-default js-edit">
-                                            <i class="fa fa-edit"></i>
-                                            Edit
+                                            {{--<button
+                                                data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
+                                                data-url="{{ route('requests.show',['id'=>$req->id]) }}"
+                                                class="btn btn-default js-edit">
+                                                <i class="fa fa-edit"></i>
+                                                Edit
+                                            </button>--}}
                                         </button>
                                     </div>
                                 </td>
@@ -212,7 +234,7 @@
     </div>
 
     <div class="modal fade myModal" tabindex="-1" role="dialog" id="detailsModal">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
@@ -224,7 +246,7 @@
                 </div>
 
                 <form novalidate action="" id="updateRequestForm" autocomplete="off"
-                      method="post">
+                      method="post" class="form-horizontal">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         @include('layouts._loader')
@@ -238,16 +260,27 @@
                                 <i class="fa fa-close"></i>
                                 Close
                             </button>
-                            <button type="submit" id="saveChangesBtn" class="btn btn-primary">
-                                <i class="fa fa-check-circle"></i>
-                                Save changes
-                            </button>
+                            @if(Auth::user()->role->name==='admin' || Auth::user()->role->name==='manager')
+                                <button type="submit" id="saveChangesBtn" class="btn btn-primary">
+                                    <i class="fa fa-check-circle"></i>
+                                    Save changes
+                                </button>
+                            @endif
+
+                            @if((Auth::user()->role->name=='keeper' || Auth::user()->role->name=='manager'))
+                                <button type="submit" id="saveChangesBtn" class="btn btn-primary">
+                                    <i class="fa fa-check-circle"></i>
+                                    Confirm stock
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @section('scripts')
@@ -259,6 +292,30 @@
         $(function () {
             $('.tr-products').addClass('active');
             $('.mn-requests').addClass('active');
+
+            var updateRequestForm = $('#updateRequestForm');
+            updateRequestForm.validate();
+
+            updateRequestForm.on('submit', function (e) {
+                e.preventDefault();
+                var form = $(this);
+                if (!form.valid()) return;
+                var action = $(document).find('#updateUrl').val();
+                var btn = $('#saveChangesBtn');
+
+                btn.button('loading');
+                $.ajax({
+                    url: action,
+                    method: 'post',
+                    data: form.serialize(),
+                    success: function (data) {
+                        location.reload();
+                    }, error: function () {
+                        btn.button('reset');
+                    }
+                })
+
+            });
 
             $('.js-details').on('click', function () {
                 var url = $(this).attr('data-url');

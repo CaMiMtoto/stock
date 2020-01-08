@@ -64,53 +64,84 @@
         <thead>
         <tr>
             <th>Product</th>
-            <th>Price</th>
-            <th>Qty</th>
+            <th>In Stock</th>
+            <th>Stock Unit Measure</th>
+            <th>Unit Price</th>
+            <th>Qty Requested</th>
             <th>Total</th>
+            @if($request->status=='approved' && (Auth::user()->role->name=='keeper' || Auth::user()->role->name=='manager'))
+                <input type="hidden" value="{{ route('requests.updateStock',[$request->id]) }}" id="updateUrl">
+                <th>Unit to be stored</th>
+            @endif
+            @if($request->status!='approved'&& (Auth::user()->role->name=='keeper' || Auth::user()->role->name=='manager'))
+                <script>
+                    $('#saveChangesBtn').addClass('div-hide');
+                </script>
+            @endif
         </tr>
         </thead>
         <tbody>
         <?php $total = 0;?>
         @foreach($request->requestItems as $item)
             <?php $total += $item->unit_price * $item->qty;?>
+            <input type="hidden" value="{{$item->product->id}}" name="product[]"/>
+            <input type="hidden" value="{{$item->qty}}" name="qty[]"/>
+            <input type="hidden" value="{{$item->unit_price}}" name="unit_price[]"/>
             <tr>
                 <td>{{ $item->product->name }}</td>
+                <td>{{ $item->product->qty }}</td>
+                <td>{{ $item->product->unit_measure }}</td>
                 <td>{{ number_format($item->unit_price) }}</td>
                 <td>{{ $item->qty }}</td>
                 <td>{{ number_format($item->unit_price*$item->qty) }}</td>
+                @if($request->status=='approved' && (Auth::user()->role->name=='keeper' || Auth::user()->role->name=='manager'))
+                    <td>
+                        <input type="text" class="form-control" id="id_{{$item->id}}" required name="qtyToBeStocked[]"
+                               style="max-width: 100px;">
+                    </td>
+                @endif
             </tr>
         @endforeach
         </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="3">
-                                    <span>
-                                        <b>Total:</b>
-                                    </span>
-            </td>
-            <td>
-                <b>{{ number_format($total) }} Rwf</b>
-            </td>
-        </tr>
-        </tfoot>
     </table>
+    <p class="text-right">
+        <strong>Total:</strong>
+        <b>{{ number_format($total) }} Rwf</b>
+    </p>
 </div>
-@if(\Illuminate\Support\Facades\Auth::user()->role==='admin')
+@if($request->status=='approved' && (Auth::user()->role->name=='keeper' || Auth::user()->role->name=='manager'))
+    <div class="form-group">
+        <label for="delivered_by" class="control-label col-sm-4">Delivered by</label>
+        <div class="col-sm-8">
+            <input type="text" required name="delivered_by" id="delivered_by" class="form-control">
+        </div>
+    </div>
 
-    {{ csrf_field() }}
+@endif
+
+@if(Auth::user()->role->name==='admin' || Auth::user()->role->name==='manager')
+
     <input type="hidden" value="{{ $request->id }}" name="id">
-    {{--    <div class="form-group">--}}
-    {{--        <label for="order_status" class="control-label col-sm-3">Order Status</label>--}}
-    {{--        <label for="order_status" class="control-label col-sm-1">:</label>--}}
-    {{--        <div class="col-sm-8">--}}
-    {{--            <select required class="form-control" name="order_status" id="order_status">--}}
-    {{--                <option value=""></option>--}}
-    {{--                <option value="Pending" {{ $request->order_status=="Pending"? 'selected':'' }}>Pending</option>--}}
-    {{--                <option value="Processing" {{ $request->order_status=="Processing"? 'selected':'' }}>Processing</option>--}}
-    {{--                <option value="Shipped" {{ $request->order_status=="Shipped"? 'selected':'' }}>Shipped</option>--}}
-    {{--            </select>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
+    <input type="hidden" value="{{ route('requests.updateStatus',[$request->id]) }}" id="updateUrl">
+    <div class="form-group">
+        <label for="order_status" class="control-label col-sm-4">Status</label>
+        <div class="col-sm-8">
+            <select required class="form-control" name="status" id="status">
+                <option value=""></option>
+                <option value="pending" {{ $request->status=="pending"? 'selected':'' }}>Pending</option>
+                <option value="approved" {{ $request->status=="approved"? 'selected':'' }}>Approved</option>
+                <option value="modify" {{ $request->status=="modify"? 'selected':'' }}>Modify</option>
+                <option value="rejected" {{ $request->status=="rejected"? 'selected':'' }}>Rejected</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comment" class="control-label col-sm-4">Comment</label>
+        <div class="col-sm-8">
+            <textarea name="comment" required id="comment" class="form-control"></textarea>
+        </div>
+    </div>
+
 
 @endif
 

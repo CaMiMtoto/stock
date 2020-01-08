@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/requests', 'RequestController@store')->name('requests.store');
             Route::get('/requests/{request}', 'RequestController@show')->name('requests.show');
             Route::get('/requests/{request}/details', 'RequestController@details')->name('requests.details');
+            Route::post('/requests/{request}/updateStatus', 'RequestController@updateStatus')->name('requests.updateStatus');
+            Route::post('/requests/{request}/updateStock', 'RequestController@updateStock')->name('requests.updateStock');
 
             Route::get('/requisitions', 'RequisitionsController@index')->name('requisitions.all');
             Route::post('/requisitions/{requisition}', 'RequisitionsController@update')->name('requisitions.update');
@@ -106,6 +108,12 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/eod', 'SettingController@eod')->name('eod');
         Route::post('/eod', 'SettingController@runEod')->name('runEod');
+
+
+
+
+
+        Route::get('/requestedItems/report', 'ReportsController@requestedItems')->name('requestedItemsReports');
 
 
         Route::get('/shifts', 'ShiftController@index')->name('shifts');

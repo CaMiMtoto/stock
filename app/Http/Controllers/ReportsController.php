@@ -8,6 +8,7 @@ use App\Order;
 use App\OrderItem;
 use App\ProductOrder;
 use App\ProductOrderItem;
+use App\RequestItem;
 use App\StockTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -135,5 +136,30 @@ class ReportsController extends Controller
             'start_date' => $startDate,
             'end_date' => $endDate,
         ]);
+    }
+
+
+    public function requestedItems(Request $request)
+    {
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+
+        $items = RequestItem::with('product')
+            ->whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->get();
+        $items = RequestItem::with(['product'])
+            ->join('products', 'products.id', '=', 'request_items.product_id')
+            ->whereDate('request_items.created_at', '>=', $startDate)
+            ->whereDate('request_items.created_at', '<=', $endDate)
+            ->select('request_items.product_id','request_items.created_at','request_items.qty as quantity',DB::raw('sum(request_items.unit_price * request_items.qty) as total'),DB::raw('sum(request_items.qty) as totalQty'),DB::raw('sum(request_items.unit_price) as totalPrice'))
+            ->groupBy('products.id')
+            ->get();
+//        return $items;
+        return view('admin.reports.requested_items', compact('items'))
+            ->with([
+                'startDate' => $startDate,
+                'endDate' => $endDate
+            ]);
     }
 }
