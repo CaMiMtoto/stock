@@ -3,6 +3,8 @@
 @section('title','Product History')
 
 @section('content')
+
+
     <section class="content">
         <div class="box box-primary flat">
             <div class="box-header with-border">
@@ -28,19 +30,26 @@
                         <th>Opening</th>
                         <th>Received</th>
                         <th>Sold</th>
-                        <th>Closing</th>
                         <th>Total avail.</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($orderItems as $item)
+                    @foreach($products as $item)
+                        <?php
+                        $totalPreviousStockQty = App\ReportData::getPreviousStockQty($date, $categoryId,$item->id);
+                        $totalPreviousSoldQty = App\ReportData::getPreviousDrinksSoldQty($date,$item->id);
+                        $opening = $totalPreviousStockQty - $totalPreviousSoldQty;
+                        $received = App\ReportData::getReceivedQty($date, $categoryId,$item->id);
+                        $sold = App\ReportData::getDrinkSoldToday($date,$item->id);
+                        $total = $opening + $received -$sold;
+
+                        ?>
                         <tr>
-                            <td>{{ $item->product->name }}</td>
-                            <td>{{ $item->opening }}</td>
-                            <td>{{ $item->received }}</td>
-                            <td>{{ $item->sold }}</td>
-                            <td>{{ $item->closing }}</td>
-                            <td>{{ $item->opening+$item->received }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $opening }}</td>
+                            <td>{{$received}}</td>
+                            <td>{{ $sold }}</td>
+                            <td>{{ $total }}</td>
                         </tr>
                     @endforeach
                     </tbody>

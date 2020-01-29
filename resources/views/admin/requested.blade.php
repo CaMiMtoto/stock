@@ -57,7 +57,7 @@
                             <th>Status</th>
                             <th>Amount</th>
                             <th>Prepared By</th>
-                            <th>Checked By</th>
+{{--                            <th>Checked By</th>--}}
                             <th>Approved By</th>
                             <th>Delivered By</th>
                             <th></th>
@@ -83,7 +83,7 @@
                                 </td>
                                 <td>{{ number_format($req->totalAmount()) }}</td>
                                 <td>{{ $req->prepared_by}}</td>
-                                <td>{{ $req->checked_by}}</td>
+{{--                                <td>{{ $req->checked_by}}</td>--}}
                                 <td>{{ $req->approvedBy==null?'Not yet':$req->approvedBy->name}}</td>
                                 <td>{{ $req->delivered_by }}</td>
                                 <td>
@@ -267,7 +267,7 @@
                                 </button>
                             @endif
 
-                            @if((Auth::user()->role->name=='keeper' || Auth::user()->role->name=='manager'))
+                            @if((Auth::user()->role->name==='keeper' || Auth::user()->role->name==='manager'))
                                 <button type="submit" id="saveChangesBtn" class="btn btn-primary">
                                     <i class="fa fa-check-circle"></i>
                                     Confirm stock

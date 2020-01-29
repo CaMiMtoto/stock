@@ -92,8 +92,6 @@ class RequestController extends Controller
             $stock->qty = $req->qtyToBeStocked[$i];
             $stock->price = $req->unit_price[$i];
             $stock->save();
-
-
         }
 
         DB::commit();

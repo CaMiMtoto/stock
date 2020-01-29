@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Expense;
 use App\FinancialReportModel;
 use App\Order;
 use App\OrderItem;
+use App\Product;
 use App\ProductOrder;
 use App\ProductOrderItem;
 use App\RequestItem;
-use App\StockTransaction;
+use App\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,35 +33,37 @@ class ReportsController extends Controller
         ]);
     }
 
+
+
+
     public function productsHistory(Request $request)
     {
         $date = $request->date;
         if ($request->category == 'Food') {
+            $categoryId=Category::$FOOD;
             $category = 'Food';
-            $orderItems = StockTransaction::with('product')
-                ->join('products', 'products.id', '=', 'stock_transactions.product_id')
-                ->whereDate('stock_transactions.created_at', $date)
-                ->where('products.category_id', '=', 2)
-                ->whereDate('stock_transactions.created_at', '=', $date)
-                ->groupBy('products.id')
-                ->select('*')
-                ->get();
-//            return \response($orderItems,200);
+          /*  $totalPreviousStockQty = $this->getPreviousStockQty($date, Category::$FOOD);
+            $totalPreviousSoldQty = $this->getPreviousFoodSoldQty($date);
+            $opening = $totalPreviousStockQty - $totalPreviousSoldQty;
+            $received = $this->getReceivedQty($date, Category::$FOOD);
+            $sold = $this->getFoodSoldToday($date);
+            $total = $opening + $received;*/
         } else {
             $category = 'Drinks';
-            $orderItems = StockTransaction::with('product')
-                ->join('products', 'products.id', '=', 'stock_transactions.product_id')
-                ->whereDate('stock_transactions.created_at', $date)
-                ->where('products.category_id', '=', 1)
-                ->whereDate('stock_transactions.created_at', '=', $date)
-                ->groupBy('products.id')
-                ->select('*')
-                ->get();
+            $categoryId=Category::$DRINK;
+           /* $totalPreviousStockQty = $this->getPreviousStockQty($date, Category::$DRINK);
+            $totalPreviousSoldQty = $this->getPreviousDrinksSoldQty($date);
+            $opening = $totalPreviousStockQty - $totalPreviousSoldQty;
+            $received = $this->getReceivedQty($date, Category::$DRINK);
+            $sold = $this->getDrinkSoldToday($date);
+            $total = $opening + $received;*/
         }
-        return view('admin.reports.product_history', compact('orderItems'))
+        return view('admin.reports.product_history')
             ->with([
                 'date' => $date,
-                'category' => $category
+                'category' => $category,
+                'categoryId' => $categoryId,
+                'products'=>Product::where('category_id','=',$categoryId)->get()
             ]);
 
     }
@@ -152,7 +156,7 @@ class ReportsController extends Controller
             ->join('products', 'products.id', '=', 'request_items.product_id')
             ->whereDate('request_items.created_at', '>=', $startDate)
             ->whereDate('request_items.created_at', '<=', $endDate)
-            ->select('request_items.product_id','request_items.created_at','request_items.qty as quantity',DB::raw('sum(request_items.unit_price * request_items.qty) as total'),DB::raw('sum(request_items.qty) as totalQty'),DB::raw('sum(request_items.unit_price) as totalPrice'))
+            ->select('request_items.product_id', 'request_items.created_at', 'request_items.qty as quantity', DB::raw('sum(request_items.unit_price * request_items.qty) as total'), DB::raw('sum(request_items.qty) as totalQty'), DB::raw('sum(request_items.unit_price) as totalPrice'))
             ->groupBy('products.id')
             ->get();
 //        return $items;
