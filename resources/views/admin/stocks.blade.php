@@ -127,7 +127,7 @@
                             <div class="form-group">
                                 <label for="product_id" class="col-sm-3  control-label">Product</label>
                                 <div class="col-sm-9">
-                                    <select required class="form-control" id="product_id" name="product_id">
+                                    <select required style="width: 100%;" class="form-control select2" id="product_id" name="product_id">
                                         <option></option>
                                         @foreach($products as $prod)
                                             <option value="{{ $prod->id}}">
@@ -135,6 +135,7 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <label id="product_id-error" class="error" for="product_id"></label>
                                 </div>
                             </div>
                             <div class="form-group">

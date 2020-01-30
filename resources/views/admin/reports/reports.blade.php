@@ -93,7 +93,7 @@
                     </form>
                 </div>
             </div>
-            @if(Auth::user()->role=='manager')
+            @if(Auth::user()->role->name=='manager' || Auth::user()->role->name=='admin')
                 <div class="col-md-4">
                     <div class="box box-info flat">
                         <div class="box-header with-border">

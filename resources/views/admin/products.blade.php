@@ -63,7 +63,7 @@
                                 <td>{{ number_format($prod->cost)  }}</td>
                                 <td>{{ number_format($prod->price)  }}</td>
                                 <td>
-                                    @if(Auth::user()->role=='manager' || Auth::user()->role=='admin' || Auth::user()->role=='keeper')
+                                    @if(Auth::user()->role->name=='manager' || Auth::user()->role->name=='admin' || Auth::user()->role->name=='keeper')
                                         <div>
                                             <button
                                                 data-url="{{ route('products.show',['id'=>$prod->id]) }}"

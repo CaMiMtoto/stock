@@ -22,6 +22,10 @@ class Request extends Model
     {
         return $this->belongsTo(User::class, 'approved_by', 'id');
     }
+    public function requestedBy()
+    {
+        return $this->belongsTo(User::class, 'requested_by', 'id');
+    }
 
     public function requestItems(){
         return $this->hasMany(RequestItem::class);

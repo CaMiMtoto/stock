@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3387ff6f-0319-49ab-9689-8a3576943384" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/ReportData.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_30_193109_add_user_id_to_requests_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MenusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MenusController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ReportData.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ReportData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/order_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/order_details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/products.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/product_history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/product_history.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/reports.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/requested.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/requested.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/stocks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/stocks.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/aside.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,28 +64,7 @@
         <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="menu_items: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="menus: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="order_items: table" type="dbc44a63:MariaImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL for 5.1 - stock@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="stock: schema" type="ebfa3cd1:MariaImplModel$Schema" />
-        <item name="stocks: table" type="dbc44a63:MariaImplModel$Table" />
+        <item name="orders: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -185,11 +175,11 @@
     <property name="DatabaseDriversLRU" value="mysql&#10;sqlserver" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/storage/logs/laravel-2020-01-03.log&#10;G:/Projects/PHP/stock/.env" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/storage/logs/laravel-2020-01-29.log&#10;G:/Projects/PHP/stock/storage/logs/laravel-2020-01-30.log&#10;G:/Projects/PHP/stock/storage/logs/laravel-2020-01-03.log&#10;G:/Projects/PHP/stock/.env" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/img" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -199,15 +189,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\PHP\stock" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Projects\PHP\stock\public\img" />
       <recent name="G:\Projects\PHP\stock\public\lib" />
       <recent name="D:\Projects\PHP\stock\public\img" />
       <recent name="D:\Projects\PHP\stock\public\lib" />
       <recent name="D:\Projects\PHP\stock\public\js" />
-      <recent name="D:\Projects\PHP\stock\public\css" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\PHP\stock" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -362,7 +352,8 @@
       <workItem from="1578479298823" duration="13806000" />
       <workItem from="1578640076912" duration="35000" />
       <workItem from="1580141977227" duration="5848000" />
-      <workItem from="1580286254194" duration="1607000" />
+      <workItem from="1580286254194" duration="2304000" />
+      <workItem from="1580399428040" duration="8011000" />
     </task>
     <servers />
   </component>

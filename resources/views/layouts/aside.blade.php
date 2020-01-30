@@ -46,16 +46,11 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="mn-requisitions">
-                            <a href="{{ route('requisitions.all') }}">
-                                <i class="fa fa-circle-o"></i>
-                                Requisitions
-                            </a>
-                        </li>
+
                         <li class="mn-requests">
                             <a href="{{ route('requests') }}">
                                 <i class="fa fa-circle-o"></i>
-                                Requests
+                                Requisitions
                             </a>
                         </li>
                     </ul>

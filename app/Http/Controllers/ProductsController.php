@@ -7,6 +7,7 @@ use App\Menu;
 use App\MenuItem;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductsController extends Controller
 {
@@ -61,11 +62,17 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
+        $isNew = false;
         if ($request->id && $request->id > 0) {
             $prod = Product::find($request->id);
         } else {
+            $find=Product::where('name','=',$request->name)->get();
+            if(count($find)>0){
+                return response()->json(['error'=>'Product already exist.'], 200);
+            }
             $prod = new Product();
             $prod->qty = $request->original_qty;
+            $isNew = true;
         }
         $prod->name = $request->name;
         $prod->unit_measure = $request->unit_measure;
@@ -76,9 +83,10 @@ class ProductsController extends Controller
         $prod->save();
 
 
-        if ($prod->category->name == 'Drinks') {
-            $this->createMenu($prod);
-
+        if ($prod->category_id == Category::$DRINK) {
+            if ($isNew){
+                $this->createMenu($prod);
+            }
         }
         return response()->json($prod, 200);
     }
@@ -110,9 +118,6 @@ class ProductsController extends Controller
      */
     private function createMenu(Product $prod): void
     {
-        $menuItem = MenuItem::where('product_id', $prod->id);
-        if ($menuItem != null) return;
-
         $menu = new Menu();
         $menu->name = $prod->name;
         $menu->price = $prod->price;

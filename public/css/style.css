@@ -45,3 +45,21 @@ td[contenteditable="true"]{
     font-style: italic;
     border: 1px solid cornflowerblue!important;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444!important;
+    line-height: unset!important;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #d2d6de !important;
+    border-radius: 0 !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444!important;
+    line-height: 24px!important;
+}
+.select2-container .select2-selection--single {
+    height: 34px !important;
+}

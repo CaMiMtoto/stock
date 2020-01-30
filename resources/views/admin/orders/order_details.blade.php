@@ -6,10 +6,10 @@
     <div class="row">
         <div class="col-xs-12">
             <h2 class="page-header">
-                <i class="fa fa-globe"></i> SMS, Inc.
+                <img src="{{ asset('img/logo.png') }}" style="height: 50px;" alt="">
                 <small class="pull-right">
                     <strong>Date:</strong>
-                    {{ \Carbon\Carbon::now()->format('d M Y') }}
+                    {{ \Carbon\Carbon::now()->format('d m Y') }}
                 </small>
             </h2>
         </div>
@@ -17,23 +17,13 @@
     </div>
     <!-- info row -->
     <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
-            From
-            <address>
-                <strong>SMS, Inc.</strong><br>
-            </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            To
-            <address>
-                <strong>{{ $order->customer_name }}</strong><br>
-            </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            <b>Order ID:</b> #{{ str_pad($order->id,5,'0',STR_PAD_LEFT) }}<br>
-            <b>Payment Due:</b> {{ $order->order_date }}<br>
+        <div class="col-sm-12 invoice-col">
+
+            <strong>Client Name :</strong>{{ $order->customer_name }}<br>
+
+            <b>Receipt Number:</b> #{{ str_pad($order->id,5,'0',STR_PAD_LEFT) }}<br>
+            <b>Payment Date:</b> {{ $order->created_at->format('d/m/Y') }}<br>
+            <b>Waiter:</b> {{ $order->waiter->name }}<br>
         </div>
         <!-- /.col -->
     </div>
@@ -102,6 +92,8 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+
+        <h4 class="text-center">Thank you for choosing us!</h4>
 
     <!-- this row will not appear when printing -->
     <div class="row no-print">

@@ -11,11 +11,14 @@
                 <h4>
                     Product History
                     <small>{{ $date }}</small>
-                    <button class="btn btn-primary pull-right btn-sm no-print" onclick="window.print()">
+                </h4>
+                <div class="box-tools">
+                    <button class="btn btn-primary btn-sm no-print border-10px" onclick="window.print()">
                         <i class="fa fa-print"></i>
                         Print Report
                     </button>
-                </h4>
+                </div>
+
             </div>
             <div class="box-body">
                 <table class="table table-hover">
@@ -31,18 +34,24 @@
                         <th>Received</th>
                         <th>Sold</th>
                         <th>Total avail.</th>
+                        <th>Closing</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($products as $item)
                         <?php
-                        $totalPreviousStockQty = App\ReportData::getPreviousStockQty($date, $categoryId,$item->id);
-                        $totalPreviousSoldQty = App\ReportData::getPreviousDrinksSoldQty($date,$item->id);
+                        $totalPreviousStockQty = App\ReportData::getPreviousStockQty($date, $categoryId, $item->id);
+                        if ($categoryId == App\Category::$DRINK) {
+                            $totalPreviousSoldQty = App\ReportData::getPreviousDrinksSoldQty($date, $item->id);
+                            $sold = App\ReportData::getDrinkSoldToday($date, $item->id);
+                        } else {
+                            $totalPreviousSoldQty = App\ReportData::getPreviousFoodSoldQty($date, $item->id);
+                            $sold = App\ReportData::getFoodSoldToday($date, $item->id);
+                        }
                         $opening = $totalPreviousStockQty - $totalPreviousSoldQty;
-                        $received = App\ReportData::getReceivedQty($date, $categoryId,$item->id);
-                        $sold = App\ReportData::getDrinkSoldToday($date,$item->id);
-                        $total = $opening + $received -$sold;
+                        $received = App\ReportData::getReceivedQty($date, $categoryId, $item->id);
 
+                        $total = $opening + $received;
                         ?>
                         <tr>
                             <td>{{ $item->name }}</td>
@@ -50,6 +59,7 @@
                             <td>{{$received}}</td>
                             <td>{{ $sold }}</td>
                             <td>{{ $total }}</td>
+                            <td>{{ $total-$sold }}</td>
                         </tr>
                     @endforeach
                     </tbody>

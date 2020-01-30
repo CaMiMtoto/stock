@@ -57,7 +57,7 @@
                             <th>Status</th>
                             <th>Amount</th>
                             <th>Prepared By</th>
-{{--                            <th>Checked By</th>--}}
+                            {{--                            <th>Checked By</th>--}}
                             <th>Approved By</th>
                             <th>Delivered By</th>
                             <th></th>
@@ -83,7 +83,7 @@
                                 </td>
                                 <td>{{ number_format($req->totalAmount()) }}</td>
                                 <td>{{ $req->prepared_by}}</td>
-{{--                                <td>{{ $req->checked_by}}</td>--}}
+                                {{--                                <td>{{ $req->checked_by}}</td>--}}
                                 <td>{{ $req->approvedBy==null?'Not yet':$req->approvedBy->name}}</td>
                                 <td>{{ $req->delivered_by }}</td>
                                 <td>
@@ -93,14 +93,16 @@
                                             data-url="{{ route('requests.details',['id'=>$req->id]) }}"
                                             class="btn btn-default js-details">
                                             Details
-                                            {{--<button
+                                        </button>
+                                        @if($req->status=='modify' && Auth::user()->id==$req->requested_by)
+                                            <button
                                                 data-update="{{ route('requisitions.update',['id'=>$req->id]) }}"
                                                 data-url="{{ route('requests.show',['id'=>$req->id]) }}"
                                                 class="btn btn-default js-edit">
                                                 <i class="fa fa-edit"></i>
                                                 Edit
-                                            </button>--}}
-                                        </button>
+                                            </button>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

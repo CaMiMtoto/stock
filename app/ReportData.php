@@ -18,7 +18,7 @@ class ReportData
             ->sum('stocks.qty');
     }
 
-    public static function getPreviousFoodSoldQty($date,$productId)
+    public static function getPreviousDrinksSoldQty ($date,$productId)
     {
         return OrderItem::with('menu')
             ->join('menus', 'order_items.menu_id', 'menus.id')
@@ -29,7 +29,7 @@ class ReportData
             ->sum('order_items.qty');
     }
 
-    public static function getPreviousDrinksSoldQty($date,$productId)
+    public static function getPreviousFoodSoldQty($date,$productId)
     {
         return ProductOrderItem::with('product')
             ->join('products', 'product_order_items.product_id', 'products.id')
@@ -53,7 +53,7 @@ class ReportData
             ->sum('stocks.qty');
     }
 
-    public static function getFoodSoldToday($date,$productId)
+    public static function getFoodSoldToday ($date,$productId)
     {
         return OrderItem::with('menu')
             ->join('menus', 'order_items.menu_id', 'menus.id')
@@ -67,7 +67,7 @@ class ReportData
             ->sum('order_items.qty');
     }
 
-    public static function getDrinkSoldToday($date,$productId)
+    public static function getDrinkSoldToday ($date,$productId)
     {
         return ProductOrderItem::with('product')
             ->join('products', 'product_order_items.product_id', 'products.id')
@@ -75,8 +75,7 @@ class ReportData
             ->where([
                 ['products.category_id', '=', Category::$DRINK],
                 ['products.id', '=', $productId],
-            ])
-            ->sum('product_order_items.qty');
+            ])->sum('product_order_items.qty');
     }
 
 }

@@ -1,12 +1,11 @@
-
 $(window).on('load',
-    function() {
+    function () {
         $('.loader').fadeOut(500);
         $('#submitForm').validate();
         $('.validate-form').validate();
 
         $(function () {
-            $('#logout_link').on('click',function (e) {
+            $('#logout_link').on('click', function (e) {
                 e.preventDefault();
                 $('#logoutForm').submit();
             });
@@ -22,36 +21,34 @@ function printDoc() {
 
 $(function () {
     $('.select2').select2();
-    $('#addButton').click(function() {
+    $('#addButton').click(function () {
         $('.myModal').modal('show');
         $('#submitForm')[0].reset();
         $('#id').val(0);
     });
 
 
-
     $('.myModal').on('hidden.bs.modal',
-        function(e) {
+        function (e) {
             $(this).find("#reset").click();
         });
 
     $('#btn-upload-photo').on('click',
-        function() {
+        function () {
             $(this).siblings('#file').trigger('click');
         });
 
     $(document).find('[data-toggle="tooltip"]').tooltip();
 
-    $('.printBtn').click(function() {
+    $('.printBtn').click(function () {
         printDoc();
     });
-
 
 
     $('.datepicker').datepicker({
         autoclose: true,
         todayHighlight: true,
-        format:'yyyy-mm-dd'
+        format: 'yyyy-mm-dd'
     });
 
     $('.clear_text').val("");
@@ -59,7 +56,7 @@ $(function () {
     //submit  form
     $(document).on('submit',
         '#submitForm',
-        function(e) {
+        function (e) {
             e.preventDefault();
             var form = $(this);
 
@@ -74,18 +71,21 @@ $(function () {
                 url: form.attr('action'),
                 type: form.attr('method'),
                 data: form.serialize()
-            }).done(function(response) {
+            }).done(function (response) {
                 // button loading
                 button.button('reset');
                 save.button('reset');
-
-                var modal=$('.modal');
-                modal.modal("hide");
-                modal.on('hidden.bs.modal',
-                    function (e) {
-                        $('.loader').fadeIn(500);
-                        location.reload();
-                    });
+                if (response.error) {
+                    alert(response.error);
+                } else {
+                    var modal = $('.modal');
+                    modal.modal("hide");
+                    modal.on('hidden.bs.modal',
+                        function (e) {
+                            $('.loader').fadeIn(500);
+                            location.reload();
+                        });
+                }
 
             })
                 .fail(function (error) {
@@ -98,9 +98,9 @@ $(function () {
                         '</div>');
 
                     $(".alert-danger").delay(500).show(10,
-                        function() {
+                        function () {
                             $(this).delay(3000).hide(10,
-                                function() {
+                                function () {
                                     $(this).remove();
                                 });
                         }); // /.alert
@@ -112,18 +112,18 @@ $(function () {
 
 $(document).on('click',
     '.js-delete',
-    function(e) {
+    function (e) {
         e.preventDefault();
         var button = $(this);
         var url = button.attr("data-url");
         bootbox.confirm("Are you sure you want to delete this Record?",
-            function(result) {
+            function (result) {
                 if (result) {
                     $.ajax({
                         url: url,
                         method: 'DELETE',
-                        data:{_token:$('meta[name="csrf-token"]').attr('content')},
-                        success: function() {
+                        data: {_token: $('meta[name="csrf-token"]').attr('content')},
+                        success: function () {
                             // button.parents('tr').remove();
                             location.reload();
                         }

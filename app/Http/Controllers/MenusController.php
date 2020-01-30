@@ -21,14 +21,18 @@ class MenusController extends Controller
     {
         if ($request->id == 0) {
             $menu=new Menu();
+            $find=Menu::where('name','=',$request->name)->get();
+            if(count($find)>0){
+                return response()->json(['error'=>'Menu already exist.'], 200);
+            }
         } else {
-            $menu = Menu::find($request->id);;
+            $menu = Menu::find($request->id);
         }
         $menu->name = $request->name;
         $menu->price = $request->price;
         $menu->category_id = Category::$FOOD;
         $menu->save();
-        return response()->json(null, 200);
+        return response()->json($menu, 200);
     }
 
 
