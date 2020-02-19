@@ -50,7 +50,6 @@
                         }
                         $opening = $totalPreviousStockQty - $totalPreviousSoldQty;
                         $received = App\ReportData::getReceivedQty($date, $categoryId, $item->id);
-
                         $total = $opening + $received;
                         ?>
                         <tr>

@@ -17,11 +17,11 @@ class OrdersController extends BaseController
         $waiters = User::with('role')->where('role_id', '=', 5)->get();
 
         if (empty($request->input('q'))) {
-            $orders = Order::paginate(10);
+            $orders = Order::orderBy("id", "desc")->paginate(10);
         } else {
             $q = $request->input('q');
-            $orders = Order::where('customer_name', 'LIKE', "%{$q}%")
-                ->orWhere('waiter', 'LIKE', "%{$q}%")
+            $orders = Order::with('waiter')
+                ->where('customer_name', 'LIKE', "%{$q}%")
                 ->orWhere('created_at', 'LIKE', "%{$q}%")
                 ->orderBy("id", "desc")
                 ->paginate(10);
@@ -87,8 +87,8 @@ class OrdersController extends BaseController
             $order->save();
             for ($i = 0; $i < count($request->menu); $i++) {
                 $orderItem = new OrderItem();
-                $menuId= $request->menu[$i];
-                $orderItem->menu_id =$menuId;
+                $menuId = $request->menu[$i];
+                $orderItem->menu_id = $menuId;
                 $orderItem->order_id = $order->id;
                 $orderItem->price = $request->rate[$i];
                 $orderItem->qty = $request->quantity[$i];
@@ -121,7 +121,7 @@ class OrdersController extends BaseController
             $order->orderItems()->delete();
             for ($i = 0; $i < count($request->menu); $i++) {
                 $orderItem = new OrderItem();
-                $menuId=$request->menu[$i];
+                $menuId = $request->menu[$i];
                 $orderItem->menu_id = $menuId;
                 $orderItem->order_id = $order->id;
                 $orderItem->price = $request->rate[$i];

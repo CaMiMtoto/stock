@@ -54,7 +54,7 @@ class ProductOrderController extends Controller
         } else {
             $search = $request->input('search.value');
             $orders = ProductOrder::with('waiter')->where('customer_name', 'LIKE', "%{$search}%")
-                ->orWhere('waiter.name', 'LIKE', "%{$search}%")
+//                ->orWhere('waiter.name', 'LIKE', "%{$search}%")
                 ->orWhere('created_at', 'LIKE', "%{$search}%")
                 ->orWhere('payment_status', 'LIKE', "%{$search}%")
                 ->offset($start)
@@ -64,7 +64,7 @@ class ProductOrderController extends Controller
 
             $totalFiltered = ProductOrder::with('waiter')
                 ->where('customer_name', 'LIKE', "%{$search}%")
-                ->orWhere('waiter.name', 'LIKE', "%{$search}%")
+//                ->orWhere('waiter.name', 'LIKE', "%{$search}%")
                 ->orWhere('created_at', 'LIKE', "%{$search}%")
                 ->orWhere('payment_status', 'LIKE', "%{$search}%")
                 ->count();
