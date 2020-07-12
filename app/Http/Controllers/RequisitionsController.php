@@ -13,7 +13,7 @@ class RequisitionsController extends Controller
     public function index()
     {
         $requisitions = Requisition::with('product')
-            ->orderBy('created_at','desc')
+            ->latest()
             ->paginate(10);
         $categories = Category::all();
         return view('admin.requisitions', ['requisitions' => $requisitions, 'categories' => $categories]);

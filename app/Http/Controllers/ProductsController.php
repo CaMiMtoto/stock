@@ -17,14 +17,29 @@ class ProductsController extends Controller
         $category = Category::all();
 
         if (empty($request->input('q'))) {
-            $products = Product::with('category')
-                ->paginate(10);
+            $products = Product::with('category');
+            if (\request('active')) {
+                $isActive = \request('active');
+                if ($isActive == 'true') {
+                    $isActive = 1;
+                    $products = $products->where('is_active', '=', $isActive);
+                } else if ($isActive == 'false') {
+                    $isActive = false;
+                    $products = $products->where('is_active', '=', $isActive);
+                }
+            }
+            $products = $products->paginate(10);
         } else {
             $q = $request->input('q');
             $products = Product::with('category')
-                ->where('name', 'LIKE', "%{$q}%")
-                ->orderBy("id", "desc")
+                ->where('name', 'LIKE', "%{$q}%");
+            if (\request('active')) {
+                $isActive = \request('active');
+                $products = $products->orWhere('is_active', '=', $isActive);
+            }
+            $products = $products->orderBy("id", "desc")
                 ->paginate(10);
+
             $products->appends(['q' => $q]);
         }
         return view('admin.products', ['products' => $products, 'category' => $category]);
@@ -42,6 +57,7 @@ class ProductsController extends Controller
                 ['categories.name', '=', 'Food'],
                 ['products.name', 'LIKE', "%{$q}%"]
             ])
+            ->where('is_active', '=', 1)
             ->select('products.*')
             ->orderBy("products.id", "desc")
             ->get();
@@ -66,9 +82,9 @@ class ProductsController extends Controller
         if ($request->id && $request->id > 0) {
             $prod = Product::find($request->id);
         } else {
-            $find=Product::where('name','=',$request->name)->get();
-            if(count($find)>0){
-                return response()->json(['error'=>'Product already exist.'], 200);
+            $find = Product::where('name', '=', $request->name)->get();
+            if (count($find) > 0) {
+                return response()->json(['error' => 'Product already exist.'], 200);
             }
             $prod = new Product();
             $prod->qty = $request->original_qty;
@@ -80,11 +96,11 @@ class ProductsController extends Controller
         $prod->original_qty = $request->original_qty;
         $prod->price = $request->price;
         $prod->cost = $request->cost;
+        $prod->is_active = $request->is_active;
         $prod->save();
 
-
         if ($prod->category_id == Category::$DRINK) {
-            if ($isNew){
+            if ($isNew) {
                 $this->createMenu($prod);
             }
         }

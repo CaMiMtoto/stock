@@ -15,7 +15,9 @@ class RequestController extends Controller
 {
     public function index()
     {
-        $req = Request::paginate(10);
+        $req = Request::with(['requestedBy','approvedBy'])
+            ->latest()
+            ->paginate(10);
         $products = Product::all();
         return view('admin.requested', compact('products'))
             ->with(['requisitions' => $req, 'categories' => Category::all()]);

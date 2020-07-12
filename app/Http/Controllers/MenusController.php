@@ -11,7 +11,15 @@ class MenusController extends Controller
 {
     public function index()
     {
-        $menus = Menu::orderBy('created_at', 'desc')->paginate(10);
+        $menus = Menu::with('category');
+        $q = \request('q');
+        if ($q) {
+            $menus = $menus->where([
+                ['name', 'LIKE', "%{$q}%"]
+            ]);
+        }
+        $menus = $menus->orderBy('created_at', 'desc')
+            ->paginate(10);
         $categories = Category::all();
         return view('admin.menus', ['categories' => $categories, 'menus' => $menus]);
     }
@@ -20,10 +28,10 @@ class MenusController extends Controller
     public function store(Request $request)
     {
         if ($request->id == 0) {
-            $menu=new Menu();
-            $find=Menu::where('name','=',$request->name)->get();
-            if(count($find)>0){
-                return response()->json(['error'=>'Menu already exist.'], 200);
+            $menu = new Menu();
+            $find = Menu::where('name', '=', $request->name)->get();
+            if (count($find) > 0) {
+                return response()->json(['error' => 'Menu already exist.'], 200);
             }
         } else {
             $menu = Menu::find($request->id);

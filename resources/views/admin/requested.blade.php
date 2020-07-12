@@ -32,7 +32,6 @@
                 </div>
                 <button class="btn btn-default">Go</button>
             </form>
-            <br>
             <div class="clearfix"></div>
             <div class="box box-primary flat">
                 <div class="box-header with-border">

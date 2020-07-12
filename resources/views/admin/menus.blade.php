@@ -18,6 +18,23 @@
                             Menus
                         </h4>
                     </div>
+                    <div class="col-md-6">
+                        <form action="{{ route('menus.all') }}" method="get">
+                            <div id="custom-search-input">
+                                <div class="input-group ">
+                                    <input type="text" name="q"
+                                           VALUE="{{ \request('q') }}"
+                                           id="query" class="form-control flat"
+                                           placeholder="Search .....">
+                                    <span class="input-group-btn">
+                                <button class="btn btn-primary flat" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="box-body">

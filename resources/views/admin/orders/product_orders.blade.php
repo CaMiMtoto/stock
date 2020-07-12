@@ -23,10 +23,10 @@
                             Drinks Orders
                         </h4>
 
-                        <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
+                     {{--   <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal"
                                 data-target="#modal-default">
                             Add New Order
-                        </button>
+                        </button>--}}
                     </div>
                     <div class="box-body table-responsive ">
                         <table class="table table-striped table-hover" id="manageTable"

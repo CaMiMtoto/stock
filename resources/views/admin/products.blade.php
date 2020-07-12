@@ -19,7 +19,9 @@
                         <form action="{{ route('products.all') }}" method="get">
                             <div id="custom-search-input">
                                 <div class="input-group ">
-                                    <input type="text" name="q" id="query" class="form-control flat"
+                                    <input type="text"
+                                           VALUE="{{ \request('q') }}"
+                                           name="q" id="query" class="form-control flat"
                                            placeholder="Search .....">
                                     <span class="input-group-btn">
                                 <button class="btn btn-primary flat" type="submit">
@@ -43,6 +45,21 @@
                             <th scope="col">Beg. Qty</th>
                             <th scope="col">Cost</th>
                             <th scope="col">Price</th>
+                            <th scope="col">
+                                <div class="dropdown">
+                                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <i class="fa fa-filter"></i>
+                                        Filter By Active
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="?active=all">All</a></li>
+                                        <li><a href="?active=true">Active</a></li>
+                                        <li><a href="?active=false">Not Active</a></li>
+                                    </ul>
+                                </div>
+                            </th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -62,6 +79,13 @@
                                 <td>{{ number_format($prod->original_qty)  }}</td>
                                 <td>{{ number_format($prod->cost)  }}</td>
                                 <td>{{ number_format($prod->price)  }}</td>
+                                <td>
+                                    @if($prod->is_active)
+                                        <span class="label label-success">Yes</span>
+                                    @else
+                                        <span class="label label-danger">No</span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if(Auth::user()->role->name=='manager' || Auth::user()->role->name=='admin' || Auth::user()->role->name=='keeper')
                                         <div>
@@ -102,7 +126,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        Products
+                        Product
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -162,6 +186,16 @@
                                     <input type="number" class="form-control" value="0" name="original_qty"
                                            id="original_qty"
                                            required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="is_active" class="col-sm-3 control-label">Mark as</label>
+                                <div class="col-sm-9">
+                                    <select required class="form-control" name="is_active" id="is_active">
+                                        <option value="">--select--</option>
+                                        <option value="1" selected>Active</option>
+                                        <option value="0">Not Active</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -260,6 +294,7 @@
                         $('#original_qty').val(data.original_qty);
                         $('#price').val(data.price);
                         $('#cost').val(data.cost);
+                        $('#is_active').val(data.is_active);
                     });
             });
 
