@@ -114,6 +114,9 @@
                     </table>
 
                 </div>
+                <div class="box-footer">
+                    {{ $products->links() }}
+                </div>
             </div>
 
         </div>
