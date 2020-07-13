@@ -50,7 +50,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::group(['middleware' => ['allowed_orders']], function () {
 
+            Route::get('/damages', 'DamageController@index')->name('damages.all');
+            Route::post('/damages', 'DamageController@store')->name('damages.save');
+
             Route::get('/products', 'ProductsController@index')->name('products.all');
+
             Route::post('/products', 'ProductsController@store')->name('products.store');
             Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
             Route::delete('/products/{product}', 'ProductsController@destroy')->name('products.destroy');
@@ -94,7 +98,6 @@ Route::middleware(['auth'])->group(function () {
         });
 
 
-
         Route::get('/expenses', 'ExpenseController@index')->name('expenses.all');
         Route::post('/expenses', 'ExpenseController@store')->name('expenses.store');
         Route::get('/expenses/{expense}', 'ExpenseController@show')->name('expenses.show');
@@ -108,9 +111,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/eod', 'SettingController@eod')->name('eod');
         Route::post('/eod', 'SettingController@runEod')->name('runEod');
-
-
-
 
 
         Route::get('/requestedItems/report', 'ReportsController@requestedItems')->name('requestedItemsReports');

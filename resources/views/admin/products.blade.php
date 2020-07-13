@@ -87,25 +87,35 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if(Auth::user()->role->name=='manager' || Auth::user()->role->name=='admin' || Auth::user()->role->name=='keeper')
-                                        <div>
+                                    <div class="btn-group btn-group-sm">
+
+                                        @if(auth()->user()->role->name=='manager' || auth()->user()->role->name=='admin' || auth()->user()->role->name=='keeper')
                                             <button
                                                 data-url="{{ route('products.show',['id'=>$prod->id]) }}"
-                                                class="btn btn-default js-edit">
+                                                class="btn btn-default btn-sm js-edit">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button
                                                 data-url="{{ route('products.destroy',['id'=>$prod->id]) }}"
-                                                class="btn btn-danger js-delete">
+                                                class="btn btn-danger btn-sm js-delete">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                             <button
                                                 data-id="{{ $prod->id }}"
-                                                class="btn btn-default js-stocking">
+                                                class="btn btn-default btn-sm js-stocking">
                                                 Stock In
                                             </button>
-                                        </div>
-                                    @endif
+                                            @if($prod->qty >0)
+                                                <button
+                                                    data-id="{{ $prod->id }}"
+                                                    title="Record damaged products"
+                                                    data-name="{{ $prod->name }}"
+                                                    class="btn btn-warning btn-sm js-damage">
+                                                    <i class="fa fa-recycle"></i>
+                                                </button>
+                                            @endif
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -273,13 +283,65 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="damagedModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Damaged
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+                <form novalidate action="{{ route('damages.save') }}" method="post"
+                      id="damageForm"
+                      class="form-horizontal">
+                    <input type="hidden" id="id" name="id" value="0">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        @include('layouts._loader')
+                        <div class="edit-result">
+                            <input type="hidden" value="0" name="product_id" id="productId">
+                            <div class="form-group">
+                                <label for="qty" class="col-sm-3 control-label"></label>
+                                <div class="col-sm-9">
+                                    <h5 id="damagedProduct"></h5>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="qty" class="col-sm-3 control-label">Qty</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" name="qty" id="qty"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer editFooter">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-save">
+                                <i class="fa fa-check-circle-o"></i>
+                                Save changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 @endsection
 
 @section('scripts')
     <script>
         $(function () {
-
+            $('#damageForm').validate();
             $('.tr-products').addClass('active');
             $('.mn-products').addClass('active');
             //edit product
@@ -305,6 +367,15 @@
                 var id = $(this).attr('data-id');
                 $('#product_id').val(id);
                 $('#stockingModal').modal();
+            });
+
+            $('.js-damage').on('click', function () {
+                var btn = $(this);
+                var id = $(this).attr('data-id');
+                $('#product_id').val(id);
+                $('#damagedModal').modal();
+                $('#damagedProduct').text(btn.data('name'));
+                $('#productId').val(btn.data('id'));
             });
 
         });

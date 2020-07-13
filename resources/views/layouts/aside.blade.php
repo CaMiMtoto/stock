@@ -34,22 +34,28 @@
                     <ul class="treeview-menu">
                         <li class="mn-products">
                             <a href="{{ url('/admin/products') }}">
-                                <i class="fa fa-circle-o"></i>
+                                <i class="fa fa-circle"></i>
                                 Manage products
                             </a>
                         </li>
                         @if(Auth::user()->role->name!='cashier')
                             <li class="mn-stocks">
                                 <a href="{{ route('stocks.all') }}">
-                                    <i class="fa fa-circle-o"></i>
+                                    <i class="fa fa-circle"></i>
                                     Stocking
+                                </a>
+                            </li>
+                            <li class="mn-damages">
+                                <a href="{{ route('damages.all') }}">
+                                    <i class="fa fa-circle"></i>
+                                    Damaged Products
                                 </a>
                             </li>
                         @endif
 
                         <li class="mn-requests">
                             <a href="{{ route('requests') }}">
-                                <i class="fa fa-circle-o"></i>
+                                <i class="fa fa-circle"></i>
                                 Requisitions
                             </a>
                         </li>
